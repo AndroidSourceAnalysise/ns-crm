@@ -1,0 +1,326 @@
+<style>
+    #vld-tooltip {
+        position: absolute;
+        z-index: 1000;
+        padding: 5px 10px;
+        background: #F37B1D;
+        min-width: 150px;
+        color: #fff;
+        transition: all 0.15s;
+        box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+        display: none;
+    }
+
+    #vld-tooltip:before {
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        width: 0;
+        height: 0;
+        margin-left: -8px;
+        content: "";
+        border-width: 0 8px 8px;
+        border-color: transparent transparent #F37B1D;
+        border-style: none inset solid;
+    }
+</style>
+<form class="am-form tpl-form-border-form tpl-form-border-br" data-am-validator id="pro_info_form">
+    <input type="hidden" name="id" value="">
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">会员号</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input productCode" name="productCode" value=""
+                   placeholder="必填, 不可重复" data-foolish-msg="必填, 不可重复！" required/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">名称</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="productName" value="" placeholder="必填"
+                   data-foolish-msg="必填！"
+                   required/>
+
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">副标题</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="title" value=""/>
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">简称</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="abbName" value=""/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">条码</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input " name="barcode" value=""/>
+
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">分类</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <select name="category">
+                
+                
+            </select>
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">品牌</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <select name="brandId">
+                
+                
+            </select>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">排序</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="number" class="tpl-form-input " name="displaySeq" value=""/>
+
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">状态</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <select name="status">
+                
+                <option value="0" >在售</option>
+                <option value="1" >停售</option>
+                <option value="2" >下架</option>
+                <option value="3" >预售</option>
+            </select>
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">简介</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="briefDescription" value=""/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">销售类型</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <select name="productType">
+                
+                <option value="1" >销售商品</option>
+                <option value="2" >赠送货品</option>
+                <option value="3" >秒杀活动产品</option>
+            </select>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">单位</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="unit" value=""/>
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">成本价</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="costPrice" placeholder="￥0.00"
+                   value=""/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">采购价</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" placeholder="￥0.00" name="phsPrice" value=""/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">默认售价</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="salPrice" placeholder="￥0.00" value=""/>
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">积分值</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="integralQuantity" placeholder="0"
+                   value=""/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">渠道佣金比例</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" placeholder="0.00%" name="channelProportion"
+                   value=""/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">积分兑换</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <select name="integralTag">
+                <option value="0" >关闭</option>
+                <option value="1" >开启</option>
+            </select>
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">默认购买数量</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="number" class="tpl-form-input" placeholder="0" name="defBuyQty"
+                   value=""/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">默认发货类型</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <select name="defSendType">
+                <option value="0" >及时发货</option>
+                <option value="1" >延迟发货</option>
+            </select>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label"></label>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">商品图片</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-11">
+            <input type="button" value="选择文件" id="fileBtn" class="am-btn am-btn-success"
+                   onclick="$('#picFile').click();"/>
+            <input type="file" name="picFile" class="am-btn am-btn-success am-round"
+                   accept="image/png,image/jpg,image/jpeg" id="picFile" onchange="toUploadPic(this);"
+                   style="display:none;"/>
+            <input type="hidden" name="imageUrl" value=""/>
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label"></label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-11">
+            <img id="img_view" style="width:100px;height:100px;"
+                 src="http://spys.hubeta.com:80/spys-manager/resources/img/ZWTP.jpg"/>
+        </div>
+    </div>
+    <div class="am-margin">
+        <label class="am-u-sm-1 am-u-md-3 am-u-lg-4"></label>
+        <button id="submitBtn" type="submit" class="am-btn am-btn-primary am-btn-xs">保存并下一步
+        </button>
+        <button type="button" class="am-btn am-btn-primary am-btn-xs"
+                onclick="goBack();">返回
+        </button>
+    </div>
+</form>
+<script>
+    $(function () {
+        AMUI.plugin('mySelected', AMUI.selected);
+        $('select').mySelected({btnWidth: '100%', btnSize: 'xs', maxHeight: 300});
+        saveInfoGoNext();
+    });
+
+    function saveInfoGoNext() {
+        var $form = $('#pro_info_form');
+        var $tooltip = $('<div id="vld-tooltip" style="z-index: 99999">提示信息！</div>');
+//        $tooltip.appendTo($form); // $("#centerPanel")
+        $tooltip.appendTo(document.body);
+        $form.validator({
+            onValid: function (validity) {
+                // 通过
+                $tooltip.hide();
+            }, onInValid: function (validity) {
+                // 不通过
+                var $this = $(validity.field);
+                var offset = $this.offset();
+                $tooltip.text($this.data('foolishMsg')).show().css({
+                    left: offset.left + 10,
+                    top: offset.top + $this.outerHeight() + 10
+                });
+            },
+            validate: function (validity) {
+                var id = "";
+                var value = $(validity.field).val();
+                if ($(validity.field).is('.productCode')) {
+                    validity.valid = false;
+                    if (value.trim().length == 0) {
+                        return validity;
+                    }
+                    return $.ajax({
+                        url: 'http://spys.hubeta.com:80/spys-manager/product/isCodeExist',
+                        data: {
+                            "productCode": value,
+                            "id": id
+                        },
+                        cache: false,
+                        dataType: 'json'
+                    }).then(function (data) {
+                        if (data.resultCode == 1) {
+                            validity.valid = true;
+                        }
+                        return validity;
+                    }, function () {
+                        return validity;
+                    });
+                }
+            }, submit: function () {
+                var formValidity = true;//this.isFormValid();
+                $.when(formValidity).then(function () {
+                    AMUI.dialog.confirm({
+                        title: '系统提示',
+                        content: '确定保存并下一步吗?',
+                        onConfirm: function () {
+                            toPicForm("");
+                            return;
+                            // 验证成功的逻辑
+                            var $subbtn = $("#submitBtn");
+                            $subbtn.button('loading');
+                            $.ajax({
+                                url: "http://spys.hubeta.com:80/spys-manager/product/addOrUpadatePro",
+                                async: false,
+                                type: "post",
+                                dataType: "json",
+                                data: $form.serialize(),
+                                success: function (result) {
+                                    if (result.resultCode == 1) {
+                                        toPicForm(result.pntProduct.id);
+                                        $("#flag").val(result.pntProduct.id);
+                                    } else {
+                                        AMUI.dialog.alert({
+                                            title: '错误提示',
+                                            content: result.errorData
+                                        });
+                                    }
+                                },
+                                error:function(){
+                                    AMUI.dialog.alert({
+                                        title: '错误提示',
+                                        content: "请求失败"
+                                    });
+                                }
+                            });
+                        }
+                    });
+
+                }, function () {
+                    return false;
+                });
+                return false;
+            }
+        });
+    }
+
+    /**
+     * 调用图片上传接口
+     * @param dom
+     */
+    function toUploadPic(dom) {
+        if (dom.value.length != 0) {
+            var formData = new FormData();
+            formData.append("targetFile", dom.files[0]);
+            $.ajax({
+//                url: "http://www.hubeta.com/web/api/file/uploadMultiFile",
+                url: "http://spys.hubeta.com:80/spys-manager/resource/photos/uploadPic",
+                type: "POST",
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function (data) {
+                    if (data.resultCode == 1) {
+                        $("input[name='imageUrl']").val(data.result);
+                        $("#img_view").attr("src", data.result);
+                        /*AMUI.dialog.alert({
+                         title: '系统提示',
+                         content: "上传完毕",
+                         onConfirm: function () {
+
+                         }
+                         });*/
+                    } else {
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: data.errorData
+                        });
+                    }
+                },
+                error:function(){
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: "请求失败"
+                    });
+                }
+            });
+        }
+    }
+</script>

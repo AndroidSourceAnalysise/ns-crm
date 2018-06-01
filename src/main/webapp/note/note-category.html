@@ -1,0 +1,340 @@
+<html>
+
+<head>
+    <style>
+    .theme-white .tpl-form-border-form {
+        padding-top: 0px !important;
+    }
+
+    .active {
+        background: #e6e6e6;
+    }
+    #data_table td {
+        vertical-align: middle;
+    }
+    tr:hover {
+        background-color: #e6e6e6;
+    }
+    </style>
+</head>
+<body>
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12" id="perListPanel">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title  am-cf">笔记版块</div>
+                    </div>
+                    <div class="widget-body  am-fr">
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                        <button type="button" class="am-btn  am-btn-xs am-btn-success" onclick="toAdd()"><span class="am-icon-plus"></span> 新增
+                        </button>
+                        <button type="button" class="am-btn am-btn-xs am-btn-danger" onclick="toDelete()"><span class="am-icon-trash-o"></span> 删除
+                        </button>
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                        <body>
+                            <!-- 内容区域 -->
+                            <div class="am-scrollable-horizontal">
+                                <table id="data_table" width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black table_hread_static">
+                                    <thead>
+                                    <tr>
+                                        <th hidden></th>
+                                        <th>序号</th>
+                                        <th>版块名称</th>
+                                        <th>显示序号</th>
+                                        <th>版块描述</th>
+                                        <th>创建时间</th>
+                                        <th>更新时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="couponPaging"></div>
+                        </body>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="assets/js/my_pagination.js"></script>
+    <script>
+    var selectCategoryId = "";
+    var displaySeq_flag = 1;
+    var edit_flag = 0; // 编辑模式的表示, 值为0, 则表示没有任何一行tr进入编辑模式;
+    $(function() {
+        getCategoryList();
+    });
+
+    function getCategoryList(){
+        var categoryListObj = null;
+        $.ajax({
+            url: WS_SERVER_ROUTE + "node/category/getList",
+            async: false,
+            type: "post",
+            dataType: "json",
+            success: function (result) {
+                if (result.result == '0') {
+                    categoryListObj = result.data;
+                    showDataList(categoryListObj);
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData,
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    //显示版块列表信息
+    function showDataList(dataObj){
+        if(dataObj){
+            displaySeq_flag = dataObj.length;
+            var dataHtml = '';
+            for (var i = 0; i < (dataObj||[]).length; i++) {
+                var dataItemObj = dataObj[i];
+                if(dataItemObj){
+                    dataHtml+='<tr class="gradeX" data-id="'+ dataItemObj.ID +'">';
+                    dataHtml+='    <td>'+ (i+1) +'</td>';
+                    dataHtml+='    <td class="name text">'+ dataItemObj.NAME +'</td>';
+                    dataHtml+='    <td class="displaySeq number">'+ dataItemObj.NODE_INDEX +'</td>';
+                    dataHtml+='    <td class="desc text">'+ dataItemObj.DESCRIPTION +'</td>';
+                    dataHtml+='    <td>'+ dataItemObj.CREATE_DT +'</td>';
+                    dataHtml+='    <td>'+ dataItemObj.UPDATE_DT +'</td>';
+                    dataHtml+='    <td><button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="toEdit(this);"><span class="am-icon-edit"></span> 编辑 </button><button type="button" style="display: none" class="am-btn am-btn-success am-btn-xs" onclick="saveUpdate(this);"><span class="am-icon-save"></span> 保存 </button></td>';
+                    dataHtml+='</tr>';
+                }
+            }
+            $("#data_table tbody").html(dataHtml);
+            $("#data_table tbody tr").dblclick(function(){
+                $(this).trigger("click");
+            });
+            $("#data_table tbody tr").click(function () {
+                if($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                    selectCategoryId = "";
+                }else{
+                    $(this).addClass('active');
+                    selectCategoryId = $(this).attr("data-id");
+                }
+                $(this).siblings().removeClass('active');
+            });
+        }
+    }
+
+    function toAdd() {
+        displaySeq_flag++;
+        var html_tr = '';
+        html_tr+='<tr class="gradeX">';
+        html_tr+='    <td>'+ displaySeq_flag +'</td>';
+        html_tr+='    <td><input type="text" class="categoryName" id="addCategoryName" placeholder="版块名称"/></td>';
+        html_tr+='    <td><input type="number" class="displaySeq" id="addCategorySeq" value="' + displaySeq_flag + '"  min="0" /></td>';
+        html_tr+='    <td><input type="text" class="categorydesc" id="addCategoryDesc" placeholder="版块描述"/></td>';
+        html_tr+='    <td></td>';
+        html_tr+='    <td></td>';
+        html_tr+='    <td><button type="button" style="display: block;" class="am-btn am-btn-success am-btn-xs" onclick="saveData()"><span class="am-icon-save"></span> 保存 </button></td>';
+        html_tr+='</tr>';
+        $("#data_table tbody").append(html_tr);
+    }
+
+    function toEdit(dom) {
+        if (edit_flag > 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '请保存之前所编辑的数据!'
+            });
+            return;
+        }
+        // 编辑标识控制
+        var tr = $(dom).parent().parent();
+        edit_flag = 1;
+        // 样式控制
+        $(dom).css('display', 'none');
+        $(dom).next().css('display', 'block');
+        startEditForTR(tr);
+    }
+
+    function toDelete() {
+        if (!clickCheck()) {
+            return;
+        }
+        //是否确认删除
+        AMUI.dialog.confirm({
+            title: '提示',
+            content: '是否确认删除,删除版块可能导致该版块下所有笔记无法显示！',
+            onConfirm: function() {
+                $.ajax({
+                    type: "POST",
+                    data: "id=" + selectCategoryId,
+                    dataType: "JSON",
+                    async: false,
+                    url: WS_SERVER_ROUTE + "node/category/delete",
+                    success: function(data) {
+                        if (data.result == '0') {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: '删除成功',
+                                onConfirm: function() {
+                                    selectCategoryId = "";
+                                    getCategoryList();
+                                }
+                            });
+                        } else {
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: data.errorData
+                            });
+                        }
+                    },
+                    error:function(){
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: "请求失败"
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    function saveData(){
+        var categoryName = $("#addCategoryName").val().trim();
+        if(categoryName.length == 0){
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "版块名称不能为空!"
+            });
+            return false;
+        }
+        var paramObj = {};
+        paramObj.NAME = categoryName;
+        paramObj.NODE_INDEX = $("#addCategorySeq").val();
+        paramObj.DESCRIPTION = $("#addCategoryDesc").val();
+        $.ajax({
+            url: WS_SERVER_ROUTE + "node/category/insert",
+            type: "post",
+            async: false,
+            data: JSON.stringify(paramObj),
+            dataType: "json",
+            success: function (result) {
+                if (result.result == 0) {
+                    selectCategoryId = "";
+                    AMUI.dialog.alert({
+                        title: '系统提示',
+                        content: '创建成功!'
+                    });
+                    getCategoryList();
+                } else {
+                    AMUI.dialog.alert({
+                        title: '系统提示',
+                        content: '保存失败!'
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    // 进入tr编辑模式
+    function startEditForTR(tr) {
+        // 遍历tr里面所有的td
+        var tds = $(tr).children();
+        for (var i = 0; i < tds.length; i++) {
+            var cls = $(tds[i]).attr('class');
+            if (typeof(cls) != 'undefined') {
+                var clsArr = cls.split(' ');
+                if (clsArr.length > 1) {
+                    // 判断第二个class是什么就给什么标签, 当然要先拿到值, 然后再替换元素
+                    var value = $(tds[i]).html().trim();
+                    var html = '';
+                    if (clsArr[1] == "number" ) {
+                        var align = clsArr[1] == 'number' ? 'text-align: right;' : '';
+                        html = '<input type="' + clsArr[1] + '" class="'+ clsArr[0] +'" style="' + align + '" value="' + value + '" />';
+                    }
+                    if (clsArr[1] == 'text') {
+                        var align = clsArr[1] == 'number' ? 'text-align: right;' : '';
+                        html = '<input type="' + clsArr[1] + '" class="'+ clsArr[0] +'" style="' + align + '" value="' + value + '" min="0" />';
+                    }
+                    $(tds[i]).html(html);
+                }
+            }
+        }
+    }
+
+    function saveUpdate(dom){
+        var tr = $(dom).parent().parent();
+        var dataId = $(tr).attr("data-id");
+        var categoryName = $(tr).find("td.name input").val().trim();
+        var categorySeq = $(tr).find("td.displaySeq input").val().trim();
+        var categoryDesc = $(tr).find("td.desc input").val().trim();
+        if(categoryName.length == 0){
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "版块名称不能为空!"
+            });
+            return;
+        }
+        var paramObj = {};
+        paramObj.ID = dataId;
+        paramObj.NAME = categoryName;
+        paramObj.NODE_INDEX = categorySeq;
+        paramObj.DESCRIPTION = categoryDesc;
+        $.ajax({
+            url: WS_SERVER_ROUTE + "node/category/update",
+            type: "post",
+            async: false,
+            data: JSON.stringify(paramObj),
+            dataType: "json",
+            success: function (result) {
+                if (result.result == 0) {
+                    edit_flag = 0;
+                    AMUI.dialog.alert({
+                        title: '系统提示',
+                        content: '更新成功!'
+                    });
+                    getCategoryList();
+                } else {
+                    AMUI.dialog.alert({
+                        title: '系统提示',
+                        content: '保存失败!'
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    function clickCheck() {
+        if ("" == selectCategoryId) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "请点选所需操作的数据!"
+            });
+            return false;
+        }else{
+            return true;
+        }
+    }
+    </script>
+</body>
+</html>

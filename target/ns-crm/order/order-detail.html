@@ -1,0 +1,568 @@
+<style>
+#tab3_table td {
+    vertical-align: middle;
+}
+
+.am-form-label {
+    font-size: 12px !important;
+}
+.am-form input[type=text][disabled]{
+    cursor: not-allowed;
+    background-color: #eee !important;
+}
+</style>
+<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+<div class="row-content am-cf">
+    <form id="listDataForm">
+    <input type="hidden" id="start_date" name="startDt" value="">
+    <input type="hidden" id="end_date" name="endDt" value="">
+    <input type="hidden" id="con_no_id" name="conNo" value="">
+    <input type="hidden" id="order_no_id" name="orderNo" value="">
+    <input type="hidden" id="pageNumber" name="pageNumber" value="">
+    <input type="hidden" id="pageSize" name="pageSize" value="">
+    </form>
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl"><a href="javascript:goBack();">订单列表</a> / 订单详情</div>
+                </div>
+                <div class="widget-body am-fr">
+                    <div id="order_detail_tabs" class="am-tabs" data-am-tabs>
+                        <ul class="am-tabs-nav am-nav am-nav-tabs">
+                            <li class="am-active"><a href="#tab1">基本信息</a></li>
+                            <li><a href="#tab2">商品列表</a></li>
+                            <li><a href="#tab3">物流</a></li>
+                        </ul>
+                        <div class="am-tabs-bd">
+                            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                                <form class="am-form tpl-form-border-form tpl-form-border-br">
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">订单号</label>
+                                        <div class="am-u-sm-7 am-u-md-2 am-u-lg-2">
+                                            <input type="text" class="tpl-form-input" id="orderNo" value="" disabled="disabled">
+                                        </div>
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">订单状态</label>
+                                        <div class="am-u-sm-7 am-u-md-2 am-u-lg-2">
+                                            <input type="text" class="tpl-form-input" id="status" value="" disabled="disabled">
+                                        </div>
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">下单时间</label>
+                                        <div class="am-u-sm-7 am-u-md-2 am-u-lg-2">
+                                            <input type="text" class="tpl-form-input" id="creatDt" value="" disabled>
+                                        </div>
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">付款类型</label>
+                                        <div class="am-u-sm-7 am-u-md-2 am-u-lg-2">
+                                            <input type="text" class="tpl-form-input" id="payType" value="" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">会员编号</label>
+                                        <div class="am-u-sm-7 am-u-md-2 am-u-lg-2">
+                                            <input type="text" class="tpl-form-input" id="conNo" value="" disabled>
+                                        </div>
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">会员昵称</label>
+                                        <div class="am-u-sm-7 am-u-md-2 am-u-lg-2">
+                                            <input type="text" class="tpl-form-input" id="conName" value="" disabled>
+                                        </div>
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">联系手机</label>
+                                        <div class="am-u-sm-7 am-u-md-2 am-u-lg-2">
+                                            <input type="text" class="tpl-form-input" id="mobile" value="" disabled>
+                                        </div>
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">上级会员</label>
+                                        <div class="am-u-sm-7 am-u-md-2 am-u-lg-2">
+                                            <input type="text" class="tpl-form-input" id="rpName" value="" disabled>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">商品总价</label>
+                                        <div class="am-u-sm-7 am-u-md-2 am-u-lg-2">
+                                            <input type="text" class="tpl-form-input" id="proTotal" value="" disabled/>
+                                        </div>
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">运费(元)</label>
+                                        <div class="am-u-sm-7 am-u-md-2 am-u-lg-2">
+                                            <input type="text" class="tpl-form-input" id="freight" name="adjustedFreight" value="0" disabled/>
+                                        </div>
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">订单实收款</label>
+                                        <div class="am-u-sm-7 am-u-md-2 am-u-lg-2">
+                                            <input type="text" class="tpl-form-input" id="orderTotal" value="" disabled>
+                                        </div>
+                                        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">订单备注</label>
+                                        <div class="am-u-sm-7 am-u-md-5 am-u-lg-5">
+                                            <input type="text" class="tpl-form-input" id="orderRemark" value="" disabled>
+                                        </div>
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">客服备注</label>
+                                        <div class="am-u-sm-7 am-u-md-5 am-u-lg-5">
+                                            <input type="text" class="tpl-form-input" name="managerRemark" value="" />
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="am-margin">
+                                        <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="updateOrder();">保存
+                                        </button>
+                                        <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="goBack();">返回
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="am-tab-panel am-fade" id="tab2">
+                                <div class="am-form-group">
+                                    <div class="am-form-group am-scrollable-horizontal">
+                                        <table id="productListTable" width="100%" class="am-table am-table-compact tpl-table-black am-text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>商品图片</th>
+                                                    <th>商品名称</th>
+                                                    <th>SKU</th>
+                                                    <th>商品单价</th>
+                                                    <th>购买数量</th>
+                                                    <th>金额小计(元)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="am-tab-panel am-fade" id="tab3">
+                                <form class="am-form tpl-form-border-form tpl-form-border-br">
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">收货人</label>
+                                        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+                                            <input type="text" class="tpl-form-input" id="recipients" name="recipients" value="uu" disabled/>
+                                        </div>
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">移动电话</label>
+                                        <div class="am-u-sm-7 am-u-md-4 am-u-lg-4">
+                                            <input type="text" class="tpl-form-input" id="expMobile" name="mobile" value="" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">收货地址 </label>
+                                        <div class="am-u-sm-12 am-u-md-2 am-u-lg-2">
+                                            <select name="province" disabled onchange="changeSelect(this.value,'city');"></select>
+                                        </div>
+                                        <div class="am-u-sm-12 am-u-md-2 am-u-lg-2">
+                                            <select name="city" disabled onchange="changeSelect(this.value,'district');"></select>
+                                        </div>
+                                        <div class="am-u-sm-12 am-u-md-2 am-u-lg-2">
+                                            <select name="district" disabled></select>
+                                        </div>
+                                        <div class="am-u-sm-12 am-u-md-5 am-u-lg-5">
+                                            <input type="text" id="address" name="address" value="" disabled/>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="am-form-group">
+                                        <div class="am-form-group am-scrollable-horizontal">
+                                            <table id="orderSplitTable" width="100%" class="am-table am-table-compact tpl-table-black am-text-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 400px;">快递单号</th>
+                                                        <th>快递公司</th>
+                                                        <th>订单号</th>
+                                                        <th>会员编号</th>
+                                                        <th>订单时间</th>
+                                                        <th>订单支付时间</th>
+                                                        <th>备注</th>
+                                                        <th>姓名</th>
+                                                        <th>联系电话</th>
+                                                        <th>商品名称</th>
+                                                        <th>数量</th>
+                                                        <th>单价</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                </tbody>
+                                                <tfoot style="font-size: 17px; font-weight: bolder;">
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>总计</td>
+                                                        <td>
+                                                            <div id="expNum">0</div>
+                                                        </td>
+                                                        <td>
+                                                            <div id="expTotal">0.0</div>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="am-margin">
+                                        <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="goBack();">返回
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function() {
+    $("#order_detail_tabs").tabs({ noSwipe: 1 });
+    AMUI.plugin('mySelected', AMUI.selected);
+    var formDataObj = back.orderListParams;
+    $('#start_date').val(formDataObj.startDt); // 开始时间
+    $('#end_date').val(formDataObj.endDt); // 结束时间
+    $("#con_no_id").val(formDataObj.conNo); // 会员号
+    $("#order_no_id").val(back.selectOrderId); // 订单编号
+    $("#pageNumber").val(formDataObj.pageNumber);
+    $("#pageSize").val(formDataObj.pageSize);
+    // 当点击物流时, 加载收货地址信息;
+    $('.am-tabs').find('a').on('opened.tabs.amui', function (e) {
+        if ($(this).text() == '物流') {
+           getOrderSplitList();
+        }
+    });
+    getOrderInfo();
+});
+
+function getOrderInfo(){
+    var $form = $('#listDataForm');
+    var orderObj = null;
+    var formSerializeVal = $form.serialize();
+    var numberReg = new RegExp("pageNumber=(\\d+)");
+    formSerializeVal= formSerializeVal.replace(numberReg,"pageNumber=1");
+    $.ajax({
+        url: WS_SERVER_ROUTE + "order/getOrderList",
+        async: false,
+        type: "post",
+        dataType: "json",
+        data: formSerializeVal,
+        success: function (result) {
+            if (result.result == '0') {
+                orderObj = result.data.list[0];
+                $('#orderNo').val(orderObj.ORDER_NO);
+                $('#status').val((ORDER_STATUS_CHN[orderObj.STATUS - 1].value));
+                $('#conNo').val(orderObj.CON_NO);
+                $('#conName').val(orderObj.CON_NAME);
+                $('#mobile').val(orderObj.MOBILE);
+                $('#rpName').val(orderObj.RP_NAME);
+                $('#creatDt').val(orderObj.CREATE_DT);
+                $('#payType').val(orderObj.PAYMENT_TYPE);
+                $('#proTotal').val(orderObj.PNT_AMOUNT);
+                $('#freight').val(orderObj.FREIGHT);
+                $('#managerRemark').val("");
+                $('#orderTotal').val(orderObj.ORDER_TOTAL);
+                $('#orderRemark').val(orderObj.REMARK);
+
+                $("#recipients").val(orderObj.RECIPIENTS);
+                $("#expMobile").val(orderObj.MOBILE);
+                $("#address").val(orderObj.ADDRESS);
+                // 当点击物流时, 加载收货地址信息;
+                $('.am-tabs').find('a').on('opened.tabs.amui', function(e) {
+                    if ($(this).text() == '物流') {
+                        $("select[name='province']").append("<option value='-1' selected>" + orderObj.PROVINCE + "</option>");
+                        $("select[name='city']").append("<option value='-1' selected>" + orderObj.CITY + "</option>");
+                        $("select[name='district']").append("<option value='-1' selected>" + orderObj.DISTRICT + "</option>");
+                    }
+                });
+
+                showProductList(orderObj.ITEMS);
+            } else {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: result.errorData,
+                });
+            }
+        },
+        error:function(){
+            AMUI.dialog.alert({
+                title: '错误提示',
+                content: "请求失败"
+            });
+        }
+    });
+}
+
+//显示订单商品列表信息
+function showProductList(dataObj){
+    if(dataObj){
+        var dataHtml = '';
+        for (var i = 0; i < (dataObj||[]).length; i++) {
+            var orderObj = dataObj[i];
+            if(orderObj){
+                var thumbUrl = "assets/img/sku-normal.png";
+                if(orderObj.THUMB_URL != null){
+                    thumbUrl = orderObj.THUMB_URL;
+                }
+                dataHtml+='<tr class="gradeX">';
+                dataHtml+='    <td>';
+                dataHtml+='        <img style="height:50px;width:50px;" src="'+ thumbUrl +'"/>';
+                dataHtml+='    </td>';
+                dataHtml+='    <td>'+ orderObj.PNT_NAME +'</td>';
+                dataHtml+='    <td>'+ orderObj.SKU_NAME +'</td>';
+                dataHtml+='    <td>'+ orderObj.SALE_PRICE +'</td>';
+                dataHtml+='    <td>'+ orderObj.QUANTITY +'</td>';
+                dataHtml+='    <td>'+ orderObj.AMOUNT +'</td>';
+                dataHtml+='</tr>';
+            }
+        }
+        $("#productListTable tbody").html(dataHtml);
+    }
+}
+
+function getOrderSplitList(){
+    var orderSplitListObj = null;
+    $.ajax({
+        url: WS_SERVER_ROUTE + "order/getOrderSplitList",
+        async: false,
+        type: "post",
+        dataType: "json",
+        data:"pageSize=10&startDt=&endDt=&conNo=&orderNo="+back.selectOrderId,
+        success: function (result) {
+            if (result.result == '0') {
+                orderSplitListObj = result.data;
+                showOrderSplitList(orderSplitListObj);
+            } else {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: result.errorData,
+                });
+            }
+        },
+        error:function(){
+            AMUI.dialog.alert({
+                title: '错误提示',
+                content: "请求失败"
+            });
+        }
+    });
+}
+function showOrderSplitList(dataObj){
+    if(dataObj){
+        var dataHtml = '';
+        var expNum = 0;
+        var expTotal = 0;
+        for (var i = 0; i < (dataObj.list||[]).length; i++) {
+            var orderObj = dataObj.list[i];
+            if(orderObj){
+                dataHtml+='<tr class="gradeX">';
+                dataHtml+='    <td>';
+                dataHtml+='        <input type="hidden" class="splitIds" value="'+ orderObj.ID +'" />';
+                dataHtml+='        <div style="width:136px;">';
+                dataHtml+='            <input type="text" class="waybills" value="'+  (orderObj.WAYBILL == null?"":orderObj.WAYBILL) +'" disabled/>';
+                dataHtml+='        </div>';
+                dataHtml+='    </td>';
+                dataHtml+='    <td>';
+                dataHtml+='        <select style="width: 110px;" class="expCompanys" disabled>';
+                dataHtml+='            <option value=""></option>';
+                dataHtml+='            <option value="" select="">'+ (orderObj.EXP_COMPANY_NAME == null?"":orderObj.EXP_COMPANY_NAME) +'</option>';
+                dataHtml+='        </select>';
+                dataHtml+='    </td>';
+                dataHtml+='    <td>'+  orderObj.ORDER_NO +'</td>';
+                dataHtml+='    <td>'+  orderObj.CON_NO +'</td>';
+                dataHtml+='    <td>'+  orderObj.CREATE_DT +'</td>';
+                dataHtml+='    <td>'+ (orderObj.PAY_DT?orderObj.PAY_DT:"") +'</td>';
+                dataHtml+='    <td>'+  (orderObj.REMARK == null?"":orderObj.REMARK) +'</td>';
+                dataHtml+='    <td>'+  orderObj.RECIPIENTS +'</td>';
+                dataHtml+='    <td>'+  orderObj.MOBILE +'</td>';
+                dataHtml+='    <td>'+  (orderObj.PNT_NAME+" "+ orderObj.SKU_NAME) +'</td>';
+                dataHtml+='    <td>'+  orderObj.SPLIT_NUMBER +'</td>';
+                dataHtml+='    <td>'+  (orderObj.SALE_PRICE == null?"":orderObj.SALE_PRICE) +'</td>';
+                dataHtml+='</tr>';
+                expNum = (expNum + orderObj.SPLIT_NUMBER);
+                expTotal = (expTotal + (Number(orderObj.SPLIT_NUMBER) * Number(orderObj.SALE_PRICE))).toFixed(2);
+            }
+        }
+        $("#expNum").text(expNum);
+        $("#expTotal").text(expTotal);
+        $("#orderSplitTable tbody").html(dataHtml);
+    }
+}
+
+/* 修改基础信息处理 */
+function updateOrder() {
+    AMUI.dialog.confirm({
+        title: '系统提示',
+        content: '确定要修改基本信息吗？',
+        onConfirm: function() {
+            var status = Number("5");
+            var managerRemark = $("input[name='managerRemark']").val();
+            //            var remark = $("input[name='remark']").val();
+            var params = {};
+            if (status == 1) {
+                var adjustDiscount = $("input[name='adjustDiscount']").val().trim();
+                var adjustedFreight = $("input[name='adjustedFreight']").val().trim();
+                adjustDiscount = adjustDiscount == '' ? 0 : adjustDiscount;
+                adjustedFreight = adjustedFreight == '' ? 0 : adjustedFreight;
+                params = {
+                    "id": "82A5C15C9095455F886DA3C4B5668E7B",
+                    "status": "5",
+                    "adjustDiscount": adjustDiscount,
+                    "beforeAdjustDiscount": "0",
+                    "adjustedFreight": adjustedFreight,
+                    "beforeAdjustedFreight": "0",
+                    "orderTotal": "50",
+                    "managerRemark": managerRemark.trim()
+                };
+            } else {
+                params = {
+                    "id": "82A5C15C9095455F886DA3C4B5668E7B",
+                    "status": "5",
+                    "managerRemark": managerRemark.trim()
+                };
+            }
+
+            $.ajax({
+                url: "http://spys.hubeta.com:80/spys-manager/orderList/updateOrder",
+                async: false,
+                type: "post",
+                data: params,
+                dataType: "json",
+                success: function(obj) {
+                    if (obj.resultCode == 1) {
+                        AMUI.dialog.alert({
+                            title: '系统提示',
+                            content: "修改成功!",
+                            onConfirm: function() {
+                                goBack();
+                            }
+                        });
+                    } else {
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: obj.errorData
+                        });
+                    }
+                },
+                error:function(){
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: "请求失败"
+                    });
+                }
+            });
+        }
+    });
+}
+
+/* 修改物流处理 */
+function updateOrderLogistics() {
+    AMUI.dialog.confirm({
+        title: '系统提示',
+        content: '确定要修改流信息吗？',
+        onConfirm: function() {
+            var flag = false; // 操作是否成功标识
+            var recipients = $("input[name='recipients']").val();
+            var mobile = $("input[name='mobile']").val();
+            var tel = $("input[name='tel']").val();
+            var address = $("input[name='address']").val();
+            var province = $("select[name='province']").find("option:selected").text();
+            var city = $("select[name='city']").find("option:selected").text();
+            var district = $("select[name='district']").find("option:selected").text();
+            var params = {
+                "id": "82A5C15C9095455F886DA3C4B5668E7B",
+                "recipients": recipients.trim(),
+                "mobile": mobile.trim(),
+                "tel": tel.trim(),
+                "province": province,
+                "city": city,
+                "district": district,
+                "address": address.trim()
+            };
+
+            $.ajax({
+                url: "http://spys.hubeta.com:80/spys-manager/orderList/updateOrderLogistics",
+                async: false,
+                type: "post",
+                dataType: "json",
+                data: params,
+                success: function(obj) {
+                    if (obj.resultCode == 1) {
+                        flag = true;
+                    }
+                }
+            });
+            if (!flag) {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "物流信息修改失败!"
+                });
+                return;
+            }
+            // 封装分单
+            var splitArray = [];
+            var splitIds = $(".splitIds");
+            var expCompanys = $(".expCompanys");
+            var waybills = $(".waybills");
+            for (var i = 0; i < splitIds.length; i++) {
+                var id = $(splitIds[i]).val();
+                var waybill = $(waybills[i]).val();
+                var expCompanyId = $(expCompanys[i]).val();
+                var expCompanyName = $(expCompanys[i]).find("option:selected").text();
+                var split = {
+                    "id": id,
+                    "waybill": waybill,
+                    "expCompanyId": expCompanyId,
+                    "expCompanyName": expCompanyName
+                };
+                splitArray.push(split);
+            }
+            if (splitArray.length > 0) {
+                $.ajax({
+                    url: "http://spys.hubeta.com:80/spys-manager/orderList/updateOrderExpressCompanyInfo",
+                    async: false,
+                    type: "post",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(splitArray),
+                    success: function(obj) {
+                        if (obj.resultCode == 1) {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: "修改成功!",
+                                onConfirm: function() {
+                                    goBack();
+                                }
+                            });
+                        } else {
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: obj.errorData
+                            });
+                        }
+                    }
+                });
+            } else {
+                AMUI.dialog.alert({
+                    title: '系统提示',
+                    content: "物流信息修改成功!",
+                    onConfirm: function() {
+                        goBack();
+                    }
+                });
+            }
+        }
+    });
+}
+function goBack() {
+    back.selectOrderId = "";
+    new panel({
+        url: current_url,
+        data: back.orderListParams,
+        target: $(".tpl-content-wrapper")
+    }).load();
+}
+</script>

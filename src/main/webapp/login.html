@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>弘德苑后台管理系统</title>
+    <meta name="description" content="弘德苑后台管理系统">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="弘德苑后台管理系统" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="assets/css/app.css">
+    <style type="text/css">
+        .theme-white .tpl-login-logo{
+           background: url(assets/img/section-content-top-bg.png) no-repeat;
+           background-size: 100%;
+           max-width:none;
+           height: 130px;
+        }
+        .tpl-login-btn {
+            background: url(assets/img/waterpage.png) no-repeat !important;
+            background-size: 100% 100%;
+            border: none;
+            padding: 10px 16px;
+            font-size: 14px;
+            color:#fff;
+            text-align: center;
+            width: 110px;
+            height: 36px;
+            line-height: 34px;
+        }
+        .login-btn-group{
+            text-align: center;
+        }
+        .am-alert{
+            width: 100% !important;
+        }
+    </style>
+    <script src="assets/js/jquery.min.js"></script>
+</head>
+<body data-type="login" style="background: url(assets/img/body.png) no-repeat;background-size: 100%;">
+    <script src="assets/js/theme.js"></script>
+    <div class="am-g tpl-g">
+        <div class="tpl-login">
+            <div class="tpl-login-content">
+                <div class="tpl-login-logo">
+                </div>
+                <form id="loginForm" class="am-form tpl-form-line-form" data-am-validator>
+                    <div class="am-form-group">
+                        <input type="text" class="tpl-form-input" id="user-name" name="userName" placeholder="请输入账号" required>
+                    </div>
+                    <div class="am-form-group">
+                        <input type="password" class="tpl-form-input" id="user-pwd" name="password" placeholder="请输入密码" required>
+                    </div>
+                    <div class="am-form-group login-btn-group">
+                        <button id="submitBtn" class="am-btn  tpl-login-btn">登陆</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/amazeui.min.js"></script>
+    <script src="assets/plugin/amazedialog/amazeui.dialog.min.js"></script>
+    <script src="assets/js/jquery.cookie.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/appBase.js"></script>
+    <script src="assets/js/htmlLoadUtils.js"></script>
+    <script type="text/javascript">
+        uLogin();
+
+        function uLogin(){
+            var $form = $('#loginForm');
+            $form.validator({
+                onValid: function(validity) {
+                    $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+                },
+                onInValid: function(validity) {
+                    var $field = $(validity.field);
+                    var $group = $field.closest('.am-form-group');
+                    var $alert = $group.find('.am-alert');
+                    // 使用自定义的提示信息 或 插件内置的提示信息
+                    var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+                    if (!$alert.length) {
+                        $alert = $('<div class="am-alert am-alert-danger am-u-sm-12 am-u-md-4 am-u-lg-3" style="float:left;"></div>').hide().appendTo($group);
+                    }
+                    $alert.html(msg).show();
+                },
+                validate: function(validity) {
+                    return validity;
+                },
+                submit: function() {
+                    var formValidity = this.isFormValid();
+                    $.when(formValidity).then(function() {
+                            // 验证成功的逻辑
+                            $.ajax({
+                                "url": WS_SERVER_ROUTE + "sys/user/login",
+                                type: "post",
+                                dataType: "json",
+                                data: $form.serialize(),
+                                success: function(result) {
+                                    if (result.result == '0') {
+                                        $.cookie('a', result.data, { expires: 0.02, path: '/' }); 
+                                        location.replace(SERVER_BASE_URL + "index.html");
+                                    } else {
+                                        AMUI.dialog.alert({
+                                            title: '错误提示',
+                                            content: result.errorData
+                                        });
+                                    }
+                                    return false;
+                                },
+                                error: function() {
+                                    AMUI.dialog.alert({
+                                        title: '错误提示',
+                                        content: "请求失败"
+                                    });
+                                }
+                            });
+                        }),
+                        function() {
+                            return false;
+                        };
+                    //阻止原生form提交
+                    return false;
+                }
+            });
+        }
+        //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function() {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
+</body>
+</html>

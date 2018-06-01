@@ -1,0 +1,408 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <style>
+    #vld-tooltip {
+        position: absolute;
+        z-index: 1000;
+        padding: 5px 10px;
+        background: #F37B1D;
+        min-width: 150px;
+        color: #fff;
+        transition: all 0.15s;
+        box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+        display: none;
+    }
+
+    #vld-tooltip:before {
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        width: 0;
+        height: 0;
+        margin-left: -8px;
+        content: "";
+        border-width: 0 8px 8px;
+        border-color: transparent transparent #F37B1D;
+        border-style: none inset solid;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title  am-cf"><a onclick="backUp();">微信首页菜单</a> / 新增
+                        </div>
+                    </div>
+                    <div class="widget-body  am-fr">
+                        <form id="addForm" class="am-form tpl-form-line-form" data-am-validator>
+                            <input type="hidden" id="dataId" name="ID" value="">
+                            <input type="hidden" id="menuFromVal" name="MENU_VALUE" value="">
+                            <div class="am-form-group am-g am-margin-top">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label for="menuName">菜单名称</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <input type="text" id="menuName" name="MENU_NAME" required value="" placeholder="菜单名称">
+                                </div>
+                            </div>
+                            <div class="am-form-group am-g am-margin-top">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label for="menuType">菜单类型</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end" id="menuDiv">
+                                    <select name="MENU_TYPE" id="menuType" required data-am-selected="{btnSize: 'sm'}" onchange="menuTypeChange()">
+                                        <option value="0">商品详情</option>
+                                        <option value="1">地址跳转</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="am-form-group am-g am-margin-top" id="urlDiv" style="display: none">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label for="menuValue">菜单值串</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <input type="text" id="menuValue" name="menuUrlVal" required value="" placeholder="跳转地址">
+                                </div>
+                            </div>
+                            <div class="am-form-group am-g am-margin-top" id="pntDiv" style="display: block">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label for="menuValue">跳转商品</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <select name="jumpPnt" id="jumpPnt" required data-am-selected="{btnSize: 'sm'}" onchange="pntChoose()">
+                                        <option value="">请选择商品</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="am-form-group am-g am-margin-top">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label for="menuValue">菜单排序</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <input type="number" id="menuSeq" name="DISPLAY_SEQ" required value="" placeholder="排序越大越靠前">
+                                </div>
+                            </div>
+                            <div class="am-form-group am-g am-margin-top">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label>是否有效</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <select name="ENABLED" id="enabled" required data-am-selected="{btnSize: 'sm'}">
+                                        <option value=""></option>
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="am-form-group am-g am-margin-top">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label for="menuDesc">菜单描述</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <input type="text" id="menuDesc" name="MENU_DESC" value="" maxlength="4" placeholder="菜单描述">
+                                </div>
+                            </div>
+                            <div class="am-form-group am-g am-margin-top">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label>菜单图标</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <input type="button" value="选择文件" id="fileBtn" class="am-btn am-btn-success" onclick="$('#picFile').click();" />
+                                    <input type="file" class="am-btn am-btn-success am-round" accept="image/png,image/jpg,image/jpeg" id="picFile" onchange="toUploadPic(this);" style="display:none;" />
+                                    <input type="hidden" name="ICON_URL" value="" />
+                                </div>
+                            </div>
+                            <div class="am-form-group am-g am-margin-top" id="pic">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label></label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <img id="img_view" style="width:100px;height:100px;" src="http://www.hubeta.com:8080/group1/M00/00/8A/wKgB9FkVKD2Aejp6AAAI7-r9KMM269.jpg" />
+                                </div>
+                            </div>
+                            <div class="am-margin">
+                                <button id="submitBtn" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                                <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="backUp();">返回
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="assets/js/formToJson.js"></script>
+<script>
+var selectMenuId = "";
+var $dpInput = $('.form-datetime').datetimepicker({
+    format: 'yyyy-mm-dd hh:ii:ss',
+    autoclose: true,
+    todayBtn: true,
+});
+$(function() {
+    selectMenuId = back.selectMenuId;
+    $("#dataId").val(selectMenuId);
+    $("#menuSeq").val(back.defaultSeq);
+    loadPntList();
+    loadMenuInfo();
+    saveOrUpdateMenuData();
+});
+
+function loadMenuInfo() {
+    $.ajax({
+        url: WS_SERVER_ROUTE + "pnt/menu/getById ",
+        type: "post",
+        async: false,
+        data: "id=" + selectMenuId,
+        dataType: "json",
+        success: function(result) {
+            if (result.result == 0) {
+                if (result.data) {
+                    var menuObj = result.data;
+                    if (1 == menuObj.MENU_TYPE) {
+                        $("#menuType option[value='1']").attr("selected", true);
+                        $("#menuValue").val(menuObj.MENU_VALUE);
+                        $("#menuFromVal").val(menuObj.MENU_VALUE);
+                    } else if (0 == menuObj.MENU_TYPE) {
+                        $("#menuType option[value='0']").attr("selected", true);
+                        if (menuObj.MENU_VALUE.length > 0) {
+                            var pntIdStr = menuObj.MENU_VALUE;
+                            $("#menuFromVal").val(menuObj.MENU_VALUE);
+                            var pntId = pntIdStr.substring(pntIdStr.lastIndexOf("=")+1);
+                            $("#jumpPnt option[value='"+ pntId +"']").attr("selected", true);
+                        }
+                    }
+                    if (1 == menuObj.ENABLED) {
+                        $("#enabled option[value='1']").attr("selected", true);
+                    }else{
+                        $("#enabled option[value='0']").attr("selected", true);
+                    }
+                    if (!$.AMUI.support.mutationobserver) {
+                        $selected.trigger('changed.selected.amui');
+                    }
+                    $('input[name=ID]').val(menuObj.ID);
+                    $('input[name=MENU_NAME]').val(menuObj.MENU_NAME);
+                    $('input[name=DISPLAY_SEQ]').val(menuObj.DISPLAY_SEQ);
+                    $("#menuSeq").val(menuObj.DISPLAY_SEQ);
+                    $('input[name=MENU_DESC]').val(menuObj.MENU_DESC);
+                    if (menuObj.ICON_URL) {
+                        $("input[name=ICON_URL]").val(menuObj.ICON_URL);
+                        $("#img_view").attr("src", menuObj.ICON_URL);
+                    }
+                    menuTypeChange();
+                    pntChoose();
+                }
+            } else {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: result.errorData
+                });
+            }
+        },
+        error: function() {
+            AMUI.dialog.alert({
+                title: '错误提示',
+                content: "请求失败"
+            });
+        }
+    });
+}
+
+function saveOrUpdateMenuData() {
+    AMUI.plugin('mySelected', AMUI.selected);
+    $('#menuType').mySelected({ btnWidth: '100%', btnSize: 'sm' });
+    $('#jumpPnt').mySelected({ btnWidth: '100%', btnSize: 'sm' });
+    $('#enabled').mySelected({ btnWidth: '100%', btnSize: 'sm' });
+    var $form = $('#addForm');
+    $form.validator({
+        onValid: function(validity) {
+            $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+        },
+        onInValid: function(validity) {
+            var $field = $(validity.field);
+            var $group = $field.closest('.am-form-group');
+            var $alert = $group.find('.am-alert');
+            // 使用自定义的提示信息 或 插件内置的提示信息
+            var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+            if (!$alert.length) {
+                $alert = $('<div class="am-alert am-alert-danger am-u-sm-12 am-u-md-4 am-u-lg-3" style="float:left;"></div>').hide().appendTo($group);
+            }
+            $alert.html(msg).show();
+        },
+        submit: function() {
+            var formValidity = this.isFormValid();
+            $.when(formValidity).then(function() {
+                    var dataFormObj = $form.serializeObject();
+                    delete dataFormObj.jumpPnt;
+                    if(dataFormObj.MENU_TYPE == 0){
+
+                    }
+                    if(dataFormObj.MENU_TYPE == 1){
+                        dataFormObj.MENU_VALUE = dataFormObj.menuUrlVal;
+                    }
+                    delete dataFormObj.menuUrlVal;
+                    var url = WS_SERVER_ROUTE + 'pnt/menu/insert';
+                    var id = back.selectMenuId;
+                    if (id && id.length > 0) {
+                        url = WS_SERVER_ROUTE + 'pnt/menu/update';
+                    }
+                    // 验证成功的逻辑
+                    var $subbtn = $("#submitBtn");
+                    $subbtn.button('loading');
+                    $.ajax({
+                        "url": url,
+                        async: false,
+                        type: "post",
+                        dataType: "json",
+                        data: JSON.stringify(dataFormObj),
+                        success: function(result) {
+                            if (result.result == '0') {
+                                AMUI.dialog.alert({
+                                    title: '系统提示',
+                                    content: '操作成功',
+                                    onConfirm: function() {
+                                        backUp();
+                                    }
+                                });
+                            } else {
+                                AMUI.dialog.alert({
+                                    title: '错误提示',
+                                    content: result.errorData
+                                });
+                            }
+                            return false;
+                        },
+                        error: function() {
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: "请求失败"
+                            });
+                        }
+                    });
+                }),
+                function() {
+                    return false;
+                };
+            //阻止原生form提交
+            return false;
+        }
+    });
+}
+
+function backUp() {
+    back.selectMenuId = "";
+    delete back.defaultSeq;
+    new panel({
+        url: current_url,
+        data: back.pntparams,
+        target: $(".tpl-content-wrapper")
+    }).load();
+}
+
+//时间类型change事件
+function menuTypeChange() {
+    var value = $('#menuType option:selected').val();
+    $("#menuFromVal").val("");
+    if (value == 0) {
+        $('#pntDiv').show();
+        $('#urlDiv').hide();
+    } else if (value == 1) {
+        $('#pntDiv').hide();
+        $('#urlDiv').show();
+    }
+}
+
+function loadPntList(){
+    $.ajax({
+        url: WS_SERVER_ROUTE + "pnt/getProductList",
+        async: false,
+        type: "post",
+        dataType: "json",
+        data: 'pageSize=100&pageNumber=1&status=1',
+        success: function (result) {
+            if (result.result == '0') {
+                if(result.data){
+                    for (var i = 0; i < (result.data.list||[]).length; i++) {
+                        var pntObj = result.data.list[i];
+                        $("#jumpPnt").append('<option value="'+ pntObj.ID +'">'+ pntObj.PRODUCT_NAME +'</option>');
+                    }
+                }
+            } else {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: result.errorData,
+                });
+            }
+        },
+        error:function(){
+            AMUI.dialog.alert({
+                title: '错误提示',
+                content: "请求失败"
+            });
+        }
+    });
+}
+
+function pntChoose(){
+    $("#menuFromVal").val(SERVER_ROUTE + "/hdy-wechat/html/productDetail.html?pId="+$("#jumpPnt").val());
+}
+
+/**
+ * 调用图片上传接口
+ * @param dom
+ */
+function toUploadPic(dom) {
+    if (dom.value.length != 0) {
+        var f = dom.files[0];
+        if (f.size > 1024 * 1024) fileSize = (Math.round(f.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+        else fileSize = (Math.round(f.size * 100 / 1024) / 100).toString() + 'KB';
+        if(f.size > 1024 * (1024 / 3)){
+            AMUI.dialog.alert({
+                title: '错误提示',
+                content: "上传的图片"+ fileSize +"超过了300KB,请重新选择"
+            });
+            return;
+        }
+        var formData = new FormData();
+        formData.append("file", dom.files[0]);
+        $.ajax({
+            url: WS_SERVER_ROUTE + "file/upload",
+            type: "POST",
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function(data) {
+                if (data.result == 0) {
+                    var fileName = $("#picFile").val();
+                    $("input[name='ICON_URL']").val(data.data);
+                    $("#img_view").attr("src", data.data);
+                    $("#form_resourceName").val(fileName.substr(fileName.lastIndexOf('\\') + 1));
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: data.errorData
+                    });
+                }
+            },
+            error: function() {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "上传异常"
+                });
+            }
+        });
+    }
+}
+</script>

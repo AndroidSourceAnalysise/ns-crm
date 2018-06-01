@@ -1,0 +1,592 @@
+<html>
+
+<head>
+    <style>
+    .theme-white .tpl-form-border-form {
+        padding-top: 0px !important;
+    }
+
+    .active {
+        background: #e6e6e6;
+    }
+    #data_table td {
+        vertical-align: middle;
+    }
+    .content{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    table{
+        table-layout:fixed;
+    }
+    tr:hover {
+        background-color: #e6e6e6;
+    }
+    td{  
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis; 
+        word-break:keep-all; 
+    }
+    .am-popup.am-modal-active {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+        z-index: 9999;
+    }
+
+    .am-popup {
+        width: 630px;
+        min-height: 290px;
+        left: 50%;
+        top: 50%;
+        margin-left: -259px !important;
+        margin-top: -257px !important;
+    }
+    .am-close{
+        color: #dd514c !important;
+        opacity: 1;
+    }
+    .ui-list {
+        background-color: #fff;
+        min-height: 200px;
+        width: 100%;
+    }
+    .ui-list li {
+        margin: 0;
+        background-color: #fff;
+        width: 100%;
+        position: relative;
+        display: -webkit-box;
+    }
+    .ui-avatar-s {
+        width: 40px;
+        height: 40px;
+        -webkit-border-radius: 200px;
+        overflow: hidden;
+        display: block;
+        margin: 14px 10px;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAA8FBMVEXp8Peat8+jwNidutKhvtagvdWcudGfu9Kpwteiv9ecudCsxNifvNTM2+ieu9PE1eSdudDO3OmkvtSyyNu/0eKhvNOivdPm7vWlv9WeutHI2Oa5zd+dudG+0eHn7/bG1+Xi6/SzydzT4Ozc5vDe6PLY5O/a5e/P3eqmv9WmwNW6zt/j7PTX4+6uxtno8Pff6fLh6vPW4u280ODg6fLC1OObuM+buNDD1eTU4eza5fDd5/GhvNKowdarw9jA0+K1y93k7PTk7fXl7fW7zt/F1uXc5/DZ5O/R3+vB0+OnwNXg6vKcuNDM2+mtxNjO3eq3zN1UQ75QAAACR0lEQVR4Xu3W1a7cMBAG4PnHDi4zMx5mxiLD+79Ne7YXq6hKHMU+Ui/8XVpKfo0nMwr9hyzLsizLsqx5ZTfX9DyvmXtXOaNXsd+rYqs9mJFx454HiLwMXsi8CzTO35JZ0x1ABLwlBZAzW0yhAzfgKOmiekLmVEII/peAd22u5ZGMSEpzSWYc30cyoim+oe4/wuU4LgZkwq0HyXEkPCMX9hmC4wmcHpK2VhWS40ncHZG2KcBJBAom2l7kJA6eSFsNDicJsB5qt8SH5EToz0nT1zUCRUi4IE3zqjLkm/aaPGsrQ8oz0nSkDgm1Z750AU4mtL/hYQ1FThZgZ4+0HH9BoAzx9knL8hKsoL9YChCsksdAd3PlWcXBhHSM15CsEqCsNY49uKwm4Lcos5MyAk7BRYmyOpxAcBoOqkca/1sBpyKyl1KH4HQc5J4pmzYkpwQsKJsQnFYRI8qmnD7EwdPrh0gcZA9xio76piBY4iFziACUMw+EcLNXEgKd7o5qVtD52UYeu5RNB3iiifIP0qcRgAplU4N/TNdILsVFgVq/0My6Vxa9lyeTF5jAwzPRsF4gLbfNhBSJ/pRMKPThxGbgkcy4iu19HqdkxN7oR2wlDmqrQ9K39JPm8RLYbZGu8T1cJ3mp1ElXJVqGLAKI7DOJxpA0Le8gJP8VSIGN7RE7Lmr6XfneACCKfwgAjfPFdP8qcpSbk76bgX+BDe+gPqMXs3quj43OQekNGTH+WBmV3nc/fdi+b+9m1S2VuqvZM6lZlmVZlmVZvwEAnS9LHbI74gAAAABJRU5ErkJggg==);
+    }
+    .ui-avatar-s span{
+        width: 100%;
+        height: 100%;
+        display: block;
+        overflow: hidden;
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        -webkit-border-radius: 200px;
+    }
+    .ui-list-info {
+        -webkit-box-flex: 1;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-box-pack: center;
+        padding-right: 0 !important;
+    }
+    .ui-list-info .ui-nowrap{
+        margin: 0 !important;
+
+    }
+    .ui-list-info .content{
+        color: #333!important;
+        margin: 8px 0;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden !important;
+        word-break: break-all;
+        white-space: normal !important;
+    }
+    .ui-list-action {
+        height: 40px;
+        line-height: 40px;
+        right: 10px;
+        font-size: 80%;
+        position: relative;
+        top: 5px;
+        color: #bbb;
+    }
+    .ui-border-t{
+        border: 1px solid #e4e4e4;
+        border-left-style: none;
+        border-right-style: none;
+        border-top-style: none;
+    }
+    </style>
+</head>
+<body>
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12" id="perListPanel">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title  am-cf">笔记列表</div>
+                    </div>
+                    <div class="widget-body  am-fr">
+                        <form id="noteParmsForm" class="am-form tpl-form-border-form tpl-form-border-br" onkeydown="if(event.keyCode==13){return false;}">
+                            <input type="hidden" id="pageSize" name="pageSize" value="10">
+                            <input type="hidden" id="pageNumber" name="pageNumber" value="1">
+                            <div class="am-form-group">
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">所属版块</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <select id="category" name="categoryId">
+                                        <option value="-1">全部</option>
+                                    </select>
+                                </div>
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">会员编号</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <input type="text" placeholder="会员编号" class="am-form-field " name="conNo"
+                                           id="conNo"
+                                           value="">
+                                </div>
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">开始时间</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <input id="startDt" name="startDt" type="text" class="am-form-field tpl-form-no-bg" placeholder="选择开始日期" readonly="readonly" value="">
+                                </div>
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">结束时间</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <input id="endDt" name="endDt" type="text" class="am-form-field tpl-form-no-bg" placeholder="选择结束日期" value="" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-u-md-10">
+                                </div>
+                                <div class="am-u-md-2">
+                                    <button type="button" class="am-btn am-btn-success am-btn-xs am-icon-search" onclick="noteSearch();">搜索
+                                    </button>
+                                    <button type="button" class="am-btn am-btn-danger am-btn-xs am-icon-undo" onclick="noteFormReset();">重置
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                        <button type="button" class="am-btn am-btn-xs am-btn-danger" onclick="toDelete('')"><span class="am-icon-trash-o"></span> 删除
+                        </button>
+                        <button type="button" class="am-btn am-btn-xs am-btn-danger" onclick="toDelete('all')"><span class="am-icon-trash-o"></span> 批量删除
+                        </button>
+                        <button type="button" class="am-btn am-btn-xs am-btn-warning" onclick="changeStatus('')"><span class="am-icon-paper-plane"></span> 设为无效
+                        </button>
+                        <button type="button" class="am-btn am-btn-xs am-btn-warning" onclick="changeStatus('all')"><span class="am-icon-paper-plane"></span> 批量设为无效
+                        </button>
+                        <button type="button" class="am-btn am-btn-success am-btn-xs" onclick="showReplyList();">
+                            <i class="am-icon-search"></i> 查看笔记评论
+                        </button>
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                        <body>
+                            <!-- 内容区域 -->
+                            <div class="am-scrollable-horizontal">
+                                <table id="data_table" width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black table_hread_static">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:5%">序号</th>
+                                        <th style="width:5%">会员编号</th>
+                                        <th style="width:10%">会员昵称</th>
+                                        <th style="width:10%">所属版块</th>
+                                        <th style="width:8%">图片1</th>
+                                        <th style="width:8%">图片2</th>
+                                        <th style="width:8%">图片3</th>
+                                        <th style="width:30%">内容</th>
+                                        <th style="width:6%">是否有效</th>
+                                        <th style="width:10%">创建时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="notePaging"></div>
+                        </body>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="assets/js/my_pagination.js"></script>
+    <script>
+    var selectNoteId = "";
+    AMUI.plugin('mySelected', AMUI.selected);
+    $('#category').mySelected({ btnWidth: '100%', btnSize: 'sm' });
+    AMUI.plugin('myDatepicker', AMUI.datepicker);
+    $('#startDt').myDatepicker();
+    $('#endDt').myDatepicker();
+
+    $(function() {
+        loadCategory();
+        getNoteList();
+    });
+
+    function loadCategory(){
+        $.ajax({
+            url: WS_SERVER_ROUTE + "node/category/getList",
+            async: false,
+            type: "post",
+            dataType: "json",
+            success: function (result) {
+                if (result.result == '0') {
+                    if(result.data){
+                        for (var i = 0; i < (result.data||[]).length; i++) {
+                            var categoryObj = result.data[i];
+                            $("#category").append('<option value="'+ categoryObj.ID +'">'+ categoryObj.NAME +'</option>');
+                        }
+                    }
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData,
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    function getNoteList(){
+        var $form = $('#noteParmsForm');
+        var noteListObj = null;
+        var formSerializeVal = $form.serialize();
+        if($("#category").val() == "-1"){
+            formSerializeVal = formSerializeVal.replace(/&categoryId=-1/g,"");
+        }
+        $.ajax({
+            url: WS_SERVER_ROUTE + "node/content/getList",
+            async: false,
+            type: "post",
+            dataType: "json",
+            data: formSerializeVal,
+            success: function (result) {
+                if (result.result == '0') {
+                    noteListObj = result.data;
+                    showDataList(noteListObj);
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData,
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+        if(noteListObj){
+            var pageObj = new myPaging({
+                page_id: "noteList",
+                div_pagination_id: "notePaging",
+                form_id: "noteParmsForm",
+                url: WS_SERVER_ROUTE + "node/content/getList",
+                pageNumber: noteListObj.pageNumber,
+                totalPage: noteListObj.totalPage,
+                pageSize: noteListObj.pageSize
+            });
+            pageObj.init();
+        }
+    }
+
+    //显示优惠券列表信息
+    function showDataList(dataObj){
+        if(dataObj){
+            var dataHtml = '';
+            for (var i = 0; i < (dataObj.list||[]).length; i++) {
+                var noteObj = dataObj.list[i];
+                if(noteObj){
+                    dataHtml+='<tr class="gradeX" data-id="'+ noteObj.ID +'">';
+                    dataHtml+='    <td>'+ (i+1) +'</td>';
+                    dataHtml+='    <td>'+ noteObj.CON_NO +'</td>';
+                    dataHtml+='    <td>'+ noteObj.CON_NAME +'</td>';
+                    dataHtml+='    <td>'+ noteObj.CATEGORY_NAME +'</td>';
+                    if(noteObj.PIC1!=null){
+                        dataHtml+='    <td><img style="height:50px;width:50px;" src="'+ noteObj.PIC1 +'"/></td>';
+                    }else{
+                        dataHtml+='    <td></td>';
+                    }
+                    if(noteObj.PIC2!=null){
+                        dataHtml+='    <td><img style="height:50px;width:50px;" src="'+ noteObj.PIC2 +'"/></td>';
+                    }else{
+                        dataHtml+='    <td></td>';
+                    }
+                    if(noteObj.PIC3!=null){
+                        dataHtml+='    <td><img style="height:50px;width:50px;" src="'+ noteObj.PIC3 +'"/></td>';
+                    }else{
+                        dataHtml+='    <td></td>';
+                    }
+                    dataHtml+='    <td><div class="content">'+ noteObj.CONTENT +'</div></td>';
+                    dataHtml+='    <td>'+ (noteObj.ENABLED==0?"失效":"有效") +'</td>';
+                    dataHtml+='    <td>'+ noteObj.CREATE_DT +'</td>';
+                    dataHtml+='</tr>';
+                }
+            }
+            $("#data_table tbody").html(dataHtml);
+
+            $("#data_table tbody tr").dblclick(function(){
+                $(this).trigger("click");
+            });
+            $("#data_table tbody tr").click(function () {
+                if($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                    selectNoteId = "";
+                }else{
+                    $(this).addClass('active');
+                    selectNoteId = $(this).attr("data-id");
+                }
+                $(this).siblings().removeClass('active');
+            });
+        }
+    }
+
+    function toDelete(type) {
+        var dataAry = [];
+        if("all" == type){
+            $('#data_table tbody tr').each(function(index){
+                dataAry.push($(this).attr("data-id"));
+            })
+        }else{
+            if (!clickCheck()) {
+                return;
+            }
+            dataAry.push(selectNoteId);
+        }
+        //是否确认删除
+        AMUI.dialog.confirm({
+            title: '提示',
+            content: '删除笔记后，相应的评论也将不可见是否继续!',
+            onConfirm: function() {
+                $.ajax({
+                    type: "POST",
+                    data: JSON.stringify(dataAry),
+                    dataType: "JSON",
+                    async: false,
+                    url: WS_SERVER_ROUTE + "node/content/delete",
+                    success: function(data) {
+                        if (data.result == '0') {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: '删除成功',
+                                onConfirm: function() {
+                                    getNoteList();
+                                }
+                            });
+                        } else {
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: data.errorData
+                            });
+                        }
+                    },
+                    error:function(){
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: "请求失败"
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    function changeStatus(type){
+        var dataAry = [];
+        if("all" == type){
+            $('#data_table tbody tr').each(function(index){
+                dataAry.push($(this).attr("data-id"));
+            })
+        }else{
+            if (!clickCheck()) {
+                return;
+            }
+            dataAry.push(selectNoteId);
+        }
+        //是否确认删除
+        AMUI.dialog.confirm({
+            title: '提示',
+            content: '设为无效笔记后，相应的评论也将不可见是否继续!',
+            onConfirm: function() {
+                $.ajax({
+                    type: "POST",
+                    data: JSON.stringify(dataAry),
+                    dataType: "JSON",
+                    async: false,
+                    url: WS_SERVER_ROUTE + "node/content/disable",
+                    success: function(data) {
+                        if (data.result == '0') {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: '操作成功',
+                                onConfirm: function() {
+                                    getNoteList();
+                                }
+                            });
+                        } else {
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: data.errorData
+                            });
+                        }
+                    },
+                    error:function(){
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: "请求失败"
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    function showReplyList(){
+        if (!clickCheck()) {
+            return;
+        }
+        var currDate = new Date();
+        var currDt = currDate.getTime();
+        $.ajax({
+            type: "POST",
+            data: 'nodeContentId='+ selectNoteId +'&pageSize=50&pageNumber=1',
+            dataType: "JSON",
+            async: false,
+            // url: WS_SERVER_ROUTE + "node/content/disable",
+            url:"http://xhd777.com.cn/hdy-api/api/node/cmt/getNodeCmt",
+            success: function(data) {
+                if (data.result == '0') {
+                    var itemHtmlStr = "";
+                    itemHtmlStr+='<ul class="dataItems ui-list ui-list-function">';
+                    for (var i = 0; i < (data.data.list||[]).length; i++) {
+                        var dataItemObj = data.data.list[i];
+                        var timestamp2 = Date.parse(new Date(dataItemObj.CREATE_DT));
+                        itemHtmlStr+='<li class="ui-border-t">';
+                        itemHtmlStr+='    <div class="ui-avatar-s"> <span style="background-image:url('+ dataItemObj.CON_PIC +')"></span> </div>';
+                        itemHtmlStr+='    <div class="ui-list-info reply-item">';
+                        if(dataItemObj.TO_CON_NAME != null){
+                            itemHtmlStr+='  <h4 class="ui-nowrap" style="color:#666">'+ dataItemObj.CON_NAME +'回复'+ dataItemObj.TO_CON_NAME +'</h4>';
+                        }else{
+                            itemHtmlStr+='  <h4 class="ui-nowrap" style="color:#666">'+ dataItemObj.CON_NAME +'</h4>';
+                        }
+                        itemHtmlStr+='      <p class="content">'+ dataItemObj.CONTENT +'</p>';
+                        itemHtmlStr+='    </div>';
+                        itemHtmlStr+='    <div class="ui-list-action">'+ formatTime(currDt - timestamp2) +'</div>';
+                        itemHtmlStr+='</li>';
+                    }
+                    itemHtmlStr+='</ul>';
+                    AMUI.dialog.popup({
+                        title: "评论内容",
+                        content: itemHtmlStr
+                    });
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: data.errorData
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        }); 
+    }
+
+
+    /** 条件搜索 **/
+    function noteSearch() {
+        var startDate = $("#startDt").val(); // 开始时间
+        var endDate = $("#endDt").val(); // 结束时间
+        if (startDate.length > 0 && endDate.length > 0) {
+            if (startDate > endDate) {
+                AMUI.dialog.alert({
+                    title: '系统提示',
+                    content: "起始时间不能大于结束时间!"
+                });
+                return;
+            }
+        }
+        getNoteList();
+    }
+    /**条件重置**/
+    function noteFormReset() {
+        $("#category").val('-1');
+        $("#category").trigger('changed.selected.amui');
+        $("#conNo").val('');
+        $("#name").val('');
+        $("#startDt").attr('value', '');
+        $("#endDt").attr('value', '');
+
+    }
+
+    function clickCheck() {
+        if ("" == selectNoteId) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "请点选所需操作的数据!"
+            });
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    function initBack() {
+        var formSerializeVal = $("#noteParmsForm").serialize();
+        if($("#category").val() == "-1"){
+            formSerializeVal = formSerializeVal.replace(/&categoryId=-1/g,"");
+        }
+        back.couponListParams = formSerializeVal;
+    }
+    /**
+     * [根据时间毫秒数计算返回年,月,天,小时,分钟]
+     * @method   formatTime
+     * @Author   chenguangchao
+     * @DateTime 2018-04-02
+     * @param    {[type]}      ms [毫秒数]
+     * @return   {[type]}         [年|月|天|小时|分钟]
+     */
+    function formatTime(ms){
+        var ss = 1000;  
+        var mi = ss * 60;  
+        var hh = mi * 60;  
+        var dd = hh * 24; 
+        var month = dd * 30;
+        var year = month * 12;
+        var day = (ms / dd);
+        var hour = ((ms - day * dd) / hh);
+        var dataObj = {};
+        dataObj.year = (ms / year);
+        dataObj.month = (ms / month);
+        dataObj.day = (ms / dd);
+        dataObj.hour = (ms / hh);
+        dataObj.minute = (ms / mi);
+        if(dataObj.year >= 1){
+            return Number(dataObj.year).toFixed(0) + "年前";
+        }
+        if(dataObj.month >= 1){
+            return Number(dataObj.month).toFixed(0) + "月前";
+        }
+        if(dataObj.day >= 1){
+            return Number(dataObj.day).toFixed(0) + "天前";
+        }
+        if(dataObj.hour >= 1){
+            return Number(dataObj.hour).toFixed(0) + "小时前";
+        }
+        if(dataObj.minute >= 1){
+            return Number(dataObj.minute).toFixed(0) + "分钟前";
+        }
+        return "刚刚";
+    }
+    </script>
+</body>
+
+</html>

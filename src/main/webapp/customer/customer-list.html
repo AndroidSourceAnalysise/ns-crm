@@ -1,0 +1,287 @@
+<style type="text/css">
+    .search-btn{
+        text-align: right;
+    }
+    .active {
+        background: #e6e6e6;
+    }
+    #table_color:hover {
+        background-color: #FFFFFF;
+    }
+    .am-popup.am-modal-active {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+        z-index: 9999;
+    }
+    tr:hover {
+        background-color: #e6e6e6;
+    }
+    .page_capacity {
+        padding-left: 0;
+        margin: 1.5rem 0;
+        list-style: none;
+        color: #999;
+        text-align: left;
+    }
+
+    #data_table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+    #data_table th {
+        border:1px solid #e4e4e4;
+        border-right: none;
+        text-align: center;
+    }
+    .theme-white .tpl-form-border-form {
+        padding-top: 0px;
+    }
+</style>
+<div id="conList">
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">会员列表</div>
+                    </div>
+                    <div class="widget-body am-fr">
+                        <form id="table_form_id" class="am-form tpl-form-border-form tpl-form-border-br">
+                            <input type="hidden" id="pageSize" name="pageSize" value="10">
+                            <input type="hidden" id="pageNumber" name="pageNumber" value="1">
+                            <!--查询参数-->
+                            <div class="am-form-group">
+                                <!-- <div class="am-u-sm-4">
+                                    <label class="am-u-sm-4 am-form-label" for="form_conType">会员类型</label>
+                                    <div class="am-u-sm-8">
+                                        <select id="form_conType" name="conType">
+                                            <option value="-1">全部</option>
+                                            <option value="FAE77ED129A54DFDAFFF8FCC0C4F7C8C"
+                                                        >购买会员</option>
+                                            <option value="636F529E5E4C4AF3E053F401A8C003C2"
+                                                        >未购买会员</option>
+                                        </select>
+                                    </div>
+                                </div> -->
+                                <label class="am-u-sm-1 am-form-label" for="form_conNo">会员号</label>
+                                <div class="am-u-sm-2">
+                                    <input type="text" id="form_conNo" name="conNo"
+                                           value=""
+                                           placeholder="会员编号"/>
+                                </div>
+                                <label class="am-u-sm-1 am-form-label" for="form_conPhoneNum">手机号</label>
+                                <div class="am-u-sm-2">
+                                    <input type="text" id="form_conPhoneNum" name="mobile"
+                                           value=""
+                                           placeholder="会员手机号"/>
+                                </div>
+                                <div class="am-u-sm-2">
+                                    <button type="button" class="am-btn am-btn-success am-btn-sm am-icon-search"
+                                            onclick="searchConList('search');">搜索
+                                    </button>
+                                    <button type="button" class="am-btn am-btn-danger am-btn-sm am-icon-undo"
+                                            onclick="resetFrom();">重置
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                        <button id="toEdit" type="button" onclick="showInfo();" class="am-btn am-btn-default am-btn-primary am-btn-xs"><span class="am-icon-edit"></span> 会员详情
+                        </button>
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
+                        <div class="am-scrollable-horizontal" style="min-height: 370px">
+                            <table id="data_table" width="100%"
+                                   class="am-table am-table-compact am-text-nowrap tpl-table-black table_hread_static">
+                                <thead>
+                                <tr>
+                                    <!-- 会员基本信息 -->
+                                    <th>序号</th>
+                                    <th>头像</th>
+                                    <th>会员号</th>
+                                    <th>昵称</th>
+                                    <th>真实姓名</th>
+                                    <th>性别</th>
+                                    <th>手机号</th>
+                                    <th>省份</th>
+                                    <th>城市</th>
+                                    <th>城区</th>
+                                    <th>地址</th>
+                                    <th>账号状态</th>
+                                    <th>微信openid</th>
+                                    <th>关注时间</th>
+                                    <!-- 会员上级信息 -->
+                                    <th>上级会员号</th>
+                                    <th>上级会员昵称</th>
+                                    <!-- 会员扩展信息 -->
+                                    <!-- <th>总积分</th>
+                                    <th>已确认积分</th>
+                                    <th>未确认积分</th>
+                                    <th>营业总额</th>
+                                    <th>消费总额</th> -->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="myPaging"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/my_pagination.js"></script>
+<script type="text/javascript">
+var selectCustomerDataId = "";
+$(function () {
+    AMUI.plugin('mySelected', AMUI.selected);
+    $('select').mySelected({btnWidth: '100%', btnSize: 'xs', maxHeight: 300});
+
+    searchConList();
+});
+
+// 查询会员列表
+function searchConList(changeFlag){
+    if(changeFlag && "search" == changeFlag){
+        $("#pageSize").val(10);
+        $("#pageNumber").val(1);
+    }
+    if(back.customerListPageSize){
+        $("#pageSize").val(back.customerListPageSize);
+    }
+    if(back.customerListPageNumber){
+        $("#pageNumber").val(back.customerListPageNumber);
+    }
+    var $form = $('#table_form_id');
+    var customerListObj = null;
+    $.ajax({
+        url: WS_SERVER_ROUTE + "customer/getCustomerList",
+        async: false,
+        type: "post",
+        dataType: "json",
+        data: $form.serialize(),
+        success: function (result) {
+            if (result.result == '0') {
+                customerListObj = result.data;
+                showDataList(customerListObj);
+            } else {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: result.errorData,
+                });
+                return;
+            }
+        },
+        error:function(){
+            AMUI.dialog.alert({
+                title: '错误提示',
+                content: "请求失败"
+            });
+        }
+    });
+
+    var pageObj = new myPaging({
+        page_id: "customerList",
+        div_pagination_id: "myPaging",
+        form_id: "table_form_id",
+        url: WS_SERVER_ROUTE + "customer/getCustomerList",
+        pageNumber: customerListObj.pageNumber,
+        totalPage: customerListObj.totalPage,
+        pageSize: customerListObj.pageSize
+    });
+    pageObj.init();
+}
+
+//显示会员列表信息
+function showDataList(dataObj){
+    if(dataObj){
+        var dataHtml = '';
+        for (var i = 0; i < (dataObj.list||[]).length; i++) {
+            var conObj = dataObj.list[i];
+            if(conObj){
+                dataHtml+='<tr class="gradeX" data-id="'+ conObj.ID +'" data-no="'+ conObj.CON_NO +'">';
+                dataHtml+='    <td>'+ (i+1) +'</td>';
+                dataHtml+='    <td>';
+                dataHtml+='        <img style="height:50px;width:50px;" src="'+ conObj.PIC +'"/>';
+                dataHtml+='    </td>';
+                dataHtml+='    <td>'+ conObj.CON_NO +'</td>';
+                dataHtml+='    <td>'+ conObj.CON_NAME +'</td>';
+                dataHtml+='    <td>'+ (conObj.REAL_NAME==null?"":conObj.REAL_NAME) +'</td>';
+                dataHtml+='    <td>'+ (conObj.SEX==2?"女":"男") +'</td>';
+                dataHtml+='    <td>'+ (conObj.MOBILE==null?"":conObj.MOBILE) +'</td>';
+                dataHtml+='    <td>'+ (conObj.PROVINCE==null?"":conObj.PROVINCE) +'</td>';
+                dataHtml+='    <td>'+ (conObj.CITY==null?"":conObj.CITY) +'</td>';
+                dataHtml+='    <td>'+ (conObj.DISTRICT==null?"":conObj.DISTRICT) +'</td>';
+                dataHtml+='    <td>'+ (conObj.ADDRESS==null?"":conObj.ADDRESS) +'</td>';
+                dataHtml+='    <td>'+ (conObj.IS_LOCKOUT==0?"正常":"锁定") +'</td>';
+                dataHtml+='    <td>'+ conObj.OPENID +'</td>';
+                dataHtml+='    <td>'+ conObj.CREATE_DT +'</td>';
+                dataHtml+='    <td>'+ conObj.RP_NO +'</td>';
+                dataHtml+='    <td>'+ conObj.RP_NAME +'</td>';
+                // dataHtml+='    <td>0</td>';
+                // dataHtml+='    <td>0</td>';
+                // dataHtml+='    <td>0</td>';
+                // dataHtml+='    <td>0</td>';
+                // dataHtml+='    <td>0</td>';
+                dataHtml+='</tr>';
+            }
+        }
+        $("#data_table tbody").html(dataHtml);
+
+        $("#data_table tbody tr").dblclick(function(){
+            $(this).trigger("click");
+        });
+        $("#data_table tbody tr").click(function () {
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+                selectCustomerDataId = "";
+            }else{
+                $(this).addClass('active');
+                back.conID = $(this).attr("data-id");
+                back.conNO = $(this).attr("data-no");
+                selectCustomerDataId = $(this).attr("data-id");
+            }
+            $(this).siblings().removeClass('active');
+        });
+    }
+}
+
+function clickCheck() {
+    if (selectCustomerDataId == "") {
+        AMUI.dialog.alert({
+            title: '系统提示',
+            content: "请点选所需操作的数据!"
+        });
+        return false;
+    }
+    return true;
+}
+
+function showInfo(){
+    if(!clickCheck()){
+        return;
+    }
+    initBackForList();
+    new panel({
+        url: SERVER_BASE_URL + "customer/customer-info.html",
+        target: $(".tpl-content-wrapper")
+    }).load();
+}
+
+function initBackForList() {
+    back.customerListPageSize = $("#pageSize").val();
+    back.customerListPageNumber = $("#pageNumber").val();
+}
+
+
+// 重置查询条件
+function resetFrom() {
+    $("#form_conType").val("-1");
+    $("#form_conType").trigger('changed.selected.amui');
+    $("#form_conNo").val("");
+    $("#form_conPhoneNum").val("");
+}
+</script>

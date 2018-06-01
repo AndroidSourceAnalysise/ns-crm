@@ -1,0 +1,210 @@
+<style type="text/css">
+    .am-form-label{
+        font-size: 12px !important;
+    }
+    .active {
+        background: #e6e6e6 !important;
+    }
+    table{
+        table-layout:fixed;
+    }
+    td{  
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis; 
+        word-break:keep-all; 
+    }
+    tr:hover {
+        background-color: #e6e6e6;
+    }
+</style>
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl">基础配置</div>
+                </div>
+                <div class="widget-body am-fr">
+                    <form id="table_form_id" class="am-form tpl-form-border-form tpl-form-border-br">
+                        <input type="hidden" id="pageSize" name="pageSize" value="10">
+                        <input type="hidden" id="pageNumber" name="pageNumber" value="1">
+                        <!--查询参数-->
+                        <div class="am-form-group">
+                            <label for="form_groupName" class="am-u-sm-5 am-u-md-1 am-u-lg-2 am-form-label">参数描述</label>
+                            <div class="am-u-sm-7 am-u-md-5 am-u-lg-5">
+                                <input type="text" id="remark" name="remark" value="" placeholder="关键词" />
+                            </div>
+                            <div class="am-u-md-2 am-u-lg-2"></div>
+                            <div class="am-u-md-3 am-u-lg-3">
+                                <button type="button" class="am-btn am-btn-success am-btn-xs am-icon-search" onclick="toSearch();">搜索
+                                </button>
+                                <button type="button" class="am-btn am-btn-danger am-btn-xs am-icon-undo" onclick="resetFrom();">重置
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                    <button type="button" class="am-btn-xs am-btn am-btn-success" onclick="toAddDict();"><span class="am-icon-plus"></span> 新增
+                    </button>
+                    <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="toEdit();"><span class="am-icon-edit"></span> 编辑
+                    </button>
+                    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                    <div class="am-scrollable-horizontal">
+                        <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black" id="data_table">
+                            <thead>
+                                <tr>
+                                    <th class="table-date am-hide-sm-only" style="width: 5%">序号</th>
+                                    <th style="width: 20%">配置代码</th>
+                                    <th style="width: 30%">配置值</th>
+                                    <th style="width: 10%">是否生效</th>
+                                   <!--  <th>参数组名称</th>
+                                    <th>参数组代码</th> -->
+                                    <th style="width: 20%">参数描述</th>
+                                    <th style="width: 15%">创建时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="sysdictPaging"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/my_pagination.js"></script>
+<script>
+var selectSysDictId = "",selectSysDictObj = null;
+$(function() {
+    AMUI.plugin('mySelected', AMUI.selected);
+    $('select').mySelected({btnWidth: '100%', btnSize: 'xs', maxHeight: 300});
+    loadSysDictList();
+});
+
+function loadSysDictList(){
+    var $form = $('#table_form_id');
+    var dataListObj = null;
+    var formSerializeVal = $form.serialize();
+    $.ajax({
+        url: WS_SERVER_ROUTE + "sysdict/getSysDict",
+        async: false,
+        type: "post",
+        dataType: "json",
+        data: formSerializeVal,
+        crossDomain: true,
+        success: function (result) {
+            if (result.result == '0') {
+                dataListObj = result.data;
+                showDataList(dataListObj);
+            } else {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: result.errorData,
+                });
+            }
+        },
+        error:function(){
+            AMUI.dialog.alert({
+                title: '错误提示',
+                content: "请求失败"
+            });
+        }
+    });
+    if(dataListObj){
+        var pageObj = new myPaging({
+            page_id: "dictDataList",
+            div_pagination_id: "sysdictPaging",
+            form_id: "table_form_id",
+            url: WS_SERVER_ROUTE + "sysdict/getSysDict",
+            pageNumber: dataListObj.pageNumber,
+            totalPage: dataListObj.totalPage,
+            pageSize: dataListObj.pageSize
+        });
+        pageObj.init();
+    }
+}
+
+function showDataList(dataObj){
+    if(dataObj){
+        var dataHtml = '';
+        for (var i = 0; i < (dataObj.list||[]).length; i++) {
+            var dataJsonObj = dataObj.list[i];
+            if(dataJsonObj){
+                dataHtml+='<tr class="gradeX" data-id="'+ dataJsonObj.ID +'">';
+                dataHtml+='    <td style="display:none"><input type="hidden" id="data_'+ dataJsonObj.ID +'" value=\''+ JSON.stringify(dataJsonObj) +'\'/></td>';
+                dataHtml+='    <td class="am-hide-sm-only">'+ (i+1) +'</td>';
+                dataHtml+='    <td title="'+ dataJsonObj.PARAM_KEY +'">'+ dataJsonObj.PARAM_KEY +'</td>';
+                dataHtml+='    <td title="'+ dataJsonObj.PARAM_VALUE +'">'+ dataJsonObj.PARAM_VALUE +'</td>';
+                dataHtml+='    <td>'+ (dataJsonObj.ENABLED==0?"失效":"有效") +'</td>';
+                // dataHtml+='    <td>'+ dataJsonObj.GROUP_NAME +'</td>';
+                // dataHtml+='    <td>'+ dataJsonObj.GROUP_CODE +'</td>';
+                dataHtml+='    <td title="'+ dataJsonObj.REMARK +'">'+ dataJsonObj.REMARK +'</td>';
+                dataHtml+='    <td>'+ dataJsonObj.UPDATE_DT +'</td>';
+                dataHtml+='</tr>';
+            }
+        }
+        $("#data_table tbody").html(dataHtml);
+        $("#data_table tbody tr").dblclick(function(){
+            $(this).trigger("click");
+        });
+        $("#data_table tbody tr").click(function () {
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+                selectSysDictId = "";
+            }else{
+                $(this).addClass('active');
+                selectSysDictId = $(this).attr("data-id");
+                selectSysDictObj = $(this).find("input").val();
+            }
+            $(this).siblings().removeClass('active');
+        });
+    }
+}
+
+function toAddDict() {
+    initBackForDictBase();
+    new panel({
+        "url": SERVER_BASE_URL + "sys-dict/dict-add.html",
+        "target": $(".tpl-content-wrapper")
+    }).load();
+}
+
+function toEdit(){
+    if (!clickCheck()) {
+        return;
+    }
+    back.selectSysDictObj = selectSysDictObj;
+    toAddDict();
+}
+
+function clickCheck() {
+    if ("" == selectSysDictId) {
+        AMUI.dialog.alert({
+            title: '系统提示',
+            content: "请点选所需操作的数据!"
+        });
+        return false;
+    }else{
+        return true;
+    }
+}
+
+function toSearch() {
+    $("#pageNumber").val(1);
+    loadSysDictList();
+}
+
+function resetFrom() {
+    $("#remark").val("");
+}
+
+/**
+ * 初始化返回对象, 前段储存该数据, 用于其他页面返回之前所操作的列表
+ */
+function initBackForDictBase() {
+    var formSerializeVal = $("#table_form_id").serialize();
+    back.sysDictParams = formSerializeVal;
+}
+</script>

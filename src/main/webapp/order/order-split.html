@@ -1,0 +1,436 @@
+<style>
+.active {
+    background: #e6e6e6;
+}
+
+.am-popup.am-modal-active {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    z-index: 9999;
+}
+tr:hover {
+    background-color: #e6e6e6;
+}
+.am-popup {
+    width: 630px;
+    min-height: 290px;
+    left: 50%;
+    top: 50%;
+    margin-left: -259px !important;
+    margin-top: -257px !important;
+}
+.am-close{
+    color: #dd514c !important;
+    opacity: 1;
+}
+.track-rcol{width: 100%; border: 1px solid #eee;}
+.track-list{margin: 20px; padding-left: 5px; position: relative;}
+.track-list li{position: relative; padding: 9px 0 0 25px; line-height: 18px; border-left: 1px solid #d9d9d9; color: #999;}
+.track-list li.first{color: red; padding-top: 0; border-left-color: #fff;}
+.track-list li .node-icon{position: absolute; left: -6px; top: 50%; width: 11px; height: 11px; background: url(assets/img/order-icons.png)  -21px -72px no-repeat;}
+.track-list li.first .node-icon{background-position:0 -72px;}
+.track-list li .time{margin-right: 20px; position: relative; top: 4px; display: inline-block; vertical-align: middle;}
+.track-list li .txt{max-width: 600px; position: relative; top: 4px; display: inline-block; vertical-align: middle;}
+.track-list li.first .time{margin-right: 20px; }
+.track-list li.first .txt{max-width: 600px; }
+</style>
+<div id="splitList">
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">分单列表</div>
+                    </div>
+                    <div class="widget-body am-fr">
+                        <form id="orderSplitListForm" class="am-form tpl-form-border-form tpl-form-border-br">
+                            <input type="hidden" id="pageNumber" name="pageNumber" value="1" />
+                            <input type="hidden" name="pageSize" value="10" />
+                            <div class="am-form-group">
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">开始时间</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <input id="start_date" name="startDt" type="text" value="" class="am-form-field tpl-form-no-bg" placeholder="选择开始日期" readonly="readonly">
+                                </div>
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">结束时间</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <input id="end_date" name="endDt" type="text" value="" class="am-form-field tpl-form-no-bg" placeholder="选择结束日期" readonly="readonly">
+                                </div>
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">会员编号</label>
+                                <div class="am-u-sm-7 am-u-md-2">
+                                    <input type="text" id="con_no_id" name="conNo" placeholder="会员编号" value="">
+                                </div>
+                                <div class="am-u-md-3"></div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">订单编号</label>
+                                <div class="am-u-sm-7 am-u-md-2">
+                                    <input type="text" id="order_no_id" name="orderNo" placeholder="订单编号" value="" />
+                                </div>
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">订单状态</label>
+                                <div class="am-dropdown am-u-sm-7 am-u-md-2">
+                                    <select id="status_id" name="status">
+                                        <option value="-1">全部</option>
+                                        <option value="1">新增订单</option>
+                                        <option value="2">已付款</option>
+                                        <option value="3">申请取消</option>
+                                        <option value="4">已取消</option>
+                                        <option value="5">已打印</option>
+                                        <option value="6">配送中</option>
+                                        <option value="7">已收货</option>
+                                        <option value="8">申请退货</option>
+                                        <option value="9">已退货</option>
+                                        <option value="10">已退款</option>
+                                        <option value="11">已关闭</option>
+                                        <option value="12">已删除</option>
+                                    </select>
+                                </div>
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">导出状态</label>
+                                <div class="am-dropdown am-u-sm-7 am-u-md-2">
+                                    <select id="isDelivery" name="isDelivery">
+                                        <option value="-1">全部</option>
+                                        <option value="0">未导出</option>
+                                        <option value="1">已导出</option>
+                                    </select>
+                                </div>
+                                <div class="am-u-md-3">
+                                    <button type="button" class="am-btn am-btn-success am-btn-xs am-icon-search" onclick="toSearch();">搜索
+                                    </button>
+                                    <button type="button" class="am-btn am-btn-danger am-btn-xs am-icon-undo" onclick="resetFrom();">重置
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                        <button id="addProBtn" type="button" class="am-btn am-btn-success am-btn-xs" onclick="toGetLogistics();"><span class="am-icon-search-plus"></span> 查物流
+                        </button>
+                        <button type="button" class="am-btn am-btn-success am-btn-xs" onclick="orderExport();">
+                            <i class="am-icon-table"></i> 导出发货单
+                        </button>
+                        <button type="button" class="am-btn am-btn-success am-btn-xs" onclick="orderImport();">
+                            <i class="am-icon-table"></i> 导入发货单
+                        </button>
+                        <input type="file" class="url_file" style="display:none;" onchange="toUpLoadExcel(this);"/>
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                        <div class="am-scrollable-horizontal">
+                            <table id="data_table" width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black">
+                                <thead>
+                                    <tr id="table_color">
+                                        <th hidden></th>
+                                        <th>序号</th>
+                                        <th>快递公司</th>
+                                        <th>快递单号</th>
+                                        <th>订单号</th>
+                                        <th>导出状态</th>
+                                        <th>会员号</th>
+                                        <th>会员昵称</th>
+                                        <th>省份</th>
+                                        <th>城市</th>
+                                        <th>区县</th>
+                                        <th>地址</th>
+                                        <th>收货人</th>
+                                        <th>收货人电话</th>
+                                        <th>生成时间</th>
+                                        <th>产品名称</th>
+                                        <!-- <th>支付日期</th> -->
+                                        <th>备注</th>
+                                        <th>订单状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="orderSplitPaging"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+var selectOrderId = "";
+$(function() {
+    $('#start_date').datepicker({ format: 'yyyy-mm-dd' });
+    $('#end_date').datepicker({ format: 'yyyy-mm-dd' });
+    AMUI.plugin('mySelected', AMUI.selected);
+    $('#status_id').mySelected({ btnWidth: '100%', btnSize: 'xs', maxHeight: 300 });
+    $('#isDelivery').mySelected({ btnWidth: '100%', btnSize: 'xs', maxHeight: 300 });
+    $(document).on('click', ".am-dropdown", function() {
+        $(this).dropdown('toggle');
+    });
+    $("#data_table tbody tr").click(function() {
+        $(this).addClass('active');
+        $(this).siblings().removeClass('active');
+    });
+
+    getOrderSplitList();
+});
+
+function getOrderSplitList(){
+    var $form = $('#orderSplitListForm');
+    var formSerializeVal = "";
+    var orderListObj = null;
+    if(back.orderListParams){
+        var formDataObj = back.orderListParams;
+        $('#start_date').attr('value', formDataObj.startDt); // 开始时间
+        $('#end_date').attr('value', formDataObj.endDt); // 结束时间
+        $("#con_no_id").val(formDataObj.conNo); // 会员号
+        $("#order_no_id").val(formDataObj.orderNo); // 订单编号
+        if(formDataObj.status == undefined){
+            $("#status_id").val("-1");
+        }else{
+            $("#status_id").val(formDataObj.status);
+        }
+        $("#status_id").trigger('changed.selected.amui');
+        $("#pageNumber").val(formDataObj.pageNumber);
+        $("#pageSize").val(formDataObj.pageSize);
+        formSerializeVal = $form.serialize();
+        formSerializeVal = formSerializeVal.replace(/&status=-1/g,"").replace(/&isDelivery=-1/g,"");
+    }else{
+        formSerializeVal = $form.serialize();
+        if($("#status_id").val() == "-1"){
+            formSerializeVal = formSerializeVal.replace(/&status=-1/g,"").replace(/&isDelivery=-1/g,"");
+        }
+    }
+    $.ajax({
+        url: WS_SERVER_ROUTE + "order/getOrderSplitList",
+        async: false,
+        type: "post",
+        dataType: "json",
+        data: formSerializeVal,
+        success: function (result) {
+            if (result.result == '0') {
+                orderListObj = result.data;
+                showDataList(orderListObj);
+            } else {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: result.errorData,
+                });
+            }
+        }
+    });
+    if(orderListObj){
+        var pageObj = new myPaging({
+            page_id: "orderSplitList",
+            div_pagination_id: "orderSplitPaging",
+            form_id: "orderSplitListForm",
+            url: WS_SERVER_ROUTE + "order/getOrderSplitList",
+            pageNumber: orderListObj.pageNumber,
+            totalPage: orderListObj.totalPage,
+            pageSize: orderListObj.pageSize
+        });
+        pageObj.init();
+    }
+}
+
+//显示订单列表信息
+function showDataList(dataObj){
+    if(dataObj){
+        var dataHtml = '';
+        for (var i = 0; i < (dataObj.list||[]).length; i++) {
+            var orderObj = dataObj.list[i];
+            if(orderObj){
+                dataHtml+='<tr class="gradeX" data-id="'+ orderObj.ID +'">';
+                dataHtml+='    <td hidden>'+ orderObj.ID +'</td>';
+                dataHtml+='    <td>'+ (i+1) +'</td>';
+                dataHtml+='    <td>'+ (orderObj.EXP_COMPANY_NAME == null?"":orderObj.EXP_COMPANY_NAME) +'</td>';
+                dataHtml+='    <td class="waybill">'+  (orderObj.WAYBILL == null?"":orderObj.WAYBILL) +'</td>';
+                dataHtml+='    <td hidden class="expCompanyId">'+  orderObj.EXP_COMPANY_ID +'</td>';
+                dataHtml+='    <td>'+  orderObj.ORDER_NO +'</td>';
+                dataHtml+='    <td>'+  (orderObj.IS_DELIVERY == 0?"未导出":"已导出") +'</td>';
+                dataHtml+='    <td>'+  orderObj.CON_NO +'</td>';
+                dataHtml+='    <td>'+  orderObj.CON_NAME +'</td>';
+                dataHtml+='    <td>'+  orderObj.PROVINCE +'</td>';
+                dataHtml+='    <td>'+  orderObj.CITY +'</td>';
+                dataHtml+='    <td>'+  orderObj.DISTRICT +'</td>';
+                dataHtml+='    <td>'+  orderObj.ADDRESS +'</td>';
+                dataHtml+='    <td>'+  orderObj.RECIPIENTS +'</td>';
+                dataHtml+='    <td>'+  orderObj.MOBILE +'</td>';
+                dataHtml+='    <td>'+  orderObj.CREATE_DT +'</td>';
+                dataHtml+='    <td>'+  (orderObj.PNT_NAME+" "+ orderObj.SKU_NAME) +'</td>';
+                dataHtml+='    <td>'+  (orderObj.REMARK == null?"":orderObj.REMARK) +'</td>';
+                dataHtml+='    <td>'+  (ORDER_STATUS_CHN[orderObj.STATUS - 1].value) +'</td>';
+                dataHtml+='</tr>';
+            }
+        }
+        $("#data_table tbody").html(dataHtml);
+        $("#data_table tbody tr").dblclick(function(){
+            $(this).trigger("click");
+        });
+        $("#data_table tbody tr").click(function () {
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+                selectOrderId = "";
+            }else{
+                $(this).addClass('active');
+                selectOrderId = $(this).attr("data-id");
+            }
+            back.selectOrderId = selectOrderId;
+            $(this).siblings().removeClass('active');
+        });
+    }
+}
+
+function toGetLogistics() {
+    if(!clickCheck()){
+        return;
+    }
+    var waybill = $(".active .waybill").html();
+    var expCompanyId = $(".active .expCompanyId").html();
+    var dataHtml = "";
+    $.ajax({
+        url: WS_SERVER_ROUTE + "order/getWaybill",
+        async: false,
+        type: "post",
+        dataType:"JSON",
+        data: {"billNo":waybill},
+        success: function(result) {
+            if (0 == result.status) {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: result.message,
+                });
+            } else {
+                if (result.length > 0) {
+                    dataHtml+='<div class="track-rcol">';
+                    dataHtml+=' <div class="track-list">';
+                    dataHtml+='     <ul>';
+                    for(var i=(result.length)-1;i>=0;i--){
+                        var dataObj = result[i];
+                        if(i == (result.length)-1){
+                            dataHtml+='<li class="first">';
+                        }else{
+                            dataHtml+='<li>';
+                        }
+                        dataHtml+='        <i class="node-icon"></i>';
+                        dataHtml+='        <span class="time">'+ dataObj.Upload_Time +'</span>';
+                        dataHtml+='        <span class="txt">'+ dataObj.ProcessInfo +'</span>';
+                        dataHtml+='    </li>';
+                    }
+                    dataHtml+='     </ul>';
+                    dataHtml+=' </div>';
+                    dataHtml+='</div>';
+                    AMUI.dialog.popup({
+                        title: '物流跟踪',
+                        content: dataHtml
+                    });
+                } else {
+                    $.tips({
+                        content: "数据异常",
+                        stayTime: 2000,
+                        type: "warn"
+                    })
+                }
+            }
+        },
+        error:function(){
+            AMUI.dialog.alert({
+                title: '错误提示',
+                content: "请求失败"
+            });
+        }
+    });
+}
+
+function orderExport(){
+    var paramData = [];
+    $('#data_table tbody tr').each(function(index){
+        paramData.push($(this).attr("data-id"));
+    })
+    //是否确认删除
+    AMUI.dialog.confirm({
+        title: '提示',
+        content: '导出的数据为当前表格显示的数据！',
+        onConfirm: function() {
+            window.open(WS_SERVER_ROUTE + "export/export?orderIds="+JSON.stringify(paramData));
+        },
+        onCancel: function() {
+            selectOrderId = "";
+        }
+    });
+}
+
+function orderImport(){
+    $(".url_file").click();
+}
+
+// 上传图片处理
+function toUpLoadExcel(dom) {
+    if (dom.value.length != 0) {
+        var formData = new FormData();
+        formData.append("excel", dom.files[0]);
+        $.ajax({
+            url: WS_SERVER_ROUTE + "export/importExcel",
+            type: "POST",
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function (data) {
+                if (data.result == 0) {
+                     AMUI.dialog.alert({
+                        title: '系统提示',
+                        content: "导入成功",
+                        onConfirm:function(){
+                            toSearch();
+                        }
+                    });
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: data.errorData
+                    });
+                }
+            },
+            error: function () {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "上传异常"
+                });
+            }
+        });
+    }
+}
+
+// 查询
+function toSearch() {
+    back.orderListParams = null;
+    var startDt = $('#start_date').val();
+    var endDt = $('#end_date').val();
+    if (startDt.length > 0 && endDt.length > 0) {
+        if (startDt > endDt) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "开始时间不大于结束时间!"
+            });
+            return;
+        }
+    }
+    getOrderSplitList();
+}
+
+function resetFrom() {
+    $('#start_date').attr('value', ''); // 开始时间
+    $('#end_date').attr('value', ''); // 结束时间
+    $("#con_no_id").val(""); // 会员号
+    $("#order_no_id").val(""); // 订单编号
+    $("#status_id").val("-1");
+    $("#status_id").trigger('changed.selected.amui');
+}
+
+function clickCheck() {
+    if (selectOrderId == "") {
+        AMUI.dialog.alert({
+            title: '系统提示',
+            content: "请点选所需操作的数据!"
+        });
+        return false;
+    }
+    return true;
+}
+</script>

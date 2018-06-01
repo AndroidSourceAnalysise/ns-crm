@@ -1,0 +1,371 @@
+
+
+
+<!doctype html>
+<html class="no-js">
+<head>
+    <style>
+        #vld-tooltip {
+            position: absolute;
+            z-index: 1000;
+            padding: 5px 10px;
+            background: #F37B1D;
+            min-width: 150px;
+            color: #fff;
+            transition: all 0.15s;
+            box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+            display: none;
+        }
+
+        #vld-tooltip:before {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            width: 0;
+            height: 0;
+            margin-left: -8px;
+            content: "";
+            border-width: 0 8px 8px;
+            border-color: transparent transparent #F37B1D;
+            border-style: none inset solid;
+        }
+        p{
+            margin: 0;
+        }
+        .am-margin-top{
+            margin-top: 0;
+        }
+        .am-form-group{
+            margin-bottom: 1rem;
+        }
+        .am-popup{
+            z-index: 1401;
+        }
+        .am-popup-bd{
+            height: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title  am-cf"><a onclick="backUp();">优惠券设置</a>
+                    / 新增
+                    </div>
+                </div>
+
+                <div class="widget-body  am-fr">
+                    <form id="addForm" class="am-form tpl-form-line-form" data-am-validator>
+                        <input type="hidden" id="couponReceiveId" name="ID" value="">
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="couponType">会员昵称</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end" id="couponTypeDiv">
+                                <p id="conNike"></p>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="couponType">会员号</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end" id="couponTypeDiv">
+                                <p id="conNo"></p>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="couponType">优惠券类型</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end" id="couponTypeDiv">
+                                <p name="COUPON_TYPE" id="couponType">优惠券类型</p>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="name">优惠券名称</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <p id="name" name="NAME"></p>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="startDt">有效起始时间</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <p id="startDt" name="START_DT"></p>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="endDt">有效结束时间</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <p id="endDt" name="END_DT"></p>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top" id="safetyAmountDiv" style="display: none">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="safetyAmount">满足条件金额</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <p id="safetyAmount" name="SAFETY_AMOUNT">0</p>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top" id="discountAmountDiv0"  style="display: none">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="discountAmount">直减金额</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <p id="discountAmount" name="DISCOUNT_AMOUNT">0</p>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top" id="discountAmountDiv1"  style="display: none">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="discountAmount">满减金额</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <p id="discountAmount" name="DISCOUNT_AMOUNT">0</p>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="description">优惠券描述</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <p id="description" name="DESCRIPTION"></p>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label>是否有效</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <select name="ENABLED" id="enabled" required data-am-selected="{btnSize: 'sm'}">
+                                    <option value=""></option>
+                                    <option value="1">有效</option>
+                                    <option value="0">失效</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label>使用状态</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <select name="STATUS" id="status" required data-am-selected="{btnSize: 'sm'}">
+                                    <option value=""></option>
+                                    <option value="0">未使用</option>
+                                    <option value="1">已使用</option>
+                                    <option value="2">已过期</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top" id="pic">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label>背景图</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <img id="img_view" style="width:100px;height:100px;"
+                                     src="http://www.hubeta.com:8080/group1/M00/00/8A/wKgB9FkVKD2Aejp6AAAI7-r9KMM269.jpg"/>
+                            </div>
+                        </div>
+                        <div class="am-margin">
+                            <button id="submitBtn" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                            <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="backUp();">返回
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/formToJson.js"></script>
+<script>
+    var selectReceiveId = "";
+    $(function () {
+        selectReceiveId = back.selectReceiveId;
+        $("#couponReceiveId").val(selectReceiveId);
+        loadCouponInfo();
+        updateCouponData();
+    });
+
+    function loadCouponInfo(){
+        $.ajax({
+            url: WS_SERVER_ROUTE + "coupon/getTldCouponGrantById",
+            type: "post",
+            async: false,
+            data: "id="+selectReceiveId,
+            dataType: "json",
+            success: function (result) {
+                if (result.result == 0) {
+                    if(result.data){
+                        var couponObj = result.data;
+                        if(1 == couponObj.COUPON_TYPE){
+                            $("#couponType").text("满减");
+                        }else if(0 == couponObj.COUPON_TYPE){
+                            $("#couponType").text("直减");
+                        }
+                        if(0 == couponObj.STATUS){
+                            $("#status option[value='0']").attr("selected",true);
+                        }
+                        if(1 == couponObj.STATUS){
+                            $("#status option[value='1']").attr("selected",true);
+                        }
+                        if(2 == couponObj.STATUS){
+                            $("#status option[value='2']").attr("selected",true);
+                        }
+                        if(0 == couponObj.ENABLED){
+                            $("#enabled option[value='0']").attr("selected",true);
+                        }
+                        if(1 == couponObj.ENABLED){
+                            $("#enabled option[value='1']").attr("selected",true);
+                        }
+                        if (!$.AMUI.support.mutationobserver) {
+                          $selected.trigger('changed.selected.amui');
+                        }
+                        $("#conNike").text(couponObj.CON_NAME);
+                        $("#conNo").text(couponObj.CON_NO);
+                        $('input[name=ID]').val(couponObj.ID);
+                        $('p[name=NAME]').text(couponObj.COUPON_NAME);
+                        $('p[name=START_DT]').text(couponObj.START_DT);
+                        $('p[name=END_DT]').text(couponObj.END_DT);
+                        $('p[name=SAFETY_AMOUNT]').text(couponObj.SAFETY_AMOUNT);
+                        $('p[name=DISCOUNT_AMOUNT]').text(couponObj.DISCOUNT_AMOUNT);
+                        $('p[name=DESCRIPTION]').text(couponObj.DESCRIPTION);
+                        if(couponObj.IMAGE_URL){
+                            $("#img_view").attr("src", couponObj.IMAGE_URL);
+                        }
+                        couponTypeChange();
+                    }
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    function updateCouponData(){
+        AMUI.plugin('mySelected', AMUI.selected);
+        $('#status').mySelected({btnWidth: '100%', btnSize: 'sm'});
+        $('#enabled').mySelected({btnWidth: '100%', btnSize: 'sm'});
+        var $form = $('#addForm');
+        $form.validator({
+            onValid: function (validity) {
+                $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+            },
+            onInValid: function (validity) {
+                var $field = $(validity.field);
+                var $group = $field.closest('.am-form-group');
+                var $alert = $group.find('.am-alert');
+                // 使用自定义的提示信息 或 插件内置的提示信息
+                var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+                if (!$alert.length) {
+                    $alert = $('<div class="am-alert am-alert-danger am-u-sm-12 am-u-md-4 am-u-lg-3" style="float:left;"></div>').hide().appendTo($group);
+                }
+                $alert.html(msg).show();
+            }, submit: function () {
+                var formValidity = this.isFormValid();
+                $.when(formValidity).then(function () {
+                    // 验证成功的逻辑
+                    var $subbtn = $("#submitBtn");
+                    $subbtn.button('loading');
+                    $.ajax({
+                        "url": WS_SERVER_ROUTE + 'coupon/updateTldCouponGrant',
+                        async: false,
+                        type: "post",
+                        dataType: "json",
+                        data: JSON.stringify($form.serializeObject()),
+                        success: function (result) {
+                            if (result.result == '0') {
+                                AMUI.dialog.alert({
+                                    title: '系统提示',
+                                    content: '操作成功',
+                                    onConfirm: function () {
+                                        backUp();
+                                    }
+                                });
+                            } else {
+                                AMUI.dialog.alert({
+                                    title: '错误提示',
+                                    content: result.errorData
+                                });
+                            }
+                            return false;
+                        },
+                        error:function(){
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: "请求失败"
+                            });
+                            return false;
+                        }
+                    });
+                }), function () {
+                    return false;
+                };
+                //阻止原生form提交
+                return false;
+            }
+        });
+    }
+
+    function backUp() {
+        back.selectReceiveId = "";
+        new panel({
+            url: current_url,
+            data: back.pntparams,
+            target: $(".tpl-content-wrapper")
+        }).load();
+    }
+
+    //时间类型change事件
+    function couponTypeChange() {
+        var value = $('#couponType option:selected').val();
+        $("#safetyAmountDiv").hide();
+        $("#safetyAmount").attr("disabled", true);
+        $('#discountAmountDiv0 #discountAmount').attr("disabled", true);
+        $('#discountAmountDiv0').hide();
+        $('#discountAmountDiv1 #discountAmount').attr("disabled", true);
+        $('#discountAmountDiv1').hide();
+        if (value == 0) {
+            $('#discountAmountDiv0').show();
+            $('#discountAmountDiv0 #discountAmount').attr("disabled", false);
+        } else if (value == 1) {
+            $('#discountAmountDiv1').show();
+            $('#discountAmountDiv1 #discountAmount').attr("disabled", false);
+            $("#safetyAmount").attr("disabled", false);
+            $("#safetyAmountDiv").show();
+        }
+    }
+
+    // $("#img_view").click(function(){
+    //     if($("#my-popup").text().length > 0){
+    //         $("#my-popup").modal('toggle');
+    //     }else{
+    //         $("body").append('<div class="am-popup" id="my-popup"><div class="am-popup-inner"><div class="am-popup-hd"><h4 class="am-popup-title">图片预览</h4><span data-am-modal-close class="am-close">&times;</span></div><div class="am-popup-bd am-vertical-align"><img src="http://www.hubeta.com:8080/group1/M00/00/8A/wKgB9FkVKD2Aejp6AAAI7-r9KMM269.jpg" style="width:100%"/></div></div></div>');
+    //         console.log($("#my-popup").html());
+    //         $("#my-popup").modal('toggle');
+    //     }
+    // })
+</script>
+</body>
+</html>
+
+
+

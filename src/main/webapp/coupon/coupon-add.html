@@ -1,0 +1,483 @@
+
+
+
+<!doctype html>
+<html class="no-js">
+<head>
+    <style>
+        #vld-tooltip {
+            position: absolute;
+            z-index: 1000;
+            padding: 5px 10px;
+            background: #F37B1D;
+            min-width: 150px;
+            color: #fff;
+            transition: all 0.15s;
+            box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+            display: none;
+        }
+
+        #vld-tooltip:before {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            width: 0;
+            height: 0;
+            margin-left: -8px;
+            content: "";
+            border-width: 0 8px 8px;
+            border-color: transparent transparent #F37B1D;
+            border-style: none inset solid;
+        }
+    </style>
+</head>
+<body>
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title  am-cf"><a onclick="backUp();">优惠券设置</a>
+                    / 新增
+                    </div>
+                </div>
+
+                <div class="widget-body  am-fr">
+                    <form id="addForm" class="am-form tpl-form-line-form" data-am-validator>
+                        <input type="hidden" id="couponId" name="ID" value="">
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="couponType">优惠券类型</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end" id="couponTypeDiv">
+                                <select name="COUPON_TYPE" id="couponType" required
+                                        data-am-selected="{btnSize: 'sm'}" onchange="couponTypeChange()">
+                                    <option value=""></option>
+                                    <option 
+                                            value="0">直减
+                                    </option>
+                                    <option 
+                                            value="1">满减
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="name">优惠券名称</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" id="name" name="NAME" required
+                                       value="" placeholder="优惠券名称">
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="startDt">有效起始时间</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input id="startDt" name="START_DT" type="text" required 
+                                       data-am-datepicker="{format: 'yyyy-mm-dd hh:ii:ss'}" class="form-datetime am-form-field" placeholder="有效起始时间"
+                                       data-validation-message="有效起始时间不能为空且不能大于有效结束时间！"
+                                       readonly="readonly" value="">
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="endDt">有效结束时间</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input id="endDt" name="END_DT" type="text" required 
+                                       data-am-datepicker="{format: 'yyyy-mm-dd hh:ii:ss'}" class="form-datetime am-form-field" placeholder="有效结束时间"
+                                       data-validation-message="有效结束时间不能为空且不能小于有效起始时间！"
+                                       readonly="readonly" value="">
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top" id="safetyAmountDiv" style="display: none">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="safetyAmount">满足条件金额</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" id="safetyAmount" name="SAFETY_AMOUNT" required disabled
+                                       value="" placeholder="满足条件金额">
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top" id="discountAmountDiv0"  style="display: none">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="discountAmount">
+                                    直减金额
+                                </label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" id="discountAmount" name="DISCOUNT_AMOUNT" required
+                                 disabled
+                                       value=""
+                                       placeholder="直减金额">
+                            </div>
+                        </div>
+                        <!-- <div class="am-form-group am-g am-margin-top" id="discountAmountDiv2"  style="display: none">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="discountAmount">
+                                    折扣比例%
+                                </label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" id="discountAmount" name="discountAmount" required
+                                       disabled
+                                       value=""
+                                       placeholder="折扣比例%">
+                            </div>
+                        </div> -->
+                        <div class="am-form-group am-g am-margin-top" id="discountAmountDiv1"  style="display: none">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="discountAmount">
+                                    满减金额
+                                </label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" id="discountAmount" name="DISCOUNT_AMOUNT" required
+                                 disabled
+                                       value=""
+                                       placeholder="满减金额">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="totalNumber">优惠券数量</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" id="totalNumber" name="TOTAL_NUMBER" required
+                                       value="" placeholder="优惠券数量">
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="remainNumber">剩余数量</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" id="remainNumber" name="REMAIN_NUMBER" required
+                                       value="" placeholder="剩余数量">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label>是否有效</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <select name="ENABLED" id="enabled" required data-am-selected="{btnSize: 'sm'}">
+                                    <option value=""></option>
+                                    <option value="1">是</option>
+                                    <option value="0">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label>是否启用优惠券</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <select name="STATUS" id="status" required data-am-selected="{btnSize: 'sm'}">
+                                    <option value=""></option>
+                                    <option value="1">是</option>
+                                    <option value="0">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="description">优惠券描述</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <textarea rows="3" placeholder="选填" id="description"
+                                          name="DESCRIPTION"></textarea>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label>背景图</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="button" value="选择文件" id="fileBtn" class="am-btn am-btn-success"
+                                       onclick="$('#picFile').click();"/>
+                                <input type="file" class="am-btn am-btn-success am-round"
+                                       accept="image/png,image/jpg,image/jpeg" id="picFile"
+                                       onchange="toUploadPic(this);"
+                                       style="display:none;"/>
+                                <input type="hidden" name="IMAGE_URL" value=""/>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top" id="pic">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label></label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <img id="img_view" style="width:100px;height:100px;"
+                                     src="http://www.hubeta.com:8080/group1/M00/00/8A/wKgB9FkVKD2Aejp6AAAI7-r9KMM269.jpg"/>
+                            </div>
+                        </div>
+
+                        <div class="am-margin">
+                            <button id="submitBtn" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                            <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="backUp();">返回
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="assets/js/formToJson.js"></script>
+<script>
+    var selectCouponId = "";
+    var $dpInput = $('.form-datetime').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:ss',
+        autoclose: true,
+        todayBtn: true,
+    });
+    $(function () {
+        selectCouponId = back.selectCouponId;
+        $("#couponId").val(selectCouponId);
+        loadCouponInfo();
+        saveOrUpdateCouponData();
+    });
+
+    function loadCouponInfo(){
+        $.ajax({
+            url: WS_SERVER_ROUTE + "coupon/getTldCouponById",
+            type: "post",
+            async: false,
+            data: "id="+selectCouponId,
+            dataType: "json",
+            success: function (result) {
+                if (result.result == 0) {
+                    if(result.data){
+                        var couponObj = result.data;
+                        if(1 == couponObj.COUPON_TYPE){
+                            $("#couponType option[value='1']").attr("selected",true);
+                        }else if(0 == couponObj.COUPON_TYPE){
+                            $("#couponType option[value='0']").attr("selected",true);
+                        }
+                        if(1 == couponObj.STATUS){
+                            $("#status option[value='1']").attr("selected",true);
+                        }
+                        if(1 == couponObj.ENABLED){
+                            $("#enabled option[value='1']").attr("selected",true);
+                        }
+                        if (!$.AMUI.support.mutationobserver) {
+                          $selected.trigger('changed.selected.amui');
+                        }
+                        $('input[name=ID]').val(couponObj.ID);
+                        $('input[name=NAME]').val(couponObj.NAME);
+                        $('input[name=START_DT]').val(couponObj.START_DT);
+                        $('input[name=END_DT]').val(couponObj.END_DT);
+                        $('input[name=SAFETY_AMOUNT]').val(couponObj.SAFETY_AMOUNT);
+                        $('input[name=DISCOUNT_AMOUNT]').val(couponObj.DISCOUNT_AMOUNT);
+                        $('input[name=TOTAL_NUMBER]').val(couponObj.TOTAL_NUMBER?couponObj.TOTAL_NUMBER:"0");
+                        $('input[name=REMAIN_NUMBER]').val(couponObj.REMAIN_NUMBER?couponObj.REMAIN_NUMBER:"0");
+                        $('textarea[name=DESCRIPTION]').val(couponObj.DESCRIPTION);
+                        if(couponObj.IMAGE_URL){
+                            $("input[name=IMAGE_URL]").val(couponObj.IMAGE_URL);
+                            $("#img_view").attr("src", couponObj.IMAGE_URL);
+                        }
+                        couponTypeChange();
+                    }
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    function saveOrUpdateCouponData(){
+        AMUI.plugin('mySelected', AMUI.selected);
+        $('#couponType').mySelected({btnWidth: '100%', btnSize: 'sm'});
+        $('#status').mySelected({btnWidth: '100%', btnSize: 'sm'});
+        $('#enabled').mySelected({btnWidth: '100%', btnSize: 'sm'});
+        var $form = $('#addForm');
+        $form.validator({
+            onValid: function (validity) {
+                $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+            },
+            onInValid: function (validity) {
+                var $field = $(validity.field);
+                var $group = $field.closest('.am-form-group');
+                var $alert = $group.find('.am-alert');
+                // 使用自定义的提示信息 或 插件内置的提示信息
+                var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+                if (!$alert.length) {
+                    $alert = $('<div class="am-alert am-alert-danger am-u-sm-12 am-u-md-4 am-u-lg-3" style="float:left;"></div>').hide().appendTo($group);
+                }
+                $alert.html(msg).show();
+            },
+            validate: function (validity) {
+                var value = $(validity.field).val();
+                if ($(validity.field).is('#endDt')) {
+                    validity.valid = false;
+                    if (value.trim().length == 0) {
+                        return validity;
+                    }
+                    var startDt = new Date($("#startDt").val());
+                    var endDt = new Date(value);
+                    if (startDt.getTime() > endDt.getTime()) {
+                        return validity;
+                    }
+                    validity.valid = true;
+                }
+                if ($(validity.field).is('#startDt')) {
+                    validity.valid = false;
+                    if (value.trim().length == 0) {
+                        return validity;
+                    }
+                    var endDt = new Date($("#endDt").val());
+                    var startDt = new Date(value);
+                    if (startDt.getTime() > endDt.getTime()) {
+                        return validity;
+                    }
+                    validity.valid = true;
+                }
+                return validity;
+            }, submit: function () {
+                var formValidity = this.isFormValid();
+                $.when(formValidity).then(function () {
+                    var url = WS_SERVER_ROUTE + 'coupon/addTldCoupon';
+                    var id = back.selectCouponId;
+                    if (id && id.length > 0) {
+                        url = WS_SERVER_ROUTE + 'coupon/updateTldCoupon';
+                    }
+                    // 验证成功的逻辑
+                    var $subbtn = $("#submitBtn");
+                    $subbtn.button('loading');
+                    $.ajax({
+                        "url": url,
+                        async: false,
+                        type: "post",
+                        dataType: "json",
+                        data: JSON.stringify($form.serializeObject()),
+                        success: function (result) {
+                            if (result.result == '0') {
+                                AMUI.dialog.alert({
+                                    title: '系统提示',
+                                    content: '操作成功',
+                                    onConfirm: function () {
+                                        backUp();
+                                    }
+                                });
+                            } else {
+                                AMUI.dialog.alert({
+                                    title: '错误提示',
+                                    content: result.errorData
+                                });
+                            }
+                            return false;
+                        },
+                        error:function(){
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: "请求失败"
+                            });
+                        }
+                    });
+                }), function () {
+                    return false;
+                };
+                //阻止原生form提交
+                return false;
+            }
+        });
+    }
+
+    function backUp() {
+        back.selectCouponId = "";
+        new panel({
+            url: current_url,
+            data: back.pntparams,
+            target: $(".tpl-content-wrapper")
+        }).load();
+    }
+
+    //时间类型change事件
+    function couponTypeChange() {
+        var value = $('#couponType option:selected').val();
+        $("#safetyAmountDiv").hide();
+        $("#safetyAmount").attr("disabled", true);
+        $('#discountAmountDiv0 #discountAmount').attr("disabled", true);
+        $('#discountAmountDiv0').hide();
+        $('#discountAmountDiv1 #discountAmount').attr("disabled", true);
+        $('#discountAmountDiv1').hide();
+        if (value == 0) {
+            $('#discountAmountDiv0').show();
+            $('#discountAmountDiv0 #discountAmount').attr("disabled", false);
+        } else if (value == 1) {
+            $('#discountAmountDiv1').show();
+            $('#discountAmountDiv1 #discountAmount').attr("disabled", false);
+            $("#safetyAmount").attr("disabled", false);
+            $("#safetyAmountDiv").show();
+        }
+    }
+    /**
+     * 调用图片上传接口
+     * @param dom
+     */
+    function toUploadPic(dom) {
+        if (dom.value.length != 0) {
+            var f = dom.files[0];
+            if (f.size > 1024 * 1024) fileSize = (Math.round(f.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+            else fileSize = (Math.round(f.size * 100 / 1024) / 100).toString() + 'KB';
+            if(f.size > 1024 * (1024 / 3)){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "上传的图片"+ fileSize +"超过了300KB,请重新选择"
+                });
+                return;
+            }
+            var formData = new FormData();
+            formData.append("file", dom.files[0]);
+            $.ajax({
+                url: WS_SERVER_ROUTE + "file/upload",
+                type: "POST",
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function (data) {
+                    if (data.result == 0) {
+                        var fileName = $("#picFile").val();
+                        $("input[name='IMAGE_URL']").val(data.data);
+                        $("#img_view").attr("src", data.data);
+                        $("#form_resourceName").val(fileName.substr(fileName.lastIndexOf('\\') + 1));
+                    } else {
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: data.errorData
+                        });
+                    }
+                },
+                error: function () {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: "上传异常"
+                    });
+                }
+            });
+        }
+    }
+</script>
+
+

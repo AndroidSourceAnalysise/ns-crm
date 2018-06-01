@@ -1,0 +1,314 @@
+
+
+
+
+<form class="am-form tpl-form-border-form tpl-form-border-br" data-am-validator id="pro_sku_item_form">
+    <label>SKU规格明细</label>
+    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
+    <button type="button" id="item_add_btn"
+            class="am-btn am-btn-success am-btn-xs" onclick="toAddSkuItemForTR();"><span
+            class="am-icon-plus"></span> 新增
+    </button>
+    <button type="button" id="item_del_btn"
+            class="am-btn am-btn-danger am-btn-xs" onclick="toDelSkuItemForTR();"><span
+            class="am-icon-trash-o"></span> 删除
+    </button>
+    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
+    <div class="am-scrollable-horizontal">
+        <table id="sku_item_table" width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black">
+            <thead>
+            <td>序号</td>
+            <th>规格名称</th>
+            <th>规格值</th>
+            <th>规格描述</th>
+            <th>更新时间</th>
+            <th>操作</th>
+            </thead>
+            <tbody id="item_table_body">
+            
+                <tr class="gradeX">
+                    <td hidden class="itemId">DAFDBBDE0E9D491FB54B2A1DBFC41EB9</td>
+                    <td>1</td>
+                    <td class="itemName select">颜色</td>
+                    <td class="itemValue text">红色</td>
+                    <td class="itemDesc text">红色</td>
+                    <td class="updateDt">2018-01-31 17:12:49</td>
+                    <td>
+                        <button type="button" class="editBtn am-btn am-btn-primary am-btn-xs"
+                                onclick="toEditItemForTR(this);"><span
+                                class="am-icon-edit"></span> 编辑
+                        </button>
+                        <button type="button" style="display: none" class="saveBtn am-btn am-btn-success am-btn-xs"
+                                onclick="toSaveItemForTR(this);"><span
+                                class="am-icon-save"></span> 保存
+                        </button>
+                    </td>
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+</form>
+<script>
+
+    var proId = "";
+
+    $(function () {
+        proId = $("#pntId").val();
+        $("#item_table_body").on("click", "tr", function () {
+            $(this).addClass('active');
+            $(this).siblings().removeClass('active');
+        });
+
+        var enabled = $("#sku_table_body .active .enabled").html().trim();
+        if (enabled == '有效') {
+            $("#item_add_btn").attr("disabled", "disabled");// 有效则不展示操作按钮
+            $("#item_del_btn").attr("disabled", "disabled");
+            $(".editBtn").attr("disabled", "disabled");
+            $(".saveBtn").attr("disabled", "disabled");
+        } else if (enabled == '无效') {
+            $("#item_add_btn").removeAttr("disabled");
+            $("#item_del_btn").removeAttr("disabled");
+            $("#editBtn").removeAttr("disabled");
+            $("#saveBtn").removeAttr("disabled");
+        }
+    })
+
+    // 删除一行
+    function toDelSkuItemForTR() {
+        var tr = $("#item_table_body .active");
+        if (tr.length == 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "请点选所需操作的数据!"
+            });
+            return;
+        }
+        AMUI.dialog.confirm({
+            title: '系统提示',
+            content: '删除之后无法还原,确定删除此SKU规格明细?',
+            onConfirm: function () {
+                var itemId = $("#item_table_body .active .itemId").html().trim();
+                var rowNum = $(tr).parent().find("tr").index(tr[0]) + 1;
+                // 如果行号等于编辑模式行号, 需要重置编辑标识
+                if (rowNum == edit_item_flag) {
+                    edit_item_flag = 0;
+                }
+                if (itemId.length == 0) {
+                    $("#item_table_body .active").remove();
+                    return;
+                }
+                $.ajax({
+                    url: "http://spys.hubeta.com:80/spys-manager/skuItems/delItem",
+                    async: false,
+                    type: "post",
+                    data: {
+                        "itemId": itemId
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.resultCode == 1) {
+                            $("#item_table_body .active").remove();
+                        } else {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: result.errorData
+                            });
+                        }
+                    },
+                    error:function(){
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: "请求失败"
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    // 新增行且可编辑
+    function toAddSkuItemForTR() {
+        if (edit_item_flag > 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '请保存之前所编辑的规格明细数据!'
+            });
+            return;
+        }
+        edit_item_flag = $("#sku_table_body tr").length + 1;
+        var specs = getSpecs();
+        var select = '<select>';
+        for (var i = 0; i < specs.length; i++) {
+            select += '<option value="' + specs[i].pntSpecName + '">' + specs[i].pntSpecName + '</option>';
+        }
+        select += '</select>';
+        var html_tr = '<tr class="gradeX">' +
+            '<td hidden class="itemId"></td>' +
+            '<td></td>' +
+            '<td class="itemName select">' + select + '</td>' +
+            '<td class="itemValue text"><input type="text" /></td>' +
+            '<td class="itemDesc text"><input type="text" /></td>' +
+            '<td class="updateDt"></td>' +
+            '<td>' +
+            '<button type="button" style="display: none" class="editBtn am-btn am-btn-primary am-btn-xs" onclick="toEditItemForTR(this);"><span class="am-icon-edit"></span> 编辑</button>' +
+            '<button type="button" class="saveBtn am-btn am-btn-success am-btn-xs" onclick="toSaveItemForTR(this);"><span class="am-icon-save"></span> 保存 </button>' +
+            '</td>' +
+            '</tr>';
+        $("#item_table_body").append(html_tr);
+    }
+
+    // 开始行编辑
+    function toEditItemForTR(dom) {
+        if (edit_item_flag > 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '请保存之前所编辑的规格明细数据!'
+            });
+            return;
+        }
+        // 编辑标识控制
+        var tr = $(dom).parent().parent();
+        edit_item_flag = $(tr).parent().find("tr").index(tr[0]) + 1;
+        // 样式控制
+        $(dom).css('display', 'none');
+        $(dom).next().css('display', 'block');
+        startEditModeForItem(tr);
+    }
+
+    // 进入编辑模式, js修改元素
+    function startEditModeForItem(tr) {
+        // 遍历tr里面所有的td
+        var tds = $(tr).children();
+        for (var i = 0; i < tds.length; i++) {
+            var cls = $(tds[i]).attr('class');
+            if (typeof(cls) != 'undefined') {
+                var clsArr = cls.split(' ');
+                if (clsArr.length < 2) {
+                    continue;
+                }
+                // 判断第二个class是什么就给什么标签, 当然要先拿到值, 然后再替换元素
+                var value = $(tds[i]).html().trim();
+                var html = '';
+                if (clsArr[1] == "number" || clsArr[1] == 'text') {
+                    var align = clsArr[1] == 'number' ? 'text-align: right;' : '';
+                    html += '<input type="' + clsArr[1] + '" style="' + align + '" value="' + value + '" />';
+                } else if (clsArr[1] == 'select') {
+                    html += '<select>';
+                    if (clsArr[0] == 'itemName') {
+                        var specs = getSpecs();
+                        for (var j = 0; j < specs.length; j++) {
+                            var select = value == specs[j].pntSpecName ? "selected" : "";
+                            html += '<option value="' + specs[j].pntSpecName + '" ' + select + '>' + specs[j].pntSpecName + '</option>';
+                        }
+                    }
+                    html += "</select>";
+                }
+                $(tds[i]).html(html);
+            }
+        }
+    }
+
+    // 保存行数据
+    function toSaveItemForTR(dom) {
+        var itemId = $($(dom).parent().parent().children()[0]).html().trim();
+        var itemName = $($(dom).parent().parent().children()[2]).children().val();
+        var itemValue = $($(dom).parent().parent().children()[3]).children().val().trim();
+        var itemDesc = $($(dom).parent().parent().children()[4]).children().val().trim();
+        var itemName_flag = false;
+        $.ajax({
+            url: "http://spys.hubeta.com:80/spys-manager/skuItems/isValidForItemName",
+            async: false,
+            type: "post",
+            data: {
+                "skuId": "DE99BF1187A0429CAF6562BB7A60F79F",
+                "itemId": itemId,
+                "itemName": itemName
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.resultCode == 1) {
+                    itemName_flag = true;
+                } else {
+                    AMUI.dialog.alert({
+                        title: '系统提示',
+                        content: data.errorData
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+        if (!itemName_flag) {
+            return;
+        }
+        if (itemDesc.length == 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "请输入规格描述!"
+            });
+            return;
+        }
+        var item_obj = {
+            "id": itemId,
+            "skuId": "DE99BF1187A0429CAF6562BB7A60F79F",
+            "itemName": itemName,
+            "itemValue": itemValue,
+            "itemDesc": itemDesc
+        };
+        AMUI.dialog.confirm({
+            title: '系统提示',
+            content: '确定保存?',
+            onConfirm: function () {
+                $.ajax({
+                    url: "http://spys.hubeta.com:80/spys-manager/skuItems/mergeForItem",
+                    type: "post",
+                    async: false,
+                    data: item_obj,
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.resultCode == 1) {
+                            var tr = $(dom).parent().parent();
+                            endEditForTR(tr);
+                            $(dom).css('display', 'none');
+                            $(dom).prev().css('display', 'block');
+                            edit_item_flag = 0;
+                            var tds = $(tr).children();
+                            var rowNum = $(tr).parent().find("tr").index(tr[0]) + 1;
+                            $(tds[0]).html(result.skuItems.id);// 赋值id
+                            $(tds[1]).html(rowNum);// 赋值行号
+                            $(tds[5]).html(result.skuItems.updateDt);// 赋值更新时间
+                        } else {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: "保存失败"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    // 获取商品规格
+    function getSpecs() {
+        var specs = {};
+        $.ajax({
+            url: "http://spys.hubeta.com:80/spys-manager/productSpec/getSpecByProId",
+            async: false,
+            type: "post",
+            data: {
+                "proId": proId
+            },
+            dataType: "json",
+            success: function (data) {
+                specs = data;
+            }
+        });
+        return specs;
+    }
+</script>

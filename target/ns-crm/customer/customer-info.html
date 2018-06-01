@@ -1,0 +1,138 @@
+<style>
+    .am-tabs-bd {
+        overflow: visible;
+    }
+</style>
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <input type="hidden" id="insertFlag" value="true"/>
+                    <div class="widget-title am-fl"><a href="javascript:goBack();">会员信息</a></div>
+                </div>
+                <div class="widget-body am-fr">
+                    <div id="product_form_tabs" class="am-tabs" data-am-tabs>
+                        <ul class="am-nav am-nav-tabs">
+                            <li id="tab_info" class="am-active"><a href="javascript:toInfoForm('');">基础信息</a>
+                            </li>
+                            <li id="tab_subordinate"><a href="javascript:toSubordinateForm('');">我的会员</a></li>
+                            <li id="tab_statistics"><a href="javascript:toStatisticsForm('');">统计信息</a></li>
+                        </ul>
+                        <div class="am-tabs-bd">
+                            <input type="hidden" id="flag" value=""/>
+                            <div class="am-tab-panel am-fade am-in am-active" id="content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p style="color: orangered"></p>
+<script>
+    $(function () {
+        if ("".length > 0) {
+            $("#insertFlag").val("false");
+        }
+        $("#flag").val(back.conId);
+        toInfoForm("");
+    });
+
+    function goBack() {
+        $("#vld-tooltip").remove();
+        new panel({
+            url: SERVER_BASE_URL + "customer/customer-list.html",
+            data: back.product,
+            target: $(".tpl-content-wrapper")
+        }).load();
+    }
+
+    // 基础信息tab跳转
+    function toInfoForm(conId) {
+        if (conId.length == 0) {
+            conId = $("#flag").val();
+        }
+        $.ajax({
+            url: SERVER_BASE_URL + "customer/customer-base.html",
+            async: false,
+            type: 'post',
+            dataType: "html",
+            data: {
+                "conId": conId
+            },
+            success: function (html) {
+                $("#tab_info").addClass("am-active");
+                $("#tab_referee").removeClass("am-active");
+                $("#tab_subordinate").removeClass("am-active");
+                $("#tab_statistics").removeClass("am-active");
+                $("#content").html(html);
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    // 我的会员列表跳转
+    function toSubordinateForm(conId) {
+        if (conId.length == 0) {
+            conId = $("#flag").val();
+        }
+        $.ajax({
+            url: SERVER_BASE_URL + "customer/customer-subordinate.html",
+            async: false,
+            type: "post",
+            dataType: "html",
+            data: {
+                "conId": conId
+            },
+            success: function (html) {
+                $("#tab_info").removeClass("am-active");
+                $("#tab_referee").removeClass("am-active");
+                $("#tab_subordinate").addClass("am-active");
+                $("#tab_statistics").removeClass("am-active");
+                $("#content").html(html);
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    // 统计信息跳转
+    function toStatisticsForm(conId) {
+        if (conId.length == 0) {
+            conId = $("#flag").val();
+        }
+        $.ajax({
+            url: SERVER_BASE_URL + "customer/customer-statistics.html",
+            async: false,
+            type: "post",
+            dataType: "html",
+            data: {
+                "conId": conId
+            },
+            success: function (html) {
+                $("#tab_info").removeClass("am-active");
+                $("#tab_referee").removeClass("am-active");
+                $("#tab_subordinate").removeClass("am-active");
+                $("#tab_statistics").addClass("am-active");
+                $("#content").html(html);
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+</script>

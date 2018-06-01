@@ -1,0 +1,200 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <style>
+    #vld-tooltip {
+        position: absolute;
+        z-index: 1000;
+        padding: 5px 10px;
+        background: #F37B1D;
+        min-width: 150px;
+        color: #fff;
+        transition: all 0.15s;
+        box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+        display: none;
+    }
+
+    #vld-tooltip:before {
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        width: 0;
+        height: 0;
+        margin-left: -8px;
+        content: "";
+        border-width: 0 8px 8px;
+        border-color: transparent transparent #F37B1D;
+        border-style: none inset solid;
+    }
+    </style>
+</head>
+<body>
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title  am-cf"><a onclick="backUp();">会员积分</a> /修正
+                        </div>
+                    </div>
+                    <div class="widget-body  am-fr">
+                        <form id="addForm" class="am-form tpl-form-line-form">
+                            <input type="hidden" id="form_id" name="ID" value="" />
+                            <div class="am-form-group am-g am-margin-top">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label for="form_conNo">会员编号</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <input type="text" class="conNo-validate" id="form_conNo" value="" readonly>
+                                </div>
+                            </div>
+                            <div class="am-form-group am-g am-margin-top">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label for="form_conNo">会员昵称</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <input type="text" class="conNo-validate" id="form_conName" value="" readonly>
+                                </div>
+                            </div>
+                            <div class="am-form-group am-g am-margin-top">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label for="form_currQty">现有可用积分</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <input type="text" id="form_currQty" value="0" readonly>
+                                </div>
+                            </div>
+                            <div class="am-form-group am-g am-margin-top">
+                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    <label for="form_pointsQty">修正可用积分</label>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                    <input type="number" id="form_pointsQty" name="POINTS_ENABLED" placeholder="负数减积分；正数加积分">
+                                </div>
+                            </div>
+                            <div class="am-margin">
+                                <button id="submitBtn" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                                <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="backUp();">返回
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="assets/js/formToJson.js"></script>
+<script>
+$(function() {
+    $("#form_id").val(back.selectDataItemId);
+    $("#form_conNo").val(back.selectDataId);
+    $("#form_conName").val(back.selectDataChn);
+    $("#form_currQty").val(back.selectDataVal);
+
+    var $form = $('#addForm');
+    $form.validator({
+        validate: function(validity) {
+            var qty = $('#form_pointsQty').val();
+            var currQty = $('#form_currQty').val();
+            var value = $(validity.field).val();
+            if ($(validity.field).is('#form_pointsQty')) {
+                validity.valid = true;
+                if (value.trim().length == 0) {
+                    validity.valid = false;
+                }
+                if (!isNaN(value) && value != '') {
+                    if (value * 1 + currQty * 1 < 0) {
+                        AMUI.dialog.alert({
+                            title: '系统提示',
+                            content: '修正积分不能小于0',
+                        });
+                        validity.valid = false;
+                    }
+                } else {
+                    AMUI.dialog.alert({
+                        title: '系统提示',
+                        content: '修正积分输入错误',
+                    });
+                    validity.valid = false;
+                }
+                return validity;
+            }
+        },
+        submit: function() {
+            var formValidity = this.isFormValid();
+            $.when(formValidity).then(function() {
+                    var qty = $('#form_pointsQty').val();
+                    var currQty = $('#form_currQty').val();
+                    if (!isNaN(qty) && qty != '') {
+                        if (qty * 1 + currQty * 1 < 0) {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: '修正积分不能小于0',
+                            });
+                            return;
+                        }
+                    } else {
+                        AMUI.dialog.alert({
+                            title: '系统提示',
+                            content: '修正积分输入错误',
+                        });
+                        return;
+                    }
+                    // 验证成功的逻辑
+                    var $subbtn = $("#submitBtn");
+                    $subbtn.button('loading');
+                    $.ajax({
+                        url: WS_SERVER_ROUTE + "ext/amendPoints",
+                        async: false,
+                        type: "post",
+                        dataType: "json",
+                        data: JSON.stringify($form.serializeObject()),
+                        success: function(result) {
+                            if (result.result == 0) {
+                                AMUI.dialog.alert({
+                                    title: '系统提示',
+                                    content: '操作成功',
+                                    onConfirm: function() {
+                                        backUp();
+                                    }
+                                });
+                            } else {
+                                AMUI.dialog.alert({
+                                    title: '错误提示',
+                                    content: result.errorData
+                                });
+                            }
+                        },
+                        error:function(){
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: "请求失败"
+                            });
+                        }
+                    });
+                }),
+                function() {
+                    return false;
+                };
+            //阻止原生form提交
+            return false;
+        }
+    });
+});
+
+function backUp() {
+    back.selectDataId = "";
+    back.selectDataChn = "";
+    back.selectDataVal = "";
+    back.selectDataItemId = "";
+    new panel({
+        url: current_url,
+        data: back.integralListParams,
+        target: $(".tpl-content-wrapper")
+    }).load();
+}
+</script>

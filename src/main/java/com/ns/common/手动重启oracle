@@ -1,0 +1,53 @@
+手动重启oracle
+su - oracle
+lsnrctl stop
+sqlplus /nolog
+shutdown immediate 
+
+备注：如果执行shutdown immediate出现ORA-01012: not logged on错误
+
+请先执行以下语句
+ps -ef|grep ora_dbw0_$orcl
+kill -9 pid #pid为进程号
+其中orcl 是数据库的SID
+
+
+手动启动oracle
+su - oracle
+sqlplus /nolog
+conn /as sysdba 
+startup
+lsnrctl start
+netstat -tunpl | grep 1521
+emctl start dbconsole
+
+
+/home/tomcat/apache-tomcat-8.0.33／AppServer/webapps/APP-Oralce-211/run.sh
+
+
+scp -P 8000 /Users/longway/Documents/trgf/trgf-app/api/target/app.war trgf@114.55.111.122:/home/tomcat/apache-tomcat-8.0.33/webapps
+
+  scp -P 8000 -r qq@114.55.97.232:/home/tomcat/apache-tomcat-8.0.33/webapps/weChatpay /Users/longway/Downloads
+
+scp -P 8000 /Users/longway/Documents/trgf/wechatOfficialAccounts/weChatpay/out/artifacts/weChatpay/weChatpay.war trgf@114.55.111.122:/home/tomcat/apache-tomcat-8.0.33/webapps
+
+scp -P 8000 /Users/longway/Documents/trgf/trgf-app/api/target/app.war trgf@114.55.111.122:/home/tomcat/apache-tomcat-8.0.33/webapps
+
+
+scp -P 8000 /Users/longway/Documents/trgf/trgf-api/target/api.war trgf@114.55.111.122:/tmp
+
+
+scp -P 8000 /Users/longway/Downloads/trgf/LoginController.class qq@114.55.97.232:/tmp/
+
+scp -P 8000 /Users/longway/Documents/trgf/trgf-app/api/target/app.war trgf@114.55.111.122:/tmp
+
+
+
+    create database AddressDB_trgf DEFAULT CHARSET utf8 COLLATE utf8_general_ci;  
+
+
+    netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+
+
+   http://imtt.dd.qq.com/16891/22A65F1CB995AAEC3E711E2E88B6DA95.apk?fsname=com.fiberhome.exmobi.client.gaeaclientandroidedn7262_2.0.9_20180008.apk&csr=1bbd
+

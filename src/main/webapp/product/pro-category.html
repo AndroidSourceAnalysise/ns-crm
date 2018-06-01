@@ -1,0 +1,250 @@
+<div class="row-content am-cf">
+    <div class="widget am-cf">
+        <div class="widget-head am-cf">
+            <div class="widget-title  am-cf">商品分类</div>
+        </div>
+        <div class="widget-body am-cf" style="padding: 9px">
+            
+                <button id="toAddSame" type="button"
+                        class="am-btn am-btn-default am-btn-success am-btn-xs"><span
+                        class="am-icon-plus"></span> 新增同级
+                </button>
+            
+            
+                <button id="toAddSub" type="button"
+                        class="am-btn am-btn-default am-btn-success am-btn-xs"><span
+                        class="am-icon-plus"></span> 新增下级
+                </button>
+            
+            
+                <button id="toEdit" type="button"
+                        class="am-btn am-btn-default am-btn-primary am-btn-xs"><span
+                        class="am-icon-edit"></span> 编辑
+                </button>
+            
+            
+                <button id="delete" type="button"
+                        class="am-btn am-btn-default am-btn-danger am-btn-xs"><span
+                        class="am-icon-trash-o"></span> 删除
+                </button>
+            
+            <hr data-am-widget="divider" class="am-divider am-divider-dashed">
+            
+                
+                
+                    <div class="am-u-sm-12 am-u-md-5">
+                        <div class="am-scrollable-vertical" style="height: 600px; overflow-y: auto">
+                            <ul id="tree" class="ztree"></ul>
+                        </div>
+                    </div>
+                    <div class="am-u-sm-12 am-u-md-7">
+                        <form class="am-scrollable-horizontal">
+                            <table id="table" class="am-table am-table-compact tpl-table-black">
+                                <tbody>
+                                <tr id="tr"></tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                
+            
+        </div>
+    </div>
+</div>
+<script>
+    //生成Table的函数
+    function createTable(treeNodeObj,id) {
+         var html =
+            '<tr><th>分类编号</th><td>' + treeNodeObj.categoryName + '</td></tr>' +
+            '<tr><th>分类名称</th><td>' + treeNodeObj.categoryName + '</td></tr>' +
+            '<tr><th>分类描述</th><td>' + treeNodeObj.categoryName + '</td></tr>' +
+            '<tr><th>是否有效</th><td>有效</td></tr>';
+        $('#table').html(html);
+        return;
+        $.ajax({
+            url: "http://spys.hubeta.com:80/spys-manager/pntCategories/getPntCategoryById",
+            async: false,
+            type: "post",
+            data: {"id": id},
+            dataType: "json",
+            success: function (msg) {
+                if (msg.resultCode == 1) {
+                    var data = msg.result;
+                    var enabled = "无效";
+                    if (data.enabled == 1) {
+                        enabled = "有效";
+                    }
+                    var html =
+                        '<tr><th>分类编号</th><td>' + data.categoryCode + '</td></tr>' +
+                        '<tr><th>分类名称</th><td>' + data.categoryName + '</td></tr>' +
+                        '<tr><th>分类描述</th><td>' + data.categoryDesc + '</td></tr>' +
+                        '<tr><th>是否有效</th><td>' + enabled + '</td></tr>';
+                    $('#table').html(html);
+                } else {
+                    AMUI.dialog.alert({title: '错误提示', content: msg.errorData});
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+    //生成Tree函数
+    function createTree(zNodes) {
+        //zTree的参数配置
+        var setting = {
+            data: {
+                key: {
+                    name: "categoryName"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "parentId",
+                    rootPId: null
+                }
+            },
+            view: {
+                selectedMulti: false,
+                dblClickExpand: false
+            },
+            check: {
+                enable: false
+            },
+            edit: {
+                enable: true,
+                showRemoveBtn: false,
+                showRenameBtn: false
+            },
+            callback: {
+                onClick: onClick
+            }
+        };
+        //tree监听点击事件
+        function onClick(event, treeId, treeNode, clickFlag) {
+            createTable(treeNode,treeNode.id);
+        }
+
+        $.fn.zTree.init($('#tree'), setting, zNodes);
+    }
+    //新增同级页
+    function toAddSame() {
+        //需要选择节点
+        var zTree = $.fn.zTree.getZTreeObj("tree");
+        if (zTree == null) {
+            new panel({
+                url: SERVER_BASE_URL + "product/add-category.html",
+                target: $(".tpl-content-wrapper")
+            }).load();
+            return;
+        }
+        var nodes = zTree.getSelectedNodes();
+        var treeNode = nodes[0];
+
+        var id = nodes.length <= 0 ? null : treeNode.id;
+        new panel({
+            url: SERVER_BASE_URL + "product/add-category.html",
+            target: $(".tpl-content-wrapper")
+        }).load();
+    }
+    //新增下级页
+    function toAddSub() {
+        //需要选择节点
+        var zTree = $.fn.zTree.getZTreeObj("tree");
+        console.log(zTree);
+        if (zTree == null) {
+            AMUI.dialog.alert({title: '提示', content: '请先新增一个节点'});
+            return;
+        }
+        var nodes = zTree.getSelectedNodes();
+        var treeNode = nodes[0];
+        if (nodes.length == 0) {
+            AMUI.dialog.alert({title: '提示', content: '请先选择一个节点'});
+            return;
+        }
+        proCategoryObj.selectNodeIds = treeNode.id;
+        proCategoryObj.selectNodeNames = treeNode.categoryName;
+        new panel({
+            url: SERVER_BASE_URL + "product/add-category.html",
+            target: $(".tpl-content-wrapper")
+        }).load();
+    }
+    //编辑页
+    function toEdit() {
+        //需要选择节点
+        var zTree = $.fn.zTree.getZTreeObj("tree");
+        if (zTree == null) {
+            return;
+        }
+        var nodes = zTree.getSelectedNodes();
+        var treeNode = nodes[0];
+        if (nodes.length == 0) {
+            AMUI.dialog.alert({title: '提示', content: '请先选择一个节点'});
+            return;
+        }
+        proCategoryObj.selectNodeIds = treeNode.id;
+        proCategoryObj.selectNodeNames = treeNode.categoryName;
+        new panel({
+            url: SERVER_BASE_URL + "product/add-category.html",
+            target: $(".tpl-content-wrapper")
+        }).load();
+    }
+    //删除
+    function remove() {
+        //需要选择节点
+        var zTree = $.fn.zTree.getZTreeObj("tree");
+        var nodes = zTree.getSelectedNodes();
+        var treeNode = nodes[0];
+        if (nodes.length == 0) {
+            return;
+        }
+        if (treeNode.isParent) {
+            AMUI.dialog.alert({content: '请先删除下级节点'});
+            return;
+        }
+        //是否确认删除
+        AMUI.dialog.confirm({
+            title: '提示',
+            content: '是否确认删除',
+            onConfirm: function () {
+                zTree.removeNode(treeNode);
+                return;
+                //后端删除
+                $.ajax({
+                    url: "http://spys.hubeta.com:80/spys-manager/pntCategories/delete",
+                    async: false,
+                    type: "post",
+                    data: {"id": treeNode.id},
+                    dataType: "json",
+                    success: function (msg) {
+                        if (msg.resultCode == 1) {
+                            //前端删除
+                            AMUI.dialog.alert({
+                                title: '提示',
+                                content: '删除成功!',
+                                onConfirm: function () {
+                                    zTree.removeNode(treeNode);
+                                }
+                            });
+                        }
+                        AMUI.dialog.alert({title: "错误提示", content: msg.errorData});
+                    }
+                });
+            }
+        });
+    }
+    $(document).ready(
+        function () {
+            //绑定相应的按钮
+            $('#toAddSame').bind('click', toAddSame);
+            $('#toAddSub').bind('click', toAddSub);
+            $('#toEdit').bind('click', toEdit);
+            $('#delete').bind('click', remove);
+            //生成树
+            createTree(proCategoryObj.treeData);
+        }
+    );
+</script>

@@ -1,0 +1,193 @@
+<style type="text/css">
+    .search-btn{
+        text-align: right;
+    }
+    .active {
+        background: #e6e6e6;
+    }
+    tr:hover {
+        background-color: #F2F6F9;
+    }
+
+    #table_color:hover {
+        background-color: #FFFFFF;
+    }
+
+    .table_hread_static thead tr:hover {
+        background-color: #FFFFFF;
+    }
+    .am-popup.am-modal-active {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+        z-index: 9999;
+    }
+
+    .page_capacity {
+        padding-left: 0;
+        margin: 1.5rem 0;
+        list-style: none;
+        color: #999;
+        text-align: left;
+    }
+
+    #data_table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+    #data_table th {
+        border:1px solid #e4e4e4;
+        border-right: none;
+        text-align: center;
+    }
+    .theme-white .tpl-form-border-form {
+        padding-top: 0px;
+    }
+    tr:hover {
+        background-color: #F2F6F9;
+    }
+    .am-table>tbody>tr>td{
+        border-top: none;
+        border-bottom: 1px solid #ddd;
+    }
+    .am-center{
+        text-align: center;
+    }
+</style>
+<div class="am-scrollable-horizontal" style="min-height: 370px">
+    <form id="paginationForm">
+        <input type="hidden" id="pageSize" name="pageSize" value="10">
+        <input type="hidden" id="pageNumber" name="pageNumber" value="1">
+        <input type="hidden" id="conId" name="conId" value="">
+    </form>
+    <table id="data_table" width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black table_hread_static">
+        <thead>
+            <tr>
+                <!-- 会员基本信息 -->
+                <th>序号</th>
+                <th>头像</th>
+                <th>会员号</th>
+                <th>昵称</th>
+                <th>性别</th>
+                <th>手机号</th>
+                <th>省份</th>
+                <th>城市</th>
+                <th>城区</th>
+                <th>账号状态</th>
+                <th>关注时间</th>
+                <!-- 会员扩展信息 -->
+                <!-- <th>总积分</th>
+                <th>已确认积分</th>
+                <th>未确认积分</th>
+                <th>营业总额</th>
+                <th>消费总额</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</div>
+<!-- <ul data-am-widget="pagination" class="am-pagination am-pagination-default">
+    <li class="am-pagination-first ">
+        <a href="javascript:;" class="">首页</a>
+    </li>
+    <li class="am-pagination-prev ">
+        <a href="javascript:;" class="">上一页</a>
+    </li>
+    <li class="am-active">
+        <a href="javascript:;" class="">1</a>
+    </li>
+    <li class="am-pagination-next ">
+        <a href="javascript:;" class="">下一页</a>
+    </li>
+    <li class="am-pagination-last ">
+        <a href="javascript:;" class="">末页</a>
+    </li>
+</ul> -->
+<div class="am-margin">
+    <label class="am-u-sm-4"></label>
+    <div class="am-u-sm-4  am-center">
+        <label class="am-u-sm-4"></label>
+        <button type="button" class="am-u-sm-4 am-btn am-btn-primary am-btn-xs"
+                onclick="goBack();">返回
+        </button>
+        <label class="am-u-sm-4"></label>
+    </div>
+    <label class="am-u-sm-4"></label>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("#conId").val(back.conID);
+        searchSubordinateList();
+    });
+    function searchSubordinateList(){
+        var $form = $('#paginationForm');
+        var customerListObj = null;
+        $.ajax({
+            url: WS_SERVER_ROUTE + "customer/getMyCustomer",
+            async: false,
+            type: "post",
+            dataType: "json",
+            data: $form.serialize(),
+            success: function (result) {
+                if (result.result == '0') {
+                    customerListObj = result.data;
+                    showConList(customerListObj);
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData,
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    //显示会员列表信息
+    function showConList(dataObj){
+        if(dataObj){
+            var dataHtml = '';
+            for (var i = 0; i < (dataObj.list||[]).length; i++) {
+                var conObj = dataObj.list[i];
+                if(conObj){
+                    dataHtml+='<tr class="gradeX">';
+                    dataHtml+='    <td>'+ (i+1) +'</td>';
+                    dataHtml+='    <td>';
+                    dataHtml+='        <img style="height:50px;width:50px;" src="'+ conObj.PIC +'" />';
+                    dataHtml+='    </td>';
+                    dataHtml+='    <td>'+ conObj.CON_NO +'</td>';
+                    dataHtml+='    <td>'+ conObj.CON_NAME +'</td>';
+                    dataHtml+='    <td>'+ (conObj.SEX==2?"女":"男") +'</td>';
+                    dataHtml+='    <td>'+ (conObj.MOBILE==null?"":conObj.MOBILE) +'</td>';
+                    dataHtml+='    <td>'+ (conObj.PROVINCE==null?"":conObj.PROVINCE) +'</td>';
+                    dataHtml+='    <td>'+ (conObj.CITY==null?"":conObj.CITY) +'</td>';
+                    dataHtml+='    <td>'+ (conObj.DISTRICT==null?"":conObj.DISTRICT) +'</td>';
+                    dataHtml+='    <td>'+ (conObj.IS_LOCKOUT==0?"正常":"锁定") +'</td>';
+                    dataHtml+='    <td>'+ conObj.CREATE_DT +'</td>';
+                    // dataHtml+='    <td>0</td>';
+                    // dataHtml+='    <td>0</td>';
+                    // dataHtml+='    <td>0</td>';
+                    // dataHtml+='    <td>0</td>';
+                    // dataHtml+='    <td>0</td>';
+                    dataHtml+='</tr>';
+                }
+            }
+            $("#data_table tbody").html(dataHtml);
+            $("#data_table tbody tr").click(function () {
+                if($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                }else{
+                    $(this).addClass('active');
+                }
+                $(this).siblings().removeClass('active');
+            });
+        }
+    }
+</script>

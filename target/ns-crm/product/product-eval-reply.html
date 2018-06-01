@@ -1,0 +1,125 @@
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title  am-cf"><a onclick="backUp();">回复评价</a> / 表单</div>
+                </div>
+                <div class="widget-body  am-fr">
+                    <form id="form" class="am-form tpl-form-line-form" data-am-validator>
+                        <input type="hidden" name="CON_ID" value="0" />
+                        <input type="hidden" name="PARENT_ID" value=""/>
+                        <input type="hidden" name="SOURCE_ID" value=""/>
+                        <input type="hidden" name="TO_CON_ID" value=""/>
+                        <input type="hidden" name="TO_CON_NO" value=""/>
+                        <input type="hidden" name="TO_CON_NAME" value=""/>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="form_reviewReply">回复内容</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <textarea rows="10" placeholder="必填" id="form_reviewReply" name="CONTENT" required></textarea>
+                            </div>
+                        </div>
+                        <div class="am-margin">
+                            <button id="submitBtn" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+                            <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="backUp();">取消保存
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+//解决下拉框冲突
+//重新注册一个JQuery插件
+AMUI.plugin('mySelected', AMUI.selected);
+//初始化插件
+$('.selected').mySelected({ btnSize: 'sm' });
+$(function() {
+    var replyBaseData = back.replyBaseData;
+    if(replyBaseData){
+        if(replyBaseData.SOURCE_ID && replyBaseData.SOURCE_ID.length > 0){
+            $("input[name=PARENT_ID]").val(replyBaseData.SOURCE_ID);
+            $("input[name=SOURCE_ID]").val(replyBaseData.SOURCE_ID);
+        }else{
+            $("input[name=PARENT_ID]").val(replyBaseData.ID);
+            $("input[name=SOURCE_ID]").val(replyBaseData.ID);
+        }
+        $("input[name=TO_CON_ID]").val(replyBaseData.CON_ID);
+        $("input[name=TO_CON_NO]").val(replyBaseData.CON_NO);
+        $("input[name=TO_CON_NAME]").val(replyBaseData.CON_NAME);
+    }
+
+    //amaze ui 表单验证
+    var $form = $('#form');
+    $form.validator({
+        onValid: function(validity) {
+            $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+        },
+        onInValid: function(validity) {
+            var $field = $(validity.field);
+            var $group = $field.closest('.am-form-group');
+            var $alert = $group.find('.am-alert');
+            // 使用自定义的提示信息 或 插件内置的提示信息
+            var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+            if (!$alert.length) {
+                $alert = $('<div class="am-alert am-alert-danger am-u-sm-12 am-u-md-4 am-u-lg-3" style="float:left;"></div>').hide().appendTo($group);
+            }
+            $alert.html(msg).show();
+        },
+        //自定义验证必须要放到validate中处理
+        validate: function(validity) {
+            return validity;
+        },
+        submit: function() {
+            var formValidity = this.isFormValid();
+            $.when(formValidity).then(function() {
+                // 验证成功的逻辑
+                var $subBtn = $("#submitBtn");
+                $subBtn.button('loading');
+                $.ajax({
+                    url: WS_SERVER_ROUTE + "pntcmt/inertCMT",
+                    async: false,
+                    type: "post",
+                    dataType: "json",
+                    data: JSON.stringify($form.serializeObject()),
+                    success: function(data) {
+                        if (data.result == 0) {
+                            AMUI.dialog.alert({
+                                content: '操作成功',
+                                onConfirm: backUp
+                            });
+                        } else {
+                            AMUI.dialog.alert({ content: data.errorData });
+                        }
+                    },
+                    error:function(){
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: "请求失败"
+                        });
+                    }
+                });
+            }, function() {
+                // 验证失败的逻辑
+                return false;
+            });
+            //阻止原生form提交
+            return false;
+        }
+    });
+});
+
+function backUp() {
+    back.selectEvalDataId = "";
+    new panel({
+        url: current_url,
+        data: back.evalListParams,
+        target: $(".tpl-content-wrapper")
+    }).load();
+}
+</script>

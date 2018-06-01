@@ -1,0 +1,492 @@
+
+
+
+
+<style>
+    .active {
+        background: #e6e6e6;
+    }
+
+    #sku_table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+    #sku_table th {
+        border:1px solid #e4e4e4;
+        border-right: none;
+        text-align: center;
+    }
+    tr:hover {
+        background-color: #e6e6e6;
+    }
+</style>
+<form class="am-form tpl-form-border-form tpl-form-border-br" data-am-validator id="pro_sku_form">
+    <input type="hidden" id="pntId" value="">
+    <label>SKU基础信息</label>
+    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
+    <button type="button"
+            class="am-btn am-btn-success am-btn-xs" onclick="toAddSkuForTR();"><span
+            class="am-icon-plus"></span> 新增
+    </button>
+    <button type="button" id="sku_del_btn" disabled="disabled"
+            class="am-btn am-btn-danger am-btn-xs" onclick="toDelSkuForTR();"><span
+            class="am-icon-trash-o"></span> 删除
+    </button>
+    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
+    <div class="am-scrollable-horizontal">
+        <table id="sku_table" width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black">
+            <thead>
+            <tr id="table_color">
+                <th hidden></th>
+                <th>序号</th>
+                <th>图片</th>
+                <th>SKU</th>
+                <th>销售价</th>
+                <th>重量</th>
+                <th>单位</th>
+                <th>库存</th>
+                <th>排序</th>
+                <th>默认选中</th>
+                <th>是否生效</th>
+                <th>返自身积分</th>
+                <th>返上级积分</th>
+                <th>更新时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="sku_table_body">
+                
+            </tbody>
+        </table>
+    </div>
+</form>
+<hr/>
+<div id="sku_itmes_div"></div>
+<div class="am-u-sm-12">
+    <button type="button" class="am-btn am-btn-primary am-btn-xs am-center"
+            onclick="goBack();">返回
+    </button>
+</div>
+<script>
+    var edit_flag = 0; // 编辑模式的表示, 值为0, 则表示没有任何一行tr进入编辑模式, 值不为0, 则值就是编辑行的行号;
+    var lineCount = 0;
+    $(function () {
+        var productId = back.productId;
+        $("#pntId").val(productId);
+
+        getProductSku();
+
+    });
+
+    //获取商品SKU列表
+    function getProductSku(){
+        $.ajax({
+            url: WS_SERVER_ROUTE + "pnt/getProductDetial",
+            type: "post",
+            async: false,
+            data: "pntId="+$("#pntId").val(),
+            dataType: "json",
+            success: function (result) {
+                if (result.result == 0) {
+                    if(result.data.skus){
+                        var skuObj = result.data.skus;
+                        showSkuList(skuObj);
+                    }
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    //显示商品列表信息
+    function showSkuList(dataObj){
+        if(dataObj){
+            var dataHtml = '';
+            lineCount = (dataObj||[]).length;
+            for (var i = 0; i < (dataObj||[]).length; i++) {
+                var skuItemObj = dataObj[i];
+                if(skuItemObj){
+                    dataHtml+='<tr class="gradeX">';
+                    dataHtml+='<td hidden class="skuId">'+ skuItemObj.ID +'</td>';
+                    dataHtml+='<td>'+ (i+1) +'</td>';
+                    dataHtml+='<td>';
+                    dataHtml+='    <img class="picImg" style="height:50px;width:50px;" src="'+ skuItemObj.THUMB_URL +'" onclick="toFileClick(this);"/>';
+                    dataHtml+='    <input type="file" class="url_file" style="display:none;" onchange="toUpLoadPic(this);"/>';
+                    dataHtml+='</td>';
+                    dataHtml+='<td class="sku text">'+ skuItemObj.SKU +'</td>';
+                    dataHtml+='<td align="right" class="salPrice number">'+ skuItemObj.SAL_PRICE +'</td>';
+                    dataHtml+='<td align="right" class="weight number">'+ skuItemObj.WEIGHT +'</td>';
+                    dataHtml+='<td class="unit text">'+ skuItemObj.UNIT +'</td>';
+                    dataHtml+='<td align="right" class="stock number">'+ skuItemObj.STOCK +'</td>';
+                    dataHtml+='<td align="right" class="displaySeq number">'+ skuItemObj.DISPLAY_SEQ +'</td>';
+                    dataHtml+='<td class="selDefault select">'+ (skuItemObj.SEL_DEFAULT==0?"不选中":"选中") +'</td>';
+                    dataHtml+='<td class="enabled select">'+ (skuItemObj.ENABLED==0?"失效":"有效") +'</td>';
+                    dataHtml+='<td class="selfIntegral number">'+ skuItemObj.INTEGRAL_SELF +'</td>';
+                    dataHtml+='<td class="refereeIntegral number">'+ skuItemObj.INTEGRAL_SUP +'</td>';
+                    dataHtml+='<td>'+ skuItemObj.UPDATE_DT +'</td>';
+                    dataHtml+='<td>';
+                    dataHtml+='    <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="toEditSkuForTR(this);">';
+                    dataHtml+='         <span class="am-icon-edit"></span> 编辑';
+                    dataHtml+='    </button>';
+                    dataHtml+='    <button type="button" style="display: none" class="am-btn am-btn-success am-btn-xs" onclick="toSaveSkuForTR(this);">';
+                    dataHtml+='         <span class="am-icon-save"></span> 保存';
+                    dataHtml+='    </button>';
+                    dataHtml+='</td>';
+                    dataHtml+='</tr>';
+                }
+            }
+            $("#sku_table_body").html(dataHtml);
+
+            $("#sku_table_body").on("click", "tr", function () {
+                var tr = $(this);
+                var rowNum = $(tr).parent().find("tr").index(tr[0]) + 1;
+                if (edit_flag != 0 && rowNum != edit_flag) {
+                    AMUI.dialog.alert({
+                        title: '系统提示',
+                        content: 'SKU正在编辑中,不能切换!'
+                    });
+                    return;
+                }
+                // 增加行点击css
+                $(this).addClass('active');
+                $(this).siblings().removeClass('active');
+                var skuId = $("#sku_table_body .active .skuId").html().trim();
+                // 根据有效性字段控制css
+                var enabled = $("#sku_table_body .active .enabled").html().trim();
+                if (enabled == '有效') {
+                    $("#sku_del_btn").attr("disabled", "disabled");// 有效则不展示删除按钮
+                } else if (enabled == '无效') {
+                    $("#sku_del_btn").removeAttr("disabled");
+                }
+            });
+        }
+    }
+
+    // 加载sku规格页面
+    function loadItems(skuId) {
+        $.ajax({
+            url: SERVER_BASE_URL + "product/product-sku-list.html",
+            type: "post",
+            async: false,
+            data: {
+                "skuId": skuId
+            },
+            dataType: "html",
+            success: function (html) {
+                $("#sku_itmes_div").html(html);
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    // 新增一条sku
+    function toAddSkuForTR() {
+        if (edit_flag > 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '请保存之前所编辑的数据!'
+            });
+            return;
+        }
+        $("#sku_del_btn").removeAttr("disabled");
+        $("#sku_itmes_div").html("");
+        edit_flag = $("#sku_table_body tr").length + 1;
+        var html_tr = '<tr class="gradeX">' +
+            '<td hidden class="skuId"></td>' +
+            '<td></td>' +
+            '<td>' +
+            '<img class="picImg" style="height:50px;width:50px;" src="assets/img/no-img.jpg" onclick="toFileClick(this);"/><input type="file" class="url_file" style="display:none;" onchange="toUpLoadPic(this);"/>' +
+            '</td>' +
+            '<td class="sku text"><input type="text" value=""/></td>' +
+            '<td align="right" class="salPrice number"><input type="text" value=""/></td>' +
+            '<td align="right" class="weight number"><input type="text" value=""/></td>' +
+            '<td class="unit text"><input type="text" value=""/></td>' +
+            '<td align="right"class="stock number"><input type="number" value=""/></td>' +
+            '<td align="right"class="displaySeq number"><input type="number" value="' + (lineCount + 1) + '"/></td>' +
+            '<td class="selDefault select"><select><option value="0">不选中</option><option value="1">选中</option></select></td>' +
+            '<td class="enabled select"><select><option value="1">有效</option><option value="0">失效</option></select></td>' +
+            '<td align="right" class="selfIntegral number"><input type="number" value="0"/></td>' +
+            '<td align="right" class="refereeIntegral number"><input type="number" value="0"/></td>' +
+            '<td></td>' +
+            '<td>' +
+            '<button type="button" style="display: none" class="am-btn am-btn-primary am-btn-xs" onclick="toEditSkuForTR(this);"><span class="am-icon-edit"></span> 编辑</button>' +
+            '<button type="button" class="am-btn am-btn-success am-btn-xs" onclick="toSaveSkuForTR(this);"><span class="am-icon-save"></span> 保存</button>' +
+            '</td>' +
+            '</tr>';
+        $("#sku_table_body").append(html_tr);
+    }
+
+    // 模拟点击上传
+    function toFileClick(dom) {
+        var tr = $(dom).parent().parent();
+        if (edit_flag == ($(tr).parent().find("tr").index(tr[0]) + 1)) {
+            $(dom).next().click();
+        }
+    }
+
+    // 上传图片
+    function toUpLoadPic(dom) {
+        if (dom.value.length != 0) {
+            var f = dom.files[0];
+            if (f.size > 1024 * 1024) fileSize = (Math.round(f.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+            else fileSize = (Math.round(f.size * 100 / 1024) / 100).toString() + 'KB';
+            if(f.size > 1024 * (1024 / 5)){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "上传的图片"+ fileSize +"超过了200KB,请重新选择"
+                });
+                return;
+            }
+            var formData = new FormData();
+            formData.append("targetFile", dom.files[0]);
+            $.ajax({
+                url: WS_SERVER_ROUTE + "file/upload",
+                type: "POST",
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function (data) {
+                    if (data.result == 0) {
+                        $("#sku_table_body .active .picImg").attr("src", data.data);
+                    } else {
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: data.errorData
+                        });
+                    }
+                },
+                error: function () {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: "上传异常"
+                    });
+                }
+            });
+        }
+    }
+
+    // 删除sku
+    function toDelSkuForTR() {
+        var tr = $("#sku_table_body .active");
+        if (tr.length == 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "请点选所需操作的数据!"
+            });
+            return;
+        }
+        AMUI.dialog.confirm({
+            title: '系统提示',
+            content: '删除之后无法还原,确定删除此SKU?',
+            onConfirm: function () {
+                var skuId = $("#sku_table_body .active .skuId").html().trim();
+                var rowNum = $(tr).parent().find("tr").index(tr[0]) + 1;
+                if (rowNum == edit_flag) {
+                    edit_flag = 0;
+                }
+                if (skuId.length != 0) {
+                    $.ajax({
+                        url: "http://spys.hubeta.com:80/spys-manager/skus/delSku",
+                        type: "post",
+                        async: false,
+                        data: {
+                            "skuId": skuId
+                        },
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.resultCode == 1) {
+                                $("#sku_table_body .active").remove();
+                                lineCount--;
+                            } else {
+                                AMUI.dialog.alert({
+                                    title: '系统提示',
+                                    content: result.errorData
+                                });
+                            }
+                        },
+                        error:function(){
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: "请求失败"
+                            });
+                        }
+                    });
+                } else {
+                    $("#sku_table_body .active").remove();
+                }
+                if ($("#sku_table_body tr").length > 1) {
+                    $($("#sku_table_body tr")[0]).click();
+                } else {
+                    $("#sku_itmes_div").html("");
+                }
+            }
+        });
+    }
+
+    // 进入编辑模式
+    function toEditSkuForTR(dom) {
+        if (edit_flag > 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '请保存之前所编辑的数据!'
+            });
+            return;
+        }
+        // 编辑标识控制
+        var tr = $(dom).parent().parent();
+        edit_flag = $(tr).parent().find("tr").index(tr[0]) + 1;
+        // 样式控制
+        $(dom).css('display', 'none');
+        $(dom).next().css('display', 'block');
+        startEditForTR(tr);
+    }
+
+    // 保存, 且退出编辑模式
+    function toSaveSkuForTR(dom) {
+        if ($($(dom).parent().parent().children()[3]).children().val().trim() == '') {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: 'sku不能为空!'
+            });
+            return;
+        }
+        AMUI.dialog.confirm({
+            title: '系统提示',
+            content: '确定保存?',
+            onConfirm: function () {
+                var imageUrl = $("#sku_table_body .active .picImg").attr('src') != 'http://spys.hubeta.com:80/spys-manager/resources/img/ZWTP.jpg' && $("#sku_table_body .active .picImg").attr('src') != 'assets/img/no-img.jpg' ? $("#sku_table_body .active .picImg").attr('src') : "";
+
+                var skuId = $("#sku_table_body .active .skuId").html().trim();
+                var object_sku = {
+                    "ID": skuId,
+                    "PRODUCT_ID": $("#pntId").val(),
+                    "THUMB_URL": imageUrl,
+                    "SKU": $("#sku_table_body .active .sku input").val(),
+                    "SAL_PRICE": $("#sku_table_body .active .salPrice input").val(),
+                    "STOCK": $("#sku_table_body .active .stock input").val(),
+                    "WEIGHT": $("#sku_table_body .active .weight input").val(),
+                    "ENABLED": $("#sku_table_body .active .enabled select").val(),
+                    "INTEGRAL_TAG": $("#sku_table_body .active .integral select").val(),
+                    "DISPLAY_SEQ": $("#sku_table_body .active .displaySeq  input").val(),
+                    "UNIT": $("#sku_table_body .active .unit input").val(),
+                    "SEL_DEFAULT": $("#sku_table_body .active .selDefault select").val(),
+                    "INTEGRAL_SELF": $("#sku_table_body .active .selfIntegral input").val(),
+                    "INTEGRAL_SUP": $("#sku_table_body .active .refereeIntegral input").val(),
+                };
+
+                var wsUrl = "";
+                if(skuId.length == 0){
+                    wsUrl = WS_SERVER_ROUTE + "pnt/addPntSku";
+                }else{
+                    wsUrl = WS_SERVER_ROUTE + "pnt/updatePntSku";
+                }
+                $.ajax({
+                    url: wsUrl,
+                    type: "post",
+                    async: false,
+                    data: JSON.stringify(object_sku),
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.result == 0) {
+                            edit_flag = 0;
+                            $("#sku_del_btn").attr("disabled","disabled");
+                            getProductSku();
+                        } else {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: '保存失败!'
+                            });
+                        }
+                    },
+                    error:function(){
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: "请求失败"
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    // 进入tr编辑模式
+    function startEditForTR(tr) {
+        // 遍历tr里面所有的td
+        var tds = $(tr).children();
+        for (var i = 0; i < tds.length; i++) {
+            var cls = $(tds[i]).attr('class');
+            if (typeof(cls) != 'undefined') {
+                var clsArr = cls.split(' ');
+                if (clsArr.length > 1) {
+                    // 判断第二个class是什么就给什么标签, 当然要先拿到值, 然后再替换元素
+                    var value = $(tds[i]).html().trim();
+                    var html = '';
+                    if (clsArr[1] == "number" || clsArr[1] == 'text') {
+                        var align = clsArr[1] == 'number' ? 'text-align: right;' : '';
+                        html = '<input type="' + clsArr[1] + '" style="' + align + '" value="' + value + '" />';
+                        $(tds[i]).html(html);
+                    } else if (clsArr[1] == 'select') {
+                        html = '<select>'
+                        if (clsArr[0] == 'enabled') {
+                            var valid = value == '有效' ? "selected" : "";
+                            var invalid = value == '无效' ? "selected" : "";
+                            html += '<option value="1" ' + valid + '>有效</option>' +
+                                '<option value="0" ' + invalid + '>无效</option>';
+                        } else if (clsArr[0] == 'selDefault') {
+                            var selected = value == '选中' ? "selected" : "";
+                            var inselected = value == '不选中' ? "selected" : "";
+                            html += '<option value="1" ' + selected + '>选中</option>' +
+                                '<option value="0" ' + inselected + '>不选中</option>';
+                        }else if (clsArr[0] == 'integral') {
+                            var selected = value == '开启' ? "selected" : "";
+                            var inselected = value == '关闭' ? "selected" : "";
+                            html += '<option value="1" ' + selected + '>开启</option>' +
+                                '<option value="0" ' + inselected + '>关闭</option>';
+                        }
+                        html += "</select>"
+                        $(tds[i]).html(html);
+                    }
+                }
+            }
+        }
+    }
+
+    // 结束tr编辑模式
+    function endEditForTR(tr) {
+        var tds = $(tr).children();
+        for (var i = 0; i < tds.length; i++) {
+            var cls = $(tds[i]).attr('class');
+            if (typeof(cls) != 'undefined') {
+                var clsArr = cls.split(' ');
+                if (clsArr.length > 1) {
+                    // 1. 取值, 2.赋值到td当中
+                    var value = "";
+                    if (clsArr[1] == "number" || clsArr[1] == 'text') {
+                        value = $(tds[i]).children().val();
+                    } else if (clsArr[1] == 'select') {
+                        value = $(tds[i]).children().find("option:selected").text();
+                    }
+                    $(tds[i]).html(value);
+                }
+            }
+        }
+    }
+</script>

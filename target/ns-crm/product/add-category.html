@@ -1,0 +1,167 @@
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title  am-cf"><a onclick="backUp();">商品分类</a> / 表单</div>
+                </div>
+                <div class="widget-body  am-fr">
+                    <form id="form" class="am-form tpl-form-line-form">
+                        <input type="hidden" name="sysAccount" value="PSY" required/>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="form_categoryCode">分类编号</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" id="form_categoryCode" name="categoryCode"
+                                       value="" placeholder="必填" required>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="form_categoryName">分类名称</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" id="form_categoryName" name="categoryName"
+                                       value="" placeholder="必填" data-foolish-msg="必填" required/>
+                            </div>
+                        </div>
+                        <input type="hidden" name="parentId" value="-1" required/>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="form_parentName">上级分类</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" id="form_parentName" name="parentName" value="顶层结点"
+                                       disabled/>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="form_categoryDesc">类别描述</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" id="form_categoryDesc" name="categoryDesc"
+                                       value="" placeholder="选填"/>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="form_displaySeq">显示顺序</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" class="js-pattern-number" id="form_displaySeq" name="displaySeq"
+                                       value="" placeholder="选填"/>
+                            </div>
+                        </div>
+
+
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="form_enabled">是否有效</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-10">
+                                <select id="form_enabled" class="selected" name="enabled">
+                                    <option value="1" >有效</option>
+                                    <option value="0" >无效</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-g am-margin-top-sm">
+                            <div class="am-u-sm-12 am-u-md-2 am-text-right admin-form-text">
+                                <label for="form_remark">备注</label>
+                            </div>
+                            <div class="am-u-sm-12 am-u-md-10">
+                                <textarea rows="10" placeholder="选填" id="form_remark"
+                                          name="remark"></textarea>
+                            </div>
+                        </div>
+                        <div class="am-margin">
+                            <button id="submitBtn" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+                            <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="backUp();">取消保存
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //解决下拉框冲突
+    //重新注册一个JQuery插件
+    AMUI.plugin('mySelected', AMUI.selected);
+    //初始化插件
+    $('.selected').mySelected({btnSize: 'sm'});
+    $(function () {
+        if(proCategoryObj.selectNodeNames && proCategoryObj.selectNodeNames.length > 0){
+            $("#form_parentName").val(proCategoryObj.selectNodeNames);
+        }
+        //amaze ui 表单验证
+        var $form = $('#form');
+        $form.validator({
+            onValid: function (validity) {
+                $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+            },
+            onInValid: function (validity) {
+                var $field = $(validity.field);
+                var $group = $field.closest('.am-form-group');
+                var $alert = $group.find('.am-alert');
+                // 使用自定义的提示信息 或 插件内置的提示信息
+                var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+                if (!$alert.length) {
+                    $alert = $('<div class="am-alert am-alert-danger am-u-sm-12 am-u-md-4 am-u-lg-3" style="float:left;"></div>').hide().appendTo($group);
+                }
+                $alert.html(msg).show();
+            },
+            validate: function (validity) {
+                return validity;
+            },
+            submit: function () {
+                var formValidity = this.isFormValid();
+                $.when(formValidity).then(function () {
+                    // 验证成功的逻辑
+                    var $subBtn = $("#submitBtn");
+                    $subBtn.button('loading');
+                    var addCategoryObj = {};
+                    addCategoryObj.categoryName = $("#form_categoryName").val().trim();
+                    addCategoryObj.id = Math.uuid(33);
+                    addCategoryObj.parentId = proCategoryObj.selectNodeIds;
+                    addCategoryObj.treeData.push(addCategoryObj);
+                    // backUp();
+                    AMUI.dialog.alert({content:"操作成功"});
+                    return;
+                    // $.ajax({
+                    //     url: "http://spys.hubeta.com:80/spys-manager/pntCategories/saveOrUpdate",
+                    //     async: false,
+                    //     type: "get",
+                    //     dataType: "json",
+                    //     data: $form.serialize(),
+                    //     success: function (data) {
+                    //         if (data.resultCode == 1) {
+                    //             AMUI.dialog.alert({
+                    //                 content: '操作成功',
+                    //                 onConfirm: backUp
+                    //             });
+                    //         } else {
+                    //             AMUI.dialog.alert({content: data.errorData});
+                    //         }
+                    //     }
+                    // });
+                }, function () {
+                    // 验证失败的逻辑
+                    return false;
+                });
+                //阻止表单提交
+                return false;
+            }
+        });
+    });
+    function backUp() {
+        new panel({
+            url: SERVER_BASE_URL + "product/pro-category.html",
+            target: $(".tpl-content-wrapper")
+        }).load();
+    }
+</script>

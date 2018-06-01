@@ -1,0 +1,271 @@
+<style>
+.theme-white .tpl-form-border-form {
+    padding-top: 0px;
+    !important;
+}
+
+.am-u-lg-2 {
+    width: 24.66666667%;
+    !important;
+}
+
+.active {
+    background: #e6e6e6;
+}
+tr:hover {
+    background-color: #e6e6e6;
+}
+#data_table td {
+    vertical-align: middle;
+}
+</style>
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-cf">线下付款</div>
+                </div>
+                <div class="widget-body am-fr">
+                    <form id="financeListForm" class="am-form tpl-form-border-form tpl-form-border-br">
+                        <input type="hidden" id="status" name="status" value="1">
+                        <input type="hidden" id="pageSize" name="pageSize" value="10">
+                        <input type="hidden" id="pageNumber" name="pageNumber" value="1">
+                        <div class="am-form-group">
+                            <label class="am-u-sm-5 am-u-md-1 am-form-label">开始时间</label>
+                            <div class="am-dropdown am-u-sm-7 am-u-md-2 ">
+                                <input id="startDt" name="startDt" type="text" data-am-datepicker="{format: 'yyyy-mm-dd hh:ii:ss'}" class="form-datetime am-form-field" value="" placeholder="选择开始时间" readonly/>
+                            </div>
+                            <label class="am-u-sm-5 am-u-md-1 am-form-label">结束时间</label>
+                            <div class="am-dropdown am-u-sm-7 am-u-md-2 ">
+                                <input id="endDt" name="endDt" type="text" data-am-datepicker="{format: 'yyyy-mm-dd hh:ii:ss'}" class="form-datetime am-form-field" value="" placeholder="选择结束时间" readonly/>
+                            </div>
+                            <label class="am-u-sm-5 am-u-md-1 am-form-label">订单编号</label>
+                            <div class="am-dropdown am-u-sm-7 am-u-md-2">
+                                <input type="text" id="form_orderNo" name="orderNo" value="" />
+                            </div>
+                            <div class="am-u-sm-3">
+                                <div class="row-content am-cf"></div>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label class="am-u-sm-5 am-u-md-1 am-form-label">会员编号</label>
+                            <div class="am-dropdown am-u-sm-7 am-u-md-2">
+                                <input type="text" id="form_conNo" name="conNo" value="" />
+                            </div>
+                            <div class="am-u-sm-3">
+                                <div class="row-content am-cf"></div>
+                            </div>
+                            <div class="am-u-sm-3">
+                            </div>
+                            <div class="am-u-sm-3">
+                                <button id="search" type="button" onclick="searchMore()" class="am-btn am-btn-default am-btn-success am-btn-xs"><span class="am-icon-search"></span>搜索
+                                </button>
+                                <button id="reset" type="button" onclick="resetForm()" class="am-btn am-btn-default am-btn-danger am-btn-xs"><span class="am-icon-undo"></span>重置
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <hr data-am-widget="divider" class="am-divider am-divider-dashed">
+                    <button id="financeBtn" type="button" onclick="offLineFinance()" class="am-btn am-btn-default am-btn-success am-btn-xs"><span class="am-icon-plus"></span>线下付款
+                    </button>
+                    <hr data-am-widget="divider" class="am-divider am-divider-dashed">
+                    <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black" id="data_table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>订单编号</th>
+                                <th>会员编号</th>
+                                <th>会员昵称</th>
+                                <th>订单金额</th>
+                                <th>创建时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                    <div id="financePaging"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/formToJson.js"></script>
+<script>
+var $dpInput = $('.form-datetime').datetimepicker({
+    format: 'yyyy-mm-dd hh:ii:ss',
+    autoclose: true,
+    todayBtn: true,
+});
+var selectFinanceDataId = "";
+$(function() {
+    loadFinanceList();
+});
+
+function loadFinanceList(){
+    var $form = $('#financeListForm');
+    var financeListObj = null;
+    var formSerializeVal = $form.serialize();
+    $.ajax({
+        url: WS_SERVER_ROUTE + "order/getOrderList",
+        async: false,
+        type: "post",
+        dataType: "json",
+        data: formSerializeVal,
+        success: function (result) {
+            if (result.result == '0') {
+                financeListObj = result.data;
+                showDataList(financeListObj);
+            } else {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: result.errorData,
+                });
+            }
+        },
+        error:function(){
+            AMUI.dialog.alert({
+                title: '错误提示',
+                content: "请求失败"
+            });
+        }
+    });
+    if(financeListObj){
+        var pageObj = new myPaging({
+            page_id: "financeList",
+            div_pagination_id: "financePaging",
+            form_id: "financeListForm",
+            url: WS_SERVER_ROUTE + "order/getOrderList",
+            pageNumber: financeListObj.pageNumber,
+            totalPage: financeListObj.totalPage,
+            pageSize: financeListObj.pageSize
+        });
+        pageObj.init();
+    }
+}
+
+function showDataList(dataObj){
+    if(dataObj){
+        var dataHtml = '';
+        for (var i = 0; i < (dataObj.list||[]).length; i++) {
+            var dataItemObj = dataObj.list[i];
+            if(dataItemObj){
+                dataHtml+='<tr class="gradeX" data-id="'+ dataItemObj.ID +'">';
+                dataHtml+='<td style="width:10%">'+ (i+1) +'</td>';
+                dataHtml+='<td style="width:20%">'+ dataItemObj.ORDER_NO +'</td>';
+                dataHtml+='<td style="width:10%">'+ dataItemObj.CON_NO +'</td>';
+                dataHtml+='<td style="width:20%">'+ dataItemObj.CON_NAME +'</td>';
+                dataHtml+='<td style="width:10%">'+ dataItemObj.ORDER_TOTAL +'</td>';
+                dataHtml+='<td style="width:20%">'+ dataItemObj.CREATE_DT +'</td>';
+                dataHtml+='</tr>';
+            }
+        }
+        $("#data_table tbody").html(dataHtml);
+        $("#data_table tbody tr").dblclick(function(){
+            $(this).trigger("click");
+        });
+        $("#data_table tbody tr").click(function () {
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+                selectFinanceDataId = "";
+            }else{
+                $(this).addClass('active');
+                selectFinanceDataId = $(this).attr("data-id");
+            }
+            back.selectFinanceDataId = selectFinanceDataId;
+            $(this).siblings().removeClass('active');
+        });
+    }
+}
+
+//搜索
+function searchMore() {
+    if ($('#startDt').val().length > 0 && $('#endDt').val().length > 0) {
+        if ($('#startDt').val() > $('#endDt').val()) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "起始时间不大于结束时间!",
+                onConfirm: function() {
+                    //清除起始时间和结束时间
+                    $("#startDt").attr('value', '');
+                    $("#endDt").attr('value', '');
+                }
+            });
+            return;
+        }
+    }
+    selectFinanceDataId = "";
+    $("#pageNumber").val(1);
+    loadFinanceList();
+}
+//重置
+function resetForm() {
+    $("#startDt").attr('value', '');
+    $("#endDt").attr('value', '');
+    $("#form_conNo").val('');
+    $("#form_orderNo").val('');
+    $("#pageNumber").val("1");
+}
+
+function offLineFinance() {
+    if(!clickCheck()){
+        return;
+    }
+    AMUI.dialog.confirm({
+        title: '提示',
+        content: '是否执行线下付款?',
+        onConfirm: function() {
+            $.ajax({
+                url: WS_SERVER_ROUTE + "order/offlinePay",
+                async: false,
+                type: "post",
+                dataType: "json",
+                data: "orderId="+selectFinanceDataId,
+                success: function (result) {
+                    if (result.result == '0') {
+                        AMUI.dialog.alert({
+                            title: '系统提示',
+                            content: "线下付款完成",
+                            onConfirm: function() {
+                                selectFinanceDataId = "";
+                                loadFinanceList();
+                            }
+                        });
+                    } else {
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: result.errorData,
+                        });
+                    }
+                },
+                error:function(){
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: "请求失败"
+                    });
+                }
+            });
+        },
+        onCancel: function() {
+            selectFinanceDataId = "";
+        }
+    })
+}
+
+function clickCheck() {
+    if (selectFinanceDataId == "") {
+        AMUI.dialog.alert({
+            title: '系统提示',
+            content: "请点选所需操作的数据!"
+        });
+        return false;
+    }
+    return true;
+}
+
+function initBackForOrder() {
+    var formSerializeVal = $("#financeListForm").serializeObject();
+    back.financeListParams = formSerializeVal;
+}
+</script>

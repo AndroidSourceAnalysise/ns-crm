@@ -1,0 +1,336 @@
+<style>
+.theme-white .tpl-form-border-form {
+    padding-top: 0px !important;
+}
+
+.am-u-lg-2 {
+    width: 24.66666667% !important;
+}
+.active {
+    background: #e6e6e6;
+}
+tr:hover {
+    background-color: #e6e6e6;
+}
+</style>
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl">订单列表</div>
+                </div>
+                <div class="widget-body am-fr">
+                    <form id="orderListForm" class="am-form tpl-form-border-form tpl-form-border-br">
+                        <input type="hidden" id="pageSize" name="pageSize" value="10" />
+                        <input type="hidden" id="pageNumber" name="pageNumber" value="1" />
+                        <div class="am-form-group">
+                            <label class="am-u-sm-5 am-u-md-1 am-form-label">开始时间</label>
+                            <div class="am-u-sm-7 am-u-md-2 ">
+                                <input id="start_date" name="startDt" type="text" class="am-form-field tpl-form-no-bg" placeholder="选择开始日期" readonly="readonly">
+                            </div>
+                            <label class="am-u-sm-5 am-u-md-1 am-form-label">结束时间</label>
+                            <div class="am-u-sm-7 am-u-md-2 ">
+                                <input id="end_date" name="endDt" type="text" class="am-form-field tpl-form-no-bg" placeholder="选择结束日期" readonly="readonly">
+                            </div>
+                            <label class="am-u-sm-5 am-u-md-1 am-form-label">订单状态</label>
+                            <div class="am-dropdown am-u-sm-7 am-u-md-2">
+                                <select id="status_id" name="status">
+                                    <option value="-1">全部</option>
+                                    <option value="1">新增订单</option>
+                                    <option value="2">已付款</option>
+                                    <option value="3">申请取消</option>
+                                    <option value="4">已取消</option>
+                                    <option value="5">已打印</option>
+                                    <option value="6">配送中</option>
+                                    <option value="7">已收货</option>
+                                    <option value="8">申请退货</option>
+                                    <option value="9">已退货</option>
+                                    <option value="10">已退款</option>
+                                    <option value="11">已关闭</option>
+                                    <option value="12">已删除</option>
+                                </select>
+                            </div>
+                            <div class="am-u-sm-4 am-u-lg-4"></div>
+                        </div>
+                        <div class="am-form-group">
+                            <label class="am-u-sm-5 am-u-md-1 am-form-label">会员编号</label>
+                            <div class="am-u-sm-7 am-u-md-2">
+                                <input type="text" id="con_no_id" name="conNo" placeholder="会员编号">
+                            </div>
+                            <label class="am-u-sm-5 am-u-md-1 am-form-label">订单编号</label>
+                            <div class="am-u-sm-7 am-u-md-2">
+                                <input type="text" id="order_no_id" name="orderNo" placeholder="订单编号" />
+                            </div>
+                            <div class="am-u-md-3"></div>
+                            <div class="am-u-md-3">
+                                <button type="button" class="am-btn am-btn-success am-btn-xs am-icon-search" onclick="search();">搜索
+                                </button>
+                                <button type="button" class="am-btn am-btn-danger am-btn-xs am-icon-undo" onclick="resetFrom();">重置
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                <button type="button" class="am-btn am-btn-success am-btn-xs" onclick="toDetail();">
+                    <i class="am-icon-search"></i> 查看详情
+                </button>
+                <button type="button" class="am-btn am-btn-success am-btn-xs" onclick="orderExport();">
+                    <i class="am-icon-table"></i> 导出订单
+                </button>
+                <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                <div class="am-scrollable-horizontal">
+                    <table id="data_table" width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black table_hread_static">
+                        <thead>
+                            <tr id="table_color">
+                                <th hidden></th>
+                                <th>序号</th>
+                                <th>订单编号</th>
+                                <th>订单类型</th>
+                                <th>会员编号</th>
+                                <th>昵称</th>
+                                <th>付款类型</th>
+                                <th>订单实收款</th>
+                                <th>积分抵扣金额</th>
+                                <th>优惠券支付金额</th>
+                                <th>商品总额</th>
+                                <th>运费</th>
+                                <th>订单状态</th>
+                                <th>订单来源</th>
+                                <th>省份</th>
+                                <th>城市</th>
+                                <th>区/县</th>
+                                <th>收货地址</th>
+                                <th>收货人手机</th>
+                                <th>收货人姓名</th>
+                                <th>订单备注</th>
+                                <th>推荐人编号</th>
+                                <th>返自身积分</th>
+                                <th>返上级积分</th>
+                                <th>创建时间</th>
+                                <th>付款时间</th>
+                                <th>完成时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div id="orderPaging"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/formToJson.js"></script>
+<script>
+var selectOrderId = "";
+var selectOrderUrl = "";
+$(function() {
+    $('#start_date').datepicker({ format: 'yyyy-mm-dd' });
+    $('#end_date').datepicker({ format: 'yyyy-mm-dd' });
+    AMUI.plugin('mySelected', AMUI.selected);
+    $('#status_id').mySelected({ btnWidth: '100%', btnSize: 'xs', maxHeight: 300 });
+    $(document).on('click', ".am-dropdown", function() {
+        $(this).dropdown('toggle');
+    });
+    getOrderList();
+});
+
+function getOrderList(){
+    var $form = $('#orderListForm');
+    var formSerializeVal = "";
+    var orderListObj = null;
+    if(back.orderListParams){
+        var formDataObj = back.orderListParams;
+        $('#start_date').attr('value', formDataObj.startDt); // 开始时间
+        $('#end_date').attr('value', formDataObj.endDt); // 结束时间
+        $("#con_no_id").val(formDataObj.conNo); // 会员号
+        $("#order_no_id").val(formDataObj.orderNo); // 订单编号
+        if(formDataObj.status == undefined){
+            $("#status_id").val("-1");
+        }else{
+            $("#status_id").val(formDataObj.status);
+        }
+        $("#status_id").trigger('changed.selected.amui');
+        $("#pageNumber").val(formDataObj.pageNumber);
+        $("#pageSize").val(formDataObj.pageSize);
+        formSerializeVal = $form.serialize();
+        formSerializeVal = formSerializeVal.replace(/&status=-1/g,"");
+    }else{
+        formSerializeVal = $form.serialize();
+        if($("#status_id").val() == "-1"){
+            formSerializeVal = formSerializeVal.replace(/&status=-1/g,"");
+        }
+    }
+    $.ajax({
+        url: WS_SERVER_ROUTE + "order/getOrderList",
+        async: false,
+        type: "post",
+        dataType: "json",
+        data: formSerializeVal,
+        success: function (result) {
+            if (result.result == '0') {
+                orderListObj = result.data;
+                showDataList(orderListObj);
+            } else {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: result.errorData,
+                });
+            }
+        },
+        error:function(){
+            AMUI.dialog.alert({
+                title: '错误提示',
+                content: "请求失败"
+            });
+        }
+    });
+    if(orderListObj){
+        var pageObj = new myPaging({
+            page_id: "orderList",
+            div_pagination_id: "orderPaging",
+            form_id: "orderListForm",
+            url: WS_SERVER_ROUTE + "order/getOrderList",
+            pageNumber: orderListObj.pageNumber,
+            totalPage: orderListObj.totalPage,
+            pageSize: orderListObj.pageSize
+        });
+        pageObj.init();
+    }
+}
+
+//显示订单列表信息
+function showDataList(dataObj){
+    if(dataObj){
+        var dataHtml = '';
+        for (var i = 0; i < (dataObj.list||[]).length; i++) {
+            var orderObj = dataObj.list[i];
+            if(orderObj){
+                dataHtml+='<tr class="gradeX" data-id="'+ orderObj.ORDER_NO +'" data-exp-id="'+ orderObj.ID +'">';
+                dataHtml+='   <td hidden>';
+                dataHtml+='        <input type="text" value="'+ orderObj.ID +'" />';
+                dataHtml+='    </td>';
+                dataHtml+='    <td>'+ (i+1) +'</td>';
+                dataHtml+='    <td>'+ orderObj.ORDER_NO +'</td>';
+                dataHtml+='    <td>'+ (orderObj.ORDER_TYPE == 1?"销售订单":"其他") +'</td>';
+                dataHtml+='    <td>'+ orderObj.CON_NO +'</td>';
+                dataHtml+='    <td>'+ orderObj.CON_NAME +'</td>';
+                dataHtml+='    <td>'+ orderObj.PAYMENT_TYPE +'</td>';
+                dataHtml+='    <td>'+ orderObj.ORDER_TOTAL +'</td>';
+                dataHtml+='    <td>'+ orderObj.INTEGRAL_AMOUNT +'</td>';
+                dataHtml+='    <td>'+ orderObj.COUPON_AMOUNT +'</td>';
+                dataHtml+='    <td>'+ orderObj.PNT_AMOUNT +'</td>';
+                dataHtml+='    <td>'+ orderObj.FREIGHT +'</td>';
+                dataHtml+='    <td>'+ (ORDER_STATUS_CHN[orderObj.STATUS - 1].value) +'</td>';
+                dataHtml+='    <td>'+ (ORDER_SOURCE_CHN[orderObj.ORDER_SOURCE - 1].value) +'</td>';
+                dataHtml+='    <td>'+ orderObj.PROVINCE +'</td>';
+                dataHtml+='    <td>'+ orderObj.CITY +'</td>';
+                dataHtml+='    <td>'+ orderObj.DISTRICT +'</td>';
+                dataHtml+='    <td>'+ orderObj.ADDRESS +'</td>';
+                dataHtml+='    <td>'+ orderObj.MOBILE +'</td>';
+                dataHtml+='    <td>'+ orderObj.RECIPIENTS +'</td>';
+                dataHtml+='    <td>'+ (orderObj.REMARK?orderObj.REMARK:"") +'</td>';
+                dataHtml+='    <td>'+ orderObj.RP_NO +'</td>';
+                dataHtml+='    <td>'+ orderObj.SELF_INTEGRAL +'</td>';
+                dataHtml+='    <td>'+ orderObj.UP1_INTEGRAL +'</td>';
+                dataHtml+='    <td>'+ orderObj.CREATE_DT +'</td>';
+                dataHtml+='    <td>'+ (orderObj.PAY_DT?orderObj.PAY_DT:"") +'</td>';
+                dataHtml+='    <td>'+ (orderObj.CONFIRM_DT?orderObj.CONFIRM_DT:"") +'</td>';
+                dataHtml+='</tr>';
+            }
+        }
+        $("#data_table tbody").html(dataHtml);
+        $("#data_table tbody tr").dblclick(function(){
+            $(this).trigger("click");
+        });
+        $("#data_table tbody tr").click(function () {
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+                selectOrderId = "";
+            }else{
+                $(this).addClass('active');
+                selectOrderId = $(this).attr("data-id");
+            }
+            back.selectOrderId = selectOrderId;
+            $(this).siblings().removeClass('active');
+        });
+    }
+}
+
+/** 条件搜索, 用于返回时加载之前的数据 **/
+function search() {
+    back.orderListParams = null;
+    var startDt = $('#start_date').val();
+    var endDt = $('#end_date').val();
+    if (startDt.length > 0 && endDt.length > 0) {
+        if (startDt > endDt) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "开始时间不大于结束时间!"
+            });
+            return;
+        }
+    }
+    getOrderList();
+}
+
+function clickCheck() {
+    if (selectOrderId == "") {
+        AMUI.dialog.alert({
+            title: '系统提示',
+            content: "请点选所需操作的数据!"
+        });
+        return false;
+    }
+    return true;
+}
+
+/* 查看订单详情 */
+function toDetail() {
+    if(!clickCheck()){
+        return;
+    }
+    initBackForOrder();
+    new panel({
+        "url": SERVER_BASE_URL + "order/order-detail.html",
+        "target": $(".tpl-content-wrapper")
+    }).load();
+}
+
+function orderExport(){
+    var paramData = [];
+    $('#data_table tbody tr').each(function(index){
+        paramData.push($(this).attr("data-exp-id"));
+    })
+    AMUI.dialog.confirm({
+        title: '提示',
+        content: '导出的数据为当前表格显示的数据！',
+        onConfirm: function() {
+            window.open(WS_SERVER_ROUTE + "export/exportOrder?orderIds="+JSON.stringify(paramData));
+        },
+        onCancel: function() {
+            selectOrderId = "";
+        }
+    });
+}
+
+function resetFrom() {
+    $('#start_date').attr('value', ''); // 开始时间
+    $('#end_date').attr('value', ''); // 结束时间
+    $("#con_no_id").val(""); // 会员号
+    $("#order_no_id").val(""); // 订单编号
+    $("#status_id").val("-1");
+    $("#status_id").trigger('changed.selected.amui');
+}
+
+function initBackForOrder() {
+    var formSerializeVal = $("#orderListForm").serializeObject();
+    if($("#status_id").val() == "-1"){
+        delete formSerializeVal.status;
+    }
+    back.orderListParams = formSerializeVal;
+}
+</script>

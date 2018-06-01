@@ -1,0 +1,328 @@
+<style>
+    #vld-tooltip {
+        position: absolute;
+        z-index: 1000;
+        padding: 5px 10px;
+        background: #F37B1D;
+        min-width: 150px;
+        color: #fff;
+        transition: all 0.15s;
+        box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+        display: none;
+    }
+
+    #vld-tooltip:before {
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        width: 0;
+        height: 0;
+        margin-left: -8px;
+        content: "";
+        border-width: 0 8px 8px;
+        border-color: transparent transparent #F37B1D;
+        border-style: none inset solid;
+    }
+    .am-selected-btn span{
+        color:#555;
+    }
+    .am-selected{
+        border:1px solid #c2cad8;
+    }
+    .am-form-label{
+        font-size: 80% !important;
+    }
+    .am-btn{
+        margin: 0.2rem;
+    }
+</style>
+<form action="" class="am-form tpl-form-border-form tpl-form-border-br" data-am-validator id="cust_info_form">
+    <div class="am-form-group">
+        <label class="am-u-sm-1 am-form-label">会员头像</label>
+        <div class="am-u-sm-3">
+            <div class="am-u-sm-5">
+                <img id="img_view" style="width:100px;height:100px;"
+                     src=""/>
+            </div>
+            <div class="am-u-sm-7">
+                <label class="am-u-sm-12 am-form-label" style="text-align: left;font-size: 90%">成为推客时间</label>
+                <label class="am-u-sm-12 am-form-label" id="firstOrderTime" style="font-size: 90%;text-align: left"></label>
+            </div>
+        </div>
+
+        <div class="am-u-sm-8">
+            <div class="am-form-group">
+                <label class="am-u-sm-2 am-form-label">会员号</label>
+                <div class="am-u-sm-4">
+                    <input type="text" class="tpl-form-input" id="conNo" name="conNo" value="" readonly="readonly" />
+                    <!-- <input type="hidden" id="dataId" name="ID" value=""/> -->
+                </div>
+                <label class="am-u-sm-2 am-form-label">会员ID</label>
+                <div class="am-u-sm-4">
+                    <input type="text" class="tpl-form-input" id="conId" name="ID" value="" readonly="readonly" />
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label class="am-u-sm-2 am-form-label">昵称|姓名</label>
+                <div class="am-u-sm-4">
+                    <input type="text" class="tpl-form-input" id="conName" name="CON_NAME" value="" readonly="readonly" placeholder="会员昵称或姓名" data-foolish-msg="必填，不可为空!" required/>
+                </div>
+                <label class="am-u-sm-2 am-form-label">手机号</label>
+                <div class="am-u-sm-4">
+                    <input type="tel" class="tpl-form-input" id="conMobile" name="MOBILE" value="" readonly="readonly" placeholder="会员手机号" data-foolish-msg="必填，不可重复!" required/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">省份</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" id="province" name="province" value="" readonly="readonly" />
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">上级ID</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" id="refereeId" name="refereeId" value="" readonly="readonly" />
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">会员类型</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" id="conType" value="未购买" readonly="readonly" />
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">城市</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" id="city" name="city" value="" readonly="readonly" />
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">上级编号</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="number" class="tpl-form-input " id="refereeNo" name="RP_NO" value="" readonly="readonly" placeholder="上级会员号" data-foolish-msg="必填，不可重复!" required />
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">账号状态</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <select id="accountStatus" name="IS_LOCKOUT" readonly="readonly" >
+                <option value="0" selected="">正常</option>
+                <option value="1">锁定</option>
+            </select>
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">城区</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" id="district" name="district" value="" readonly="readonly" />
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">上级昵称</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input " id="refereeName" name="refereeName" value="" readonly="readonly" />
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">OPENID</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" id="openId" name="openId" value="" readonly="readonly" />
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-1 am-form-label">地址</label>
+        <div class="am-u-sm-11">
+            <input type="text" class="tpl-form-input" id="address" name="address" value="" placeholder="详细地址"  readonly="readonly"/>
+        </div>
+    </div>
+    <div class="am-margin">
+        <label class="am-u-sm-4"></label>
+        <button id="editBtn" type="button" class="am-u-sm-1 am-btn am-btn-primary am-btn-xs"
+                onclick="editInfo();">编辑
+        </button>
+        <button id="saveBtn" type="submit" class="am-u-sm-1 am-btn am-btn-primary am-btn-xs"
+                style="display: none">保存
+        </button>
+        <button id="cancelBtn" type="button" class="am-u-sm-1 am-btn am-btn-primary am-btn-xs"
+                onclick="cancelEdit();" style="display: none">取消
+        </button>
+        <button type="button" class="am-u-sm-1 am-btn am-btn-primary am-btn-xs"
+                onclick="goBack();">返回
+        </button>
+        <label class="am-u-sm-4"></label>
+    </div>
+</form>
+<script src="assets/js/formToJson.js"></script>
+<script>
+    $(function () {
+        getBaseInfo();
+
+        saveInfo();
+    });
+
+    /**
+     * 获取会员基本信息
+     * @method   getBaseInfo
+     * @Author   chenguangchao
+     * @DateTime 2018-02-22
+     * @return   JSONObject
+     */
+    function getBaseInfo(){
+        var conId = back.conID;
+        var conNO = back.conNO;
+
+
+        $.ajax({
+            url: WS_SERVER_ROUTE + "customer/getInfo",
+            async: false,
+            type: "post",
+            dataType: "json",
+            data: "conId="+conId,
+            success: function (result) {
+                if (result.result == '0') {
+                    if(result.data.customer){
+                        var customerObj = result.data.customer;
+                        $("#img_view").attr("src",customerObj.PIC);
+                        $("#firstOrderTime").text(customerObj.CREATE_DT);
+                        $("#conId").val(customerObj.ID);
+                        // $("#dataId").val(customerObj.ID);
+                        $("#conNo").val(customerObj.CON_NO);
+                        $("#conName").val(customerObj.CON_NAME);
+                        $("#conMobile").val(customerObj.MOBILE);
+                        $("#province").val(customerObj.PROVINCE);
+                        $("#city").val(customerObj.CITY);
+                        $("#district").val(customerObj.DISTRICT);
+                        $("#address").val(customerObj.ADDRESS);
+                        
+                        $("#refereeId").val(customerObj.RP_ID);
+                        $("#refereeNo").val(customerObj.RP_NO);
+                        $("#refereeName").val(customerObj.RP_NAME);
+                        $("#openId").val(customerObj.OPENID);
+
+                        if(1 == customerObj.CON_TYPE){
+                            $("#conType").val("已购买");
+                        }else{
+                            $("#conType").val("未购买");
+                        }
+                        if(1 == customerObj.IS_LOCKOUT){
+                            $("#accountStatus option[value='1']").attr("selected",true);
+                        }
+                        if (!$.AMUI.support.mutationobserver) {
+                          $selected.trigger('changed.selected.amui');
+                        }
+                    }
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData,
+                    });
+                }
+                AMUI.plugin('mySelected', AMUI.selected);
+                $('select').mySelected({btnWidth: '100%', btnSize: 'xs', maxHeight: 300});
+                $('select').mySelected('disable');
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    /**
+     * 表单启用编辑
+     * @method   editInfo
+     * @Author   chenguangchao
+     * @DateTime 2018-02-04
+     */
+    function editInfo(){
+        $('select').mySelected('enable');
+        $("#conName").removeAttr("readonly");
+        $("#conMobile").removeAttr("readonly");
+        $("#refereeNo").removeAttr("readonly");
+        $("#cancelBtn").show();
+        $("#saveBtn").show();
+        $("#editBtn").hide();
+    }
+
+    function cancelEdit(){
+        $("#cancelBtn").hide();
+        $("#saveBtn").hide();
+        $("#editBtn").show();
+        $("#conName").attr("readonly","readonly");
+        $("#conMobile").attr("readonly","readonly");
+        $("#refereeNo").attr("readonly","readonly");
+        getBaseInfo();
+    }
+
+    /**
+     * 保存修改数据
+     * @method   saveInfo
+     * @Author   chenguangchao
+     * @DateTime 2018-02-04
+     */
+    function saveInfo(){
+        var $tooltip = $('<div id="vld-tooltip" style="z-index: 99999"></div>');
+        $tooltip.appendTo(document.body);
+        var $form = $('#cust_info_form');
+        $form.validator({
+            onValid: function (validity) {
+                // 通过
+            }, onInValid: function (validity) {
+                // 不通过
+                var $this = $(validity.field);
+                var offset = $this.offset();
+                $tooltip.text($this.data('foolishMsg')).show().css({
+                    left: offset.left + 10,
+                    top: offset.top + $this.outerHeight() + 10
+                });
+            },validate: function (validity) {
+                if ($(validity.field).is('#conMobile')) {
+                    var value = $(validity.field).val();
+                    if (value.trim().length == 0) {
+                        validity.valid = false;
+                    }else{
+                        if(!checkPhone(value)){
+                            validity.valid = false;
+                        }else{
+                            validity.valid = true;
+                        }
+                    }
+                    return validity;
+                }
+            }, submit: function () {
+                var formValidity = this.isFormValid();
+                $.when(formValidity).then(function () {
+                    $("#saveBtn").button('loading');
+                    // 验证成功的逻辑
+                    $.ajax({
+                        url: WS_SERVER_ROUTE + "customer/updateCustomer",
+                        async: false,
+                        type: "post",
+                        dataType: "json",
+                        data: JSON.stringify($form.serializeObject()),
+                        success: function (result) {
+                            if (0 == result.result) {
+                                AMUI.dialog.alert({
+                                    title: '温馨提示',
+                                    content: "操作成功",
+                                    onConfirm:function(){
+                                        cancelEdit();
+                                    }
+                                });
+                            } else {
+                                AMUI.dialog.alert({
+                                    title: '错误提示',
+                                    content: result.errorData
+                                });
+                            }
+                            $tooltip.hide();
+                            $("#saveBtn").button('reset');
+                        },
+                        error:function(){
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: "请求失败"
+                            });
+                        }
+                    });
+                }, function () {
+                    return false;
+                });
+                return false;
+            }
+        });
+    }
+</script>

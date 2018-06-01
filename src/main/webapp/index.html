@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>弘德苑后台管理系统</title>
+    <meta name="description" content="弘德苑后台管理系统">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="弘德苑后台管理系统" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="assets/css/amazeui.datetimepicker.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <link rel="stylesheet" href="assets/plugin/ztree/css/metroStyle.css" />
+    <script src="assets/js/jquery.min.js"></script>
+    <style type="text/css">
+    tr:hover {
+        background-color: #e6e6e6;
+    }
+
+    #table_color:hover {
+        background-color: #FFFFFF;
+    }
+
+    .table_hread_static thead tr:hover {
+        background-color: #e6e6e6;
+    }
+
+    .am-form-label {
+        font-size: 12px !important;
+    }
+    </style>
+</head>
+
+<body data-type="index" class="theme-white">
+    <script src="assets/js/theme.js"></script>
+    <div class="am-g tpl-g">
+        <!-- 头部 -->
+        <header>
+            <!-- logo -->
+            <div class="am-fl tpl-header-logo">
+                <a href="javascript:;"><img src="assets/img/logo.png" alt=""></a>
+            </div>
+            <!-- 右侧内容 -->
+            <div class="tpl-header-fluid">
+                <!-- 侧边切换 -->
+                <div class="am-fl tpl-header-switch-button am-icon-list">
+                    <span>
+                    </span>
+                </div>
+                <!-- 搜索 -->
+                <div class="am-fl tpl-header-search">
+                </div>
+                <!-- 其它功能-->
+                <div class="am-fr tpl-header-navbar">
+                    <ul>
+                        <!-- 欢迎语 -->
+                        <li class="am-text-sm tpl-header-navbar-welcome">
+                            <a href="javascript:;">欢迎你, <span id="userName"></span> </a>
+                        </li>
+                        <!-- 退出 -->
+                        <li class="am-text-sm">
+                            <a href="javascript:;" id="layoutBtn">
+                                <span class="am-icon-sign-out"></span> 退出
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- 侧边导航栏 -->
+        <div class="left-sidebar">
+            <!-- 菜单 -->
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-link">
+                    <a href="index.html" class="active">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-cog sidebar-nav-link-logo"></i> 系统配置
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/sys-dict/dict-list.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 基础配置
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/wechat/main-banner.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 轮播图设置
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/menu/menu-main.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 微信首页菜单
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-shopping-bag sidebar-nav-link-logo"></i> 商品管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/product/product-list.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 商品列表
+                            </a>
+                        </li>
+                        <!--  <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/product/pro-category.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 商品分类
+                            </a>
+                        </li> -->
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/product/product-eval.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 商品评论
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-file-text sidebar-nav-link-logo"></i> 订单管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/order/order-list.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                订单列表
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/order/order-print.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                订单打印
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/order/order-split.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                分单查询
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/order/order-deliver.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                订单发货
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-street-view sidebar-nav-link-logo"></i> 会员管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/customer/customer-list.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                会员列表
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-money sidebar-nav-link-logo"></i> 财务管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/finance/finance-customer-service.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                退货申请-客服
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/finance/finance-financial.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                退货申请-财务
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/finance/finance-offline.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                线下支付
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-database sidebar-nav-link-logo"></i> 积分管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/integral/integral-list.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                会员积分
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-ticket sidebar-nav-link-logo"></i> 优惠券管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/coupon/coupon-list.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                优惠券设定
+                            </a>
+                        </li>
+                        <!-- <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('http://d-fh.gmtec.cn:8001/hdyCRM/other.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                优惠券规则
+                            </a>
+                        </li> -->
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/coupon/coupon-receive-list.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                领券明细
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-book sidebar-nav-link-logo"></i> 笔记管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/note/note-category.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                笔记版块
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="javascript:;" onclick="urlChange('/note/note-list.html')">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 
+                                笔记列表
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-comments-o sidebar-nav-link-logo"></i> 客服服务
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 内容区域 -->
+        <div class="tpl-content-wrapper">
+            <div class="row-content">
+                <div class="row">
+                    <div class="am-u-sm-12 am-u-md-6 am-u-lg-8">
+                        <div class="widget am-cf">
+                            <div class="widget-head am-cf">
+                                <div class="widget-title am-fl">订单信息</div>
+                                <div class="widget-function am-fr">
+                                    <button type="button" class="am-btn am-btn-xs am-btn-default am-active" onclick="getSysOrders(0,this);">当日
+                                    </button>
+                                    <button type="button" class="am-btn am-btn-xs am-btn-default" onclick="getSysOrders(1,this);">当月
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="mainOrderData" class="widget-body am-fr">
+                                <div class="am-scrollable-horizontal">
+                                    <div class="am-u-sm-12 am-u-md-1 am-u-lg-1" style="text-align: center">
+                                        <label id="ORDER_NUM" class="order-value" data-to="0" data-speed="1500" style="color: #000;">0</label>
+                                        <br>
+                                        <span class="order-field">新增</span>
+                                    </div>
+                                    <div class="am-u-sm-12 am-u-md-2 am-u-lg-2" style="text-align: center">
+                                        <label id="PAY_NUM" class="order-value" data-to="0" data-speed="1500" style="color: #000;">0</label>
+                                        <br>
+                                        <span class="order-field">已付款</span>
+                                    </div>
+                                    <div class="am-u-sm-12 am-u-md-2 am-u-lg-2" style="text-align: center">
+                                        <label id="NOT_SHIPMENTS" class="order-value" data-to="0" data-speed="1500" style="color: #000;">0</label>
+                                        <br>
+                                        <span class="order-field">待发货</span>
+                                    </div>
+                                    <div class="am-u-sm-12 am-u-md-3 am-u-lg-3" style="text-align: center">
+                                        <label id="PNT_AMOUNT" class="order-value" data-to="0" data-speed="1500" style="color: #000;">0</label>&nbsp;
+                                        <br>
+                                        <span class="order-field">订单金额</span>
+                                    </div>
+                                    <div class="am-u-sm-12 am-u-md-4 am-u-lg-4" style="text-align: center">
+                                        <label id="ORDER_TOTAL" class="order-value" data-to="0" data-speed="1500" style="color: #000;">0</label>&nbsp;
+                                        <br>
+                                        <span class="order-field">订单实付金额</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
+                        <div class="widget am-cf">
+                            <div class="widget-head am-cf">
+                                <div class="widget-title am-fl">售后信息</div>
+                            </div>
+                            <div class="widget-body am-fr">
+                                <div class="am-scrollable-horizontal">
+                                    <div class="am-u-sm-12 am-u-md-4 am-u-lg-4" style="text-align: center">
+                                        <label id="APPLYING" class="order-value" data-to="0" data-speed="1500" style="color: #000;">0</label>
+                                        <br/>
+                                        <span class="order-field">申请中</span>
+                                    </div>
+                                    <div class="am-u-sm-12 am-u-md-4 am-u-lg-4" style="text-align: center">
+                                        <label id="APP_PASS" class="order-value" data-to="0" data-speed="1500" style="color: #000;">0</label>
+                                        <br/>
+                                        <span class="order-field">申请通过</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <div class="widget am-cf" style="min-height: 0px;">
+                            <div class="widget-head am-cf">
+                                <div class="widget-title am-fl">会员信息</div>
+                                <div class="widget-function am-fr">
+                                    <button type="button" class="am-btn am-btn-xs am-btn-default am-active" onclick="getSysCustomer(0,this);">当日
+                                    </button>
+                                    <button type="button" class="am-btn am-btn-xs am-btn-default" onclick="getSysCustomer(1,this);">当月
+                                    </button>
+                                    &nbsp;
+                                    <a href="javascript:void(0);" class="am-icon-chevron-down" onclick="toChangeDiv('customer_id',this);"></a>
+                                </div>
+                            </div>
+                            <div id="customer_id" class="widget-body am-fr" style="display: block;">
+                                <div class="am-scrollable-horizontal">
+                                    <div class="am-u-sm-12 am-u-md-1 am-u-lg-4" style="text-align: center;border-right: 1px solid #eef1f5;">
+                                        <label id="TOTAL" class="order-value" data-to="0" data-speed="1500" style="color: #000;">0</label>
+                                        <span style="font-size: 1px">
+                                            <label id="SUBSCRIBE_NUM" data-to="0" data-speed="1500" style="color: #323232;">0</label>
+                                        </span>
+                                        <br>
+                                        <span class="order-field">总人数（关注）</span>
+                                    </div>
+                                    <div class="am-u-sm-12 am-u-md-2 am-u-lg-4" style="text-align: center">
+                                        <label id="TWITTER_NUM" class="order-value" data-to="0" data-speed="1500" style="color: #000;">0</label>&nbsp;
+                                        <span style="font-size: 1px">
+                                            <label id="NOT_TWITTER_NUM" data-to="0" data-speed="1500" style="color: #323232;">0</label>
+                                        </span>
+                                        <br>
+                                        <span class="order-field">推客（非推客）</span>
+                                    </div>
+                                    <div class="am-u-sm-12 am-u-md-3 am-u-lg-4" style="text-align: center">
+                                        <label id="CONVERSION_RATE" class="order-value" data-to="0" data-speed="1500" style="color: #000;">0.0%</label>&nbsp;
+                                        <br>
+                                        <span class="order-field">转化率</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <div class="widget am-cf" style="min-height: 0px;">
+                            <div class="widget-head am-cf">
+                                <div class="widget-title am-fl">快捷通道</div>
+                                <div class="widget-function am-fr">
+                                    <a href="javascript:void(0);" class="am-icon-chevron-down" onclick="toChangeDiv('btn_id',this);"></a>
+                                </div>
+                            </div>
+                            <div id="btn_id" class="widget-body am-fr" style="display: block;">
+                                <div class="am-scrollable-horizontal">
+                                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4" style="text-align: center">
+                                        <a href="javascript:urlChange('/order/order-list.html');">
+                                            <i class="am-icon-file-text am-icon-lg"></i>
+                                            <br>
+                                            <label class="order-field">订单列表</label>
+                                        </a>
+                                    </div>
+                                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4" style="text-align: center">
+                                        <a href="javascript:urlChange('/product/product-list.html');">
+                                            <i class="am-icon-shopping-bag am-icon-lg"></i>
+                                            <br>
+                                            <label class="order-field">商品列表</label>
+                                        </a>
+                                    </div>
+                                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4" style="text-align: center">
+                                        <a href="javascript:urlChange('/finance/finance-offline.html');">
+                                            <i class="am-icon-cny am-icon-lg"></i>
+                                            <br>
+                                            <label class="order-field">线下付款</label>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="assets/js/amazeui.min.js"></script>
+    <script src="assets/js/amazeui.datatables.min.js"></script>
+    <script src="assets/js/amazeui.datetimepicker.min.js"></script>
+    <script src="assets/js/dataTables.responsive.min.js"></script>
+    <script src="assets/js/jquery.cookie.js"></script>
+    <script src="assets/plugin/ztree/js/jquery.ztree.core.min.js"></script>
+    <script src="assets/plugin/ztree/js/jquery.ztree.excheck.min.js"></script>
+    <script src="assets/plugin/ztree/js/jquery.ztree.exedit.min.js"></script>
+    <script src="assets/plugin/amazedialog/amazeui.dialog.min.js"></script>
+    <script src="assets/js/my_pagination.js"></script>
+    <script src="assets/plugin/mathuuid/Math.uuid.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/appBase.js"></script>
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/htmlLoadUtils.js"></script>
+    <script>
+    var delay = 1800 * 1000,timer;
+    var aval = $.cookie('a');
+    window.onload = function () {
+        document.onmousemove = startTimer;
+        startTimer();
+    }
+    function startTimer() {
+        clearTimeout(timer);
+        if (!checkLogin()) {
+            $.cookie('a', aval, { expires: 0.02, path: '/' });    
+        }
+        timer = setTimeout(TimerHandler, delay);
+    }
+    function TimerHandler() {
+        document.onmousemove = null;//锁定后移除鼠标移动事件
+        var url = SERVER_BASE_URL + 'login.html';
+        location.replace(url);
+    }
+    $(function() {
+        if (!checkLogin()) {
+            AMUI.dialog.alert({
+                title: '提示',
+                content: '请先登陆',
+                onConfirm: function() {
+                    var url = SERVER_BASE_URL + 'login.html';
+                    location.replace(url);
+                }
+            });
+            return;
+        }else{
+            $("#userName").text("管理员");
+            getSysOrders(0);
+            getSysRequest();
+            getSysCustomer(0);
+            $('.order-value').each(count);
+        }
+    });
+
+    function getSysOrders(typeFlag,domObj){
+        $(domObj).siblings().removeClass("am-active");
+        $(domObj).addClass("am-active");
+        $.ajax({
+            url: WS_SERVER_ROUTE + "customer/homeOrder",
+            async: false,
+            type: "post",
+            dataType: "json",
+            data: "type="+typeFlag,
+            success: function (result) {
+                if(result.result == 0){
+                    if(result.data){
+                        var dataObj = result.data;
+                        $("#ORDER_NUM").text(dataObj.ORDER_NUM);
+                        $("#ORDER_NUM").attr("data-to",dataObj.ORDER_NUM);
+                        $("#PAY_NUM").text(dataObj.PAY_NUM);
+                        $("#PAY_NUM").attr("data-to",dataObj.PAY_NUM);
+                        $("#NOT_SHIPMENTS").text(dataObj.NOT_SHIPMENTS);
+                        $("#NOT_SHIPMENTS").attr("data-to",dataObj.NOT_SHIPMENTS);
+                        $("#PNT_AMOUNT").text(dataObj.PNT_AMOUNT);
+                        $("#PNT_AMOUNT").attr("data-to",dataObj.PNT_AMOUNT);
+                        $("#ORDER_TOTAL").text(dataObj.ORDER_TOTAL);
+                        $("#ORDER_TOTAL").attr("data-to",dataObj.ORDER_TOTAL);
+                        // $('#mainOrderData').find(".order-value").each(count);
+                    }
+                }else{
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    function getSysRequest(){
+        $.ajax({
+            url: WS_SERVER_ROUTE + "customer/homeRequest",
+            async: false,
+            type: "post",
+            dataType: "json",
+            success: function (result) {
+                if(result.result == 0){
+                    if(result.data){
+                        var dataObj = result.data;
+                        $("#APPLYING").text(dataObj.APPLYING);
+                        $("#APPLYING").attr("data-to",dataObj.APPLYING);
+                        $("#APP_PASS").text(dataObj.APP_PASS);
+                        $("#APP_PASS").attr("data-to",dataObj.APP_PASS);
+                    }
+                }else{
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    function getSysCustomer(typeFlag,domObj){
+        $(domObj).siblings().removeClass("am-active");
+        $(domObj).addClass("am-active");
+        $.ajax({
+            url: WS_SERVER_ROUTE + "customer/homeCustomer",
+            async: false,
+            type: "post",
+            dataType: "json",
+            data: "type="+typeFlag,
+            success: function (result) {
+                if(result.result == 0){
+                    if(result.data){
+                        var dataObj = result.data;
+                        $("#TOTAL").text(dataObj.TOTAL);
+                        $("#TOTAL").attr("data-to",dataObj.TOTAL);
+                        $("#SUBSCRIBE_NUM").text(dataObj.SUBSCRIBE_NUM);
+                        $("#SUBSCRIBE_NUM").attr("data-to",dataObj.SUBSCRIBE_NUM);
+                        $("#TWITTER_NUM").text(dataObj.TWITTER_NUM);
+                        $("#TWITTER_NUM").attr("data-to",dataObj.TWITTER_NUM);
+                        $("#NOT_TWITTER_NUM").text(dataObj.NOT_TWITTER_NUM);
+                        $("#NOT_TWITTER_NUM").attr("data-to",dataObj.NOT_TWITTER_NUM);
+                        $("#CONVERSION_RATE").text(dataObj.CONVERSION_RATE);
+                        $("#CONVERSION_RATE").attr("data-to",dataObj.CONVERSION_RATE);
+                        // $('#customer_id').find(".order-value").each(count);
+                    }
+                }else{
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    var current_url = "";
+    function urlChange(url) {
+        if (!checkLogin()) {
+            AMUI.dialog.alert({
+                title: '提示',
+                content: '请先登陆',
+                onConfirm: function() {
+                    var url = SERVER_BASE_URL + 'login.html';
+                    location.replace(url);
+                }
+            });
+            return;
+        }
+
+        current_url = SERVER_BASE_URL + url.substring(1);
+        back = {}; // 切换菜单模块, 置空back;
+        new panel({
+            url: current_url,
+            target: $(".tpl-content-wrapper")
+        }).load();
+    }
+
+    $(document).on("click", "#layoutBtn", function() {
+        AMUI.dialog.confirm({
+            title: '提示',
+            content: '确定退出系统？',
+            onConfirm: function() {
+                var url = SERVER_BASE_URL + 'login.html';
+                $.cookie('a', null, { expires: -1, path: '/' }); 
+                location.replace(url);
+            }
+        });
+    })
+
+    function checkLogin() {
+        var aStr = $.cookie('a');
+        if (aStr == undefined || aStr.length == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function toChangeDiv(objId,objDom){
+        $("#"+objId).toggle();
+        if($("#"+objId).css("display") == "block"){
+            $(objDom).removeClass("am-icon-chevron-right").addClass("am-icon-chevron-down");
+        }else{
+            $(objDom).removeClass("am-icon-chevron-down").addClass("am-icon-chevron-right");
+        }
+    }
+
+    //防止页面后退
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function() {
+        history.pushState(null, null, document.URL);
+    });
+    </script>
+</body>
+
+</html>

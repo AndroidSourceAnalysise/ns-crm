@@ -1,0 +1,473 @@
+<html>
+
+<head>
+    <style>
+    .theme-white .tpl-form-border-form {
+        padding-top: 0px !important;
+    }
+
+    .active {
+        background: #e6e6e6;
+    }
+    #data_table td {
+        vertical-align: middle;
+    }
+    tr:hover {
+        background-color: #e6e6e6;
+    }
+    </style>
+</head>
+<body>
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12" id="perListPanel">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title  am-cf">优惠券设定</div>
+                    </div>
+                    <div class="widget-body  am-fr">
+                        <form id="couponParmsForm" class="am-form tpl-form-border-form tpl-form-border-br" onkeydown="if(event.keyCode==13){return false;}">
+                            <input type="hidden" id="pageSize" name="pageSize" value="10">
+                            <input type="hidden" id="pageNumber" name="pageNumber" value="1">
+                            <div class="am-form-group">
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">类型</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <select id="couponType" name="couponType">
+                                        <option value="-1">全部</option>
+                                        <option value="0">直减</option>
+                                        <option value="2">满减</option>
+                                    </select>
+                                </div>
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">名称</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <input type="text" placeholder="优惠券名称" class="am-form-field " name="name" id="name" value="">
+                                </div>
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">开始时间</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <input id="startDt" name="startDt" type="text" class="am-form-field tpl-form-no-bg" placeholder="选择开始日期" readonly="readonly" value="">
+                                </div>
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">结束时间</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <input id="endDt" name="endDt" type="text" class="am-form-field tpl-form-no-bg" placeholder="选择结束日期" value="" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-u-md-10">
+                                </div>
+                                <div class="am-u-md-2">
+                                    <button type="button" class="am-btn am-btn-success am-btn-xs am-icon-search" onclick="couponSearch();">搜索
+                                    </button>
+                                    <button type="button" class="am-btn am-btn-danger am-btn-xs am-icon-undo" onclick="couponFormReset();">重置
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                        <button type="button" class="am-btn  am-btn-xs am-btn-success" onclick="toAdd()"><span class="am-icon-plus"></span> 新增
+                        </button>
+                        <button type="button" class="am-btn  am-btn-primary am-btn-xs " onclick="toEdit()"><span class="am-icon-edit"></span> 编辑
+                        </button>
+                        <button type="button" class="am-btn am-btn-xs am-btn-danger" onclick="toDelete()"><span class="am-icon-trash-o"></span> 删除
+                        </button>
+                        <button type="button" class="am-btn am-btn-xs am-btn-warning" onclick="sendToWechat()"><span class="am-icon-paper-plane"></span> 优惠券发放
+                        </button>
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                        <body>
+                            <!-- 内容区域 -->
+                            <div class="am-scrollable-horizontal">
+                                <table id="data_table" width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black table_hread_static">
+                                    <thead>
+                                    <tr>
+                                        <th hidden></th>
+                                        <th>序号</th>
+                                        <th>图片</th>
+                                        <th>类型</th>
+                                        <th>名称</th>
+                                        <th>满足条件金额</th>
+                                        <th>直减|满减金额</th>
+                                        <th>总数量</th>
+                                        <th>剩余数量</th>
+                                        <th>是否有效</th>
+                                        <th>是否启用</th>
+                                        <th>开始时间</th>
+                                        <th>结束时间</th>
+                                        <th>描述</th>
+                                        <th>创建时间</th>
+                                        <th>更新时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="couponPaging"></div>
+                        </body>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="assets/js/my_pagination.js"></script>
+    <script>
+    var selectCouponId = "",selectCouponUrl = "";
+    AMUI.plugin('mySelected', AMUI.selected);
+    $('#couponType').mySelected({ btnWidth: '100%', btnSize: 'sm' });
+    AMUI.plugin('myDatepicker', AMUI.datepicker);
+    $('#startDt').myDatepicker();
+    $('#endDt').myDatepicker();
+
+    function toAdd() {
+        initBack();
+        new panel({
+            "url": SERVER_BASE_URL + "coupon/coupon-add.html",
+            "target": $(".tpl-content-wrapper")
+        }).load();
+    }
+
+    function toEdit() {
+        if (!clickCheck()) {
+            return;
+        }
+        var myDate = new Date();
+        var endDt = new Date($(".active td:eq(11)").text().trim());
+        if (myDate.getTime() > endDt.getTime()) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "此优惠券已结束，不能修改!"
+            });
+            return;
+        }
+        back.selectCouponId = selectCouponId;
+        toAdd();
+    }
+
+    function toReceiveList(){
+        initBack();
+        new panel({
+            "url": SERVER_BASE_URL + "coupon/coupon-receive-list.html",
+            "target": $(".tpl-content-wrapper")
+        }).load();
+    }
+
+    function toDelete() {
+        if (!clickCheck()) {
+            return;
+        }
+        var status = $(".active td:eq(9)").text().trim();
+        if (status == 1) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "活用已启动，不能删除!"
+            });
+            return;
+        }
+        //是否确认删除
+        AMUI.dialog.confirm({
+            title: '提示',
+            content: '是否确认删除',
+            onConfirm: function() {
+                $.ajax({
+                    type: "POST",
+                    data: "id=" + selectCouponId,
+                    dataType: "JSON",
+                    async: false,
+                    url: WS_SERVER_ROUTE + "coupon/deleteTldCoupon",
+                    success: function(data) {
+                        if (data.result == '0') {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: '删除成功',
+                                onConfirm: function() {
+                                    deleteMainBanner(selectCouponId);
+                                    couponSearch();
+                                }
+                            });
+                        } else {
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: data.errorData
+                            });
+                        }
+                    },
+                    error:function(){
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: "请求失败"
+                        });
+                    }
+                });
+            }
+        });
+    }
+    $(function() {
+        getCoupinList();
+    });
+
+    function deleteMainBanner(dataId){
+        $.ajax({
+            type: "POST",
+            data: "id=" + dataId,
+            dataType: "JSON",
+            async: false,
+            url: WS_SERVER_ROUTE + "photos/deletePotos",
+            success: function(data) {
+                if (data.result == '0') {
+
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: data.errorData
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    function getCoupinList(){
+        var $form = $('#couponParmsForm');
+        var couponListObj = null;
+        var formSerializeVal = $form.serialize();
+        if($("#couponType").val() == "-1"){
+            formSerializeVal = formSerializeVal.replace(/&couponType=-1/g,"");
+        }
+        $.ajax({
+            url: WS_SERVER_ROUTE + "coupon/getTldCouponList",
+            async: false,
+            type: "post",
+            dataType: "json",
+            data: formSerializeVal,
+            success: function (result) {
+                if (result.result == '0') {
+                    couponListObj = result.data;
+                    showDataList(couponListObj);
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData,
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+        if(couponListObj){
+            var pageObj = new myPaging({
+                page_id: "couponList",
+                div_pagination_id: "couponPaging",
+                form_id: "couponParmsForm",
+                url: WS_SERVER_ROUTE + "coupon/getTldCouponList",
+                pageNumber: couponListObj.pageNumber,
+                totalPage: couponListObj.totalPage,
+                pageSize: couponListObj.pageSize
+            });
+            pageObj.init();
+        }
+    }
+
+    //显示优惠券列表信息
+    function showDataList(dataObj){
+        if(dataObj){
+            var dataHtml = '';
+            for (var i = 0; i < (dataObj.list||[]).length; i++) {
+                var couponObj = dataObj.list[i];
+                if(couponObj){
+                    dataHtml+='<tr class="gradeX" data-id="'+ couponObj.ID +'">';
+                    dataHtml+='    <td>'+ (i+1) +'</td>';
+                    dataHtml+='    <td>';
+                    dataHtml+='        <img style="height:50px;width:50px;" src="'+ couponObj.IMAGE_URL +'"/>';
+                    dataHtml+='    </td>';
+                    var couponChn = "";
+                    if(0 == couponObj.COUPON_TYPE){
+                        couponChn = "直减";
+                    }
+                    if(1 == couponObj.COUPON_TYPE){
+                        couponChn = "满减";
+                    }
+                    dataHtml+='    <td>'+ couponChn +'</td>';
+                    dataHtml+='    <td>'+ couponObj.NAME +'</td>';
+                    dataHtml+='    <td>'+ couponObj.SAFETY_AMOUNT +'</td>';
+                    dataHtml+='    <td>'+ couponObj.DISCOUNT_AMOUNT +'</td>';
+                    dataHtml+='    <td>'+ couponObj.TOTAL_NUMBER +'</td>';
+                    dataHtml+='    <td>'+ couponObj.REMAIN_NUMBER +'</td>';
+                    dataHtml+='    <td data-val="'+ couponObj.ENABLED +'">'+ (couponObj.ENABLED==0?"失效":"有效") +'</td>';
+                    dataHtml+='    <td data-val="'+ couponObj.STATUS +'">'+ (couponObj.STATUS==0?"未启用":"启用") +'</td>';
+                    dataHtml+='    <td>'+ couponObj.START_DT +'</td>';
+                    dataHtml+='    <td>'+ couponObj.END_DT +'</td>';
+                    dataHtml+='    <td>'+ couponObj.DESCRIPTION + '</td>';
+                    dataHtml+='    <td>'+ couponObj.CREATE_DT + '</td>';
+                    dataHtml+='    <td>'+ couponObj.UPDATE_DT + '</td>';
+                    dataHtml+='</tr>';
+                }
+            }
+            $("#data_table tbody").html(dataHtml);
+
+            $("#data_table tbody tr").dblclick(function(){
+                $(this).trigger("click");
+            });
+            $("#data_table tbody tr").click(function () {
+                if($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                    selectCouponId = "";
+                    selectCouponUrl = "";
+                }else{
+                    $(this).addClass('active');
+                    selectCouponId = $(this).attr("data-id");
+                    selectCouponUrl = $(this).find("td:eq(1) img").attr("src");
+                }
+                $(this).siblings().removeClass('active');
+            });
+        }
+    }
+
+    function sendToWechat(){
+        if (!clickCheck()) {
+            return;
+        }
+        var myDate = new Date();
+        var endDt = new Date($(".active td:eq(11)").text().trim());
+        if (myDate.getTime() > endDt.getTime()) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "此优惠券已结束，请不要重复发放!"
+            });
+            return;
+        }
+        var status = $(".active td:eq(9)").attr("data-val").trim();
+        var enabled = $(".active td:eq(8)").attr("data-val").trim();
+        if (status != 1) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "优惠券【未启用】不能发放!"
+            });
+            return;
+        }
+        if (enabled != 1) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "优惠券【未生效】不能发放!"
+            });
+            return;
+        }
+        
+        $.ajax({
+            url: WS_SERVER_ROUTE + "coupon/isGrantCoupon",
+            async: false,
+            type: "post",
+            dataType: "json",
+            data: "id="+selectCouponId,
+            success: function (obj) {
+                if (obj.result == 0) {
+                    var postAryData = [];
+                    var postData = {};
+                    postData.SYS_ID = 1;
+                    postData.RELATION_ID = selectCouponId;
+                    postData.TYPE = 10;
+                    postData.URL = selectCouponUrl;
+                    postData.HREF_URL = "couponReceive.html";
+                    postData.DISPLAY_SEQ = 1;
+                    postAryData.push(postData);
+                    $.ajax({
+                        url: WS_SERVER_ROUTE + "photos/addPotos",
+                        async: false,
+                        type: "post",
+                        dataType: "json",
+                        data: JSON.stringify(postAryData),
+                        success: function (obj) {
+                            if (obj.result == 0) {
+                                AMUI.dialog.alert({
+                                    title: '成功提示',
+                                    content: "发放成功"
+                                });
+                            } else {
+                                AMUI.dialog.alert({
+                                    title: '错误提示',
+                                    content: obj.errorData
+                                });
+                                return;
+                            }
+                        },
+                        error: function () {
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: "请求异常"
+                            });
+                        }
+                    });
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: obj.errorData
+                    });
+                    return;
+                }
+            },
+            error: function () {
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求异常"
+                });
+            }
+        });
+    }
+
+
+    /** 条件搜索 **/
+    function couponSearch() {
+        var startDate = $("#startDt").val(); // 开始时间
+        var endDate = $("#endDt").val(); // 结束时间
+        if (startDate.length > 0 && endDate.length > 0) {
+            if (startDate > endDate) {
+                AMUI.dialog.alert({
+                    title: '系统提示',
+                    content: "起始时间不能大于结束时间!"
+                });
+                return;
+            }
+        }
+        getCoupinList();
+    }
+    /**条件重置**/
+    function couponFormReset() {
+        $("#couponType").val('-1');
+        $("#couponType").trigger('changed.selected.amui');
+        $("#conNo").val('');
+        $("#name").val('');
+        $("#startDt").attr('value', '');
+        $("#endDt").attr('value', '');
+
+    }
+
+    function clickCheck() {
+        if ("" == selectCouponId) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "请点选所需操作的数据!"
+            });
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    function initBack() {
+        var formSerializeVal = $("#couponParmsForm").serialize();
+        if($("#couponType").val() == "-1"){
+            formSerializeVal = formSerializeVal.replace(/&couponType=-1/g,"");
+        }
+        back.couponListParams = formSerializeVal;
+    }
+    </script>
+</body>
+
+</html>

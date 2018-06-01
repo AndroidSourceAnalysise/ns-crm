@@ -1,0 +1,171 @@
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl"><a href="javascript:backToDict();">基础配置</a>/ 新增
+                    </div>
+                </div>
+                <div class="widget-body  am-fr">
+                    <form id="addForm" class="am-form tpl-form-line-form">
+                        <input type="hidden" name="ID" value="" />
+                        <input type="hidden" name="GROUP_NAME" value="系统参数" />
+                        <input type="hidden" name="GROUP_CODE" value="SysType" />
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="form_paramKey">配置代码</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                 <input type="text" name="PARAM_KEY" value="" placeholder="必填" readonly="readonly" required>
+                            </div>
+                        </div>
+                        <div class="am-form-group am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label for="form_paramValue">配置值</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" name="PARAM_VALUE" value="" placeholder="必填" required>
+                            </div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                <label>是否有效</label>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-10">
+                                <select name="ENABLED">
+                                    <option value="1">有效</option>
+                                    <option value="0">无效</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-g am-margin-top-sm">
+                            <div class="am-u-sm-12 am-u-md-2 am-text-right admin-form-text">
+                                <label for="form_remark">备注</label>
+                            </div>
+                            <div class="am-u-sm-12 am-u-md-10">
+                                <textarea rows="10" placeholder="选填" name="REMARK" style="padding: 2%;"></textarea>
+                            </div>
+                        </div>
+                        <div class="am-margin">
+                            <button id="submitBtn" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                            <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="backToDict();">
+                                返回
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/formToJson.js"></script>
+<script>
+var selectSysDictId = "",selectSysDictObj = null;
+$(function() {
+    AMUI.plugin('mySelected', AMUI.selected);
+    $('select').mySelected();
+    selectSysDictId = back.selectSysDictId;
+    if(back.selectSysDictObj && back.selectSysDictObj != null){
+        selectSysDictObj = JSON.parse(back.selectSysDictObj);
+        if(selectSysDictObj != null){
+            $('input[name=ID]').val(selectSysDictObj.ID);
+            $('input[name=PARAM_KEY]').val(selectSysDictObj.PARAM_KEY);
+            $('input[name=PARAM_VALUE]').val(selectSysDictObj.PARAM_VALUE);
+            if(0 == selectSysDictObj.ENABLED){
+                $("#ENABLED option[value='0']").attr("selected",true);
+            }
+            if (!$.AMUI.support.mutationobserver) {
+              $selected.trigger('changed.selected.amui');
+            }
+            $('input[name=ENABLED]').val(selectSysDictObj.ID);
+            $('textarea[name=REMARK]').val(selectSysDictObj.REMARK);
+        }
+    }
+    if(selectSysDictId == undefined){
+        $('input[name=PARAM_KEY]').removeAttr("readonly");
+    }
+    
+
+    var $form = $('#addForm');
+    $form.validator({
+        onValid: function(validity) {
+            $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+        },
+        onInValid: function(validity) {
+            var $field = $(validity.field);
+            var $group = $field.closest('.am-form-group');
+            var $alert = $group.find('.am-alert');
+            // 使用自定义的提示信息 或 插件内置的提示信息
+            var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+            if (!$alert.length) {
+                $alert = $('<div class="am-alert am-alert-danger am-u-sm-12 am-u-md-4 am-u-lg-3" style="float:left;"></div>').hide().appendTo($group);
+            }
+            $alert.html(msg).show();
+        },
+        validate: function(validity) {
+            return validity;
+        },
+        submit: function() {
+            var formValidity = this.isFormValid();
+            $.when(formValidity).then(function() {
+                var parameData = "";
+                var requestUrl = "";
+                var dataId = $('input[name=ID]').val();
+                if(dataId == ""){
+                    requestUrl = WS_SERVER_ROUTE + "sysdict/addSysDict";
+                }else{
+                    requestUrl = WS_SERVER_ROUTE + "sysdict/updateSysDict";
+                }
+                // 验证成功的逻辑
+                var $subbtn = $("#submitBtn");
+                $subbtn.button('loading');
+                $.ajax({
+                    url: requestUrl,
+                    async: false,
+                    type: "post",
+                    dataType: "json",
+                    data: JSON.stringify($form.serializeObject()),
+                    success: function(result) {
+                        if (result.result == 0) {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: '操作成功',
+                                onConfirm: function() {
+                                    backToDict();
+                                }
+                            });
+                        } else {
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: result.errorData
+                            });
+                        }
+                        return false;
+                    },
+                    error:function(){
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: "请求失败"
+                        });
+                        return false;
+                    }
+                });
+            }, function() {
+                return false;
+            });
+            //阻止原生form提交
+            return false;
+        }
+    });
+});
+
+function backToDict() {
+    back.selectSysDictId = "";
+    back.selectSysDictObj = null;
+    new panel({
+        url: current_url,
+        data: back.sysDictParams,
+        target: $(".tpl-content-wrapper")
+    }).load();
+}
+</script>

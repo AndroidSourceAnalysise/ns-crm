@@ -1,0 +1,238 @@
+<html>
+
+<head>
+    <style>
+    .active {
+        background: #e6e6e6;
+    }
+
+    #data_table td {
+        vertical-align: middle;
+    }
+
+    .am-popup.am-modal-active {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+        z-index: 9999;
+    }
+
+    .am-form-label {
+        font-size: 12px !important;
+    }
+    tr:hover {
+        background-color: #e6e6e6;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12" id="perListPanel">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title  am-cf">【<label></label>】的积分明细</div>
+                    </div>
+                    <div class="widget-body  am-fr">
+                        <form id="integralListForm" class="am-form tpl-form-border-form tpl-form-border-br" onkeydown="if(event.keyCode==13){return false;}">
+                            <input type="hidden" id="pageNumber" name="pageNumber" value="1">
+                            <input type="hidden" id="pageSize" name="pageSize" value="10">
+                            <input type="hidden" id="conNo" name="conNo" value="">
+                            <div class="am-form-group">
+                                 <label class="am-u-sm-5 am-u-md-1 am-form-label">起始日期</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <input type="text" placeholder="起始日期" data-am-datepicker="{format: 'yyyy-mm-dd hh:ii:ss'}" class="form-datetime am-form-field" name="startDt" id="form_startDate" value="">
+                                </div>
+                                <label class="am-u-sm-5 am-u-md-1 am-form-label">结束日期</label>
+                                <div class="am-u-sm-7 am-u-md-2 ">
+                                    <input type="text" placeholder="结束日期" data-am-datepicker="{format: 'yyyy-mm-dd hh:ii:ss'}" class="form-datetime am-form-field" name="endDt" id="form_endDate" value="">
+                                </div>
+                                <div class="am-u-md-3"></div>
+                                <div class="am-u-md-3">
+                                    <button type="button" class="am-btn am-btn-success am-btn-xs am-icon-search" onclick="pointsSearch();">搜索
+                                    </button>
+                                    <button type="button" class="am-btn am-btn-danger am-btn-xs am-icon-undo" onclick="pointsReset();">重置
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                        <div class="am-u-sm-12">
+                            <table width="100%" class="am-table am-table-compact tpl-table-black " id="data_table">
+                                <thead>
+                                    <tr id="table_color">
+                                        <th class="table-date am-hide-sm-only">序号</th>
+                                        <th>类型</th>
+                                        <th>分值</th>
+                                        <th>发生时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="am-u-lg-12 am-cf">
+                            <div id="integtalPaging"></div>
+                        </div>
+                    </div>
+                    <div class="am-margin">
+                        <label class="am-u-sm-4"></label>
+                        <button type="button" class="am-btn am-btn-primary am-btn-xs"
+                                onclick="backUp();">返回
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/formToJson.js"></script>
+    <script>
+    var $dpInput = $('.form-datetime').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:ss',
+        autoclose: true,
+        todayBtn: true,
+    });
+    var selectDataId = "";
+    $(function() {
+       $("#conNo").val(back.selectDataId);
+       $(".widget-title label").text(back.selectDataChn);
+       searchIntegralList();
+    });
+
+    function searchIntegralList(){
+        var $form = $('#integralListForm');
+        var formSerializeVal = "";
+        var integralListObj = null;
+        var formSerializeVal = $form.serialize();
+        $.ajax({
+            url: WS_SERVER_ROUTE + "ext/getPointTransList",
+            async: false,
+            type: "post",
+            dataType: "json",
+            data: formSerializeVal,
+            success: function (result) {
+                if (result.result == '0') {
+                    integralListObj = result.data;
+                    showDataList(integralListObj);
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData,
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+        if(integralListObj){
+            var pageObj = new myPaging({
+                page_id: "integtalList",
+                div_pagination_id: "integtalPaging",
+                form_id: "integralListForm",
+                url: WS_SERVER_ROUTE + "ext/getPointTransList",
+                pageNumber: integralListObj.pageNumber,
+                totalPage: integralListObj.totalPage,
+                pageSize: integralListObj.pageSize
+            });
+            pageObj.init();
+        }
+    }
+
+    function showDataList(dataObj){
+        if(dataObj){
+            var dataHtml = '';
+            for (var i = 0; i < (dataObj.list||[]).length; i++) {
+                var dataItemObj = dataObj.list[i];
+                if(dataItemObj){
+                    dataHtml+='<tr class="gradeX" data-id="'+ dataItemObj.ID +'">';
+                    dataHtml+='<td class="am-hide-sm-only" style="width:10%">'+ (i+1) +'</td>';
+                    dataHtml+='<td style="width:30%">'+ (POINTS_TYPE_CHN[dataItemObj.POINTS_TYPE -1].value) +'</td>';
+                    dataHtml+='<td style="width:30%">'+ (dataItemObj.POINTS_QTY) +'</td>';
+                    dataHtml+='<td style="width:30%">'+ dataItemObj.UPDATE_DT +'</td>';
+                    dataHtml+='</tr>';
+                }
+            }
+            $("#data_table tbody").html(dataHtml);
+            $("#data_table tbody tr").dblclick(function(){
+                $(this).trigger("click");
+            });
+            $("#data_table tbody tr").click(function () {
+                if($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                    selectDataId = "";
+                }else{
+                    $(this).addClass('active');
+                    selectDataId = $(this).attr("data-id");
+                }
+                back.selectDataId = selectDataId;
+                $(this).siblings().removeClass('active');
+            });
+        }
+    }
+
+    function clickCheck() {
+        if (selectDataId == "") {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: "请点选所需操作的数据!"
+            });
+            return false;
+        }
+        return true;
+    }
+
+    function integralEdit(){
+        if(!clickCheck()){
+            return;
+        }
+        initBackForData();
+        new panel({
+            "url": SERVER_BASE_URL + "integral/integral-edit.html",
+            "target": $(".tpl-content-wrapper")
+        }).load();
+    }
+    /** 条件搜索 **/
+    function pointsSearch() {
+        $("#pageNumber").val(1);
+        var startDate = $("#form_startDate").val(); // 开始时间
+        var endDate = $("#form_endDate").val(); // 结束时间
+        if (startDate.length > 0 && endDate.length > 0) {
+            if (startDate > endDate) {
+                AMUI.dialog.alert({
+                    title: '系统提示',
+                    content: "起始时间不能大于结束时间!"
+                });
+                return;
+            }
+        }
+        searchIntegralList();
+    }
+    /**条件重置**/
+    function pointsReset() {
+        $("#pageNumber").val(1);
+        $("#form_startDate").attr('value', '');
+        $("#form_endDate").attr('value', '');
+    }
+
+    function initBackForData() {
+        var formSerializeVal = $("#integralListForm").serializeObject();
+        back.integralListParams = formSerializeVal;
+    }
+    function backUp() {
+        back.selectDataId = "";
+        back.selectDataChn = "";
+        new panel({
+            url: current_url,
+            data: back.integralListParams,
+            target: $(".tpl-content-wrapper")
+        }).load();
+    }
+    </script>
+</body>
+</html>

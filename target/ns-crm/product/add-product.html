@@ -1,0 +1,265 @@
+<style>
+    .am-tabs-bd {
+        overflow: visible;
+    }
+</style>
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <input type="hidden" id="insertFlag" value="true"/>
+                    <div class="widget-title am-fl"><a href="javascript:goBack();">商品列表</a> / 新增商品</div>
+                </div>
+                <div class="widget-body am-fr">
+                    <div id="product_form_tabs" class="am-tabs" data-am-tabs>
+                        <ul class="am-nav am-nav-tabs">
+                            <li id="tab_info" class="am-active"><a href="javascript:toInfoForm('');">商品信息</a>
+                            </li>
+                            <li id="tab_pic"><a href="javascript:toPicForm('');">商品图片</a></li>
+                            <li id="tab_sku"><a href="javascript:toSkuForm('');">商品SKU</a></li>
+                        </ul>
+                        <div class="am-tabs-bd">
+                            <input type="hidden" id="flag" value=""/>
+                            <div class="am-tab-panel am-fade am-in am-active" id="content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p style="color: orangered"></p>
+<script>
+    $(function () {
+        var productId = back.productId;
+        if (productId && productId.length > 0) {
+            $("#insertFlag").val("false");
+        }
+        $("#flag").val(productId);
+        toInfoForm(productId);
+    });
+
+    function goBack() {
+        $("#vld-tooltip").remove();
+        new panel({
+            url: SERVER_BASE_URL + "product/product-list.html",
+            target: $(".tpl-content-wrapper")
+        }).load();
+    }
+
+    // 商品信息tab跳转
+    function toInfoForm(proId) {
+        if (proId.length == 0) {
+            proId = $("#flag").val();
+        }
+        $.ajax({
+            url: SERVER_BASE_URL + "product/product-base.html",
+            async: false,
+            type: 'get',
+            dataType: "html",
+            data: {
+                "proId": proId
+            },
+            success: function (html) {
+                $("#tab_info").addClass("am-active");
+                $("#tab_pic").removeClass("am-active");
+                $("#tab_sku").removeClass("am-active");
+                $("#content").html(html);
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    // 商品图片tab跳转
+    function toPicForm(proId) {
+        if (proId.length == 0) {
+            proId = $("#flag").val();
+        }
+        if (proId.length == 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '请完成<span style="color: orangered">商品信息</span>的编辑!'
+            });
+            return;
+        }
+        $.ajax({
+            url: SERVER_BASE_URL + "product/product-pics.html",
+            async: false,
+            type: "get",
+            dataType: "html",
+            data: {
+                "proId": proId
+            },
+            success: function (html) {
+                $("#tab_info").removeClass("am-active");
+                $("#tab_pic").addClass("am-active");
+                $("#tab_spec").removeClass("am-active");
+                $("#tab_sku").removeClass("am-active");
+                $("#tab_agent").removeClass("am-active");
+                $("#tab_shop_params").removeClass("am-active");
+                $("#content").html(html);
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    // 商品规格tab跳转
+    function toSpecForm(proId) {
+        if (proId.length == 0) {
+            proId = $("#flag").val();
+        }
+        if (proId.length == 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '请完成<span style="color: orangered">商品信息</span>的编辑!'
+            });
+            return;
+        }
+        $.ajax({
+            url: SERVER_BASE_URL + "product/product-spec.html",
+            async: false,
+            type: "get",
+            dataType: "html",
+            data: {
+                "proId": proId
+            },
+            success: function (html) {
+                $("#tab_info").removeClass("am-active");
+                $("#tab_pic").removeClass("am-active");
+                $("#tab_spec").addClass("am-active");
+                $("#tab_sku").removeClass("am-active");
+                $("#tab_agent").removeClass("am-active");
+                $("#tab_shop_params").removeClass("am-active");
+                $("#content").html(html);
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    // 商品SKU tab跳转
+    function toSkuForm(proId) {
+        if (proId.length == 0) {
+            proId = $("#flag").val();
+        }
+        if (proId.length == 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '请完成<span style="color: orangered">商品信息</span>的编辑!'
+            });
+            return;
+        }
+        $.ajax({
+            url: SERVER_BASE_URL + "product/product-sku.html",
+            async: false,
+            type: "get",
+            dataType: "html",
+            success: function (html) {
+                $("#tab_info").removeClass("am-active");
+                $("#tab_pic").removeClass("am-active");
+                $("#tab_spec").removeClass("am-active");
+                $("#tab_sku").addClass("am-active");
+                $("#tab_agent").removeClass("am-active");
+                $("#tab_shop_params").removeClass("am-active");
+                $("#content").html(html);
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    // 积分tab跳转
+    function toIntegralForm(proId) {
+        if (proId.length == 0) {
+            proId = $("#flag").val();
+        }
+        if (proId.length == 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '请完成<span style="color: orangered">商品信息</span>的编辑!'
+            });
+            return;
+        }
+        $.ajax({
+            url: "http://spys.hubeta.com:80/spys-manager/product/toAgentForm",
+            async: false,
+            type: "get",
+            dataType: "html",
+            data: {
+                "proId": proId
+            },
+            success: function (html) {
+                $("#tab_info").removeClass("am-active");
+                $("#tab_pic").removeClass("am-active");
+                $("#tab_spec").removeClass("am-active");
+                $("#tab_sku").removeClass("am-active");
+                $("#tab_shop_params").removeClass("am-active");
+                $("#tab_agent").addClass("am-active");
+                $("#content").html(html);
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    function toShopParams(proId) {
+        if (proId.length == 0) {
+            proId = $("#flag").val();
+        }
+        if (proId.length == 0) {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '请完成<span style="color: orangered">商品信息</span>的编辑!'
+            });
+            return;
+        }
+        $.ajax({
+            url: "http://spys.hubeta.com:80/spys-manager/product/toShopParams",
+            async: false,
+            type: "get",
+            dataType: "html",
+            data: {
+                "proId": proId
+            },
+            success: function (html) {
+                $("#tab_info").removeClass("am-active");
+                $("#tab_pic").removeClass("am-active");
+                $("#tab_spec").removeClass("am-active");
+                $("#tab_sku").removeClass("am-active");
+                $("#tab_agent").removeClass("am-active");
+                $("#tab_shop_params").addClass("am-active");
+                $("#content").html(html);
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+</script>

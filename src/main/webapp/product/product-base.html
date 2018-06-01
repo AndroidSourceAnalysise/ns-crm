@@ -1,0 +1,342 @@
+<style>
+    #vld-tooltip {
+        position: absolute;
+        z-index: 1000;
+        padding: 5px 10px;
+        background: #F37B1D;
+        min-width: 150px;
+        color: #fff;
+        transition: all 0.15s;
+        box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+        display: none;
+    }
+
+    #vld-tooltip:before {
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        width: 0;
+        height: 0;
+        margin-left: -8px;
+        content: "";
+        border-width: 0 8px 8px;
+        border-color: transparent transparent #F37B1D;
+        border-style: none inset solid;
+    }
+    .am-form-label{
+        font-size: 80% !important;
+    }
+</style>
+<form class="am-form tpl-form-border-form tpl-form-border-br" data-am-validator id="pro_info_form">
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">商品ID</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="ID" value="" readonly="readonly" />
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">编号</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" id="productCode" name="PRODUCT_CODE" value=""
+                   placeholder="必填, 不可重复" data-foolish-msg="必填, 不可重复！" required/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">名称</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="PRODUCT_NAME" value="" placeholder="必填" data-foolish-msg="必填！" required/>
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">简称</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="ABB_NAME" value=""/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">拼音码</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="PY_CODE" value=""/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">标题</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="text" class="tpl-form-input" name="TITLE" value=""/>
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">商品价格</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="number" class="tpl-form-input" name="SAL_PRICE" value="" required min="0" data-foolish-msg="必填, 请录入大于0的数字！"/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">商品排序</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <input type="number" class="tpl-form-input " name="DISPLAY_SEQ" value="" required min="1"  data-foolish-msg="必填, 请录入大于0的数字！"/>
+        </div>
+        <label class="am-u-sm-5 am-u-md-1 am-u-lg-1 am-form-label">是否在售</label>
+        <div class="am-u-sm-7 am-u-md-3 am-u-lg-3">
+            <select id="STATUS" name="STATUS">
+                <option value="0" selected="">停售</option>
+                <option value="1">在售</option>
+            </select>
+        </div>
+        <label class="am-u-sm-4 am-form-label"></label>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-1 am-form-label">商品简介</label>
+        <div class="am-u-sm-11">
+            <input type="text" class="tpl-form-input" name="BRIEF_DESCRIPTION" value=""/>
+        </div>
+    </div>
+    <div class="am-form-group">
+        <div class="am-u-sm-2">
+            <label class="am-u-sm-6 am-form-label">商品图</label>
+            <div class="am-u-sm-6 am-u-md-3 am-u-lg-3">
+                <input type="button" value="选择文件" id="fileBtn" class="am-btn am-btn-success"
+                       onclick="$('#picFile').click();"/>
+                <input type="file" name="picFile" class="am-btn am-btn-success am-round"
+                       accept="image/png,image/jpg,image/jpeg" id="picFile" onchange="toUploadPic(this);"
+                       style="display:none;"/>
+                <input type="hidden" name="IMAGE_URL" value=""/>
+            </div>
+            <div class="am-form-group">
+                <label class="am-u-sm-6 am-form-label"></label>
+                <div class="am-u-sm-6">
+                    <img id="img_view" style="width:100px;height:100px;"
+                         src="http://spys.hubeta.com:80/spys-manager/resources/img/ZWTP.jpg"/>
+                </div>
+            </div>
+        </div>
+        <div class="am-u-sm-2">
+            <label class="am-u-sm-6 am-form-label">缩略图</label>
+            <div class="am-u-sm-6">
+                <input type="button" value="选择文件" id="fileBtn" class="am-btn am-btn-success"
+                       onclick="$('#picFile1').click();"/>
+                <input type="file" name="picFile1" class="am-btn am-btn-success am-round"
+                       accept="image/png,image/jpg,image/jpeg" id="picFile1" onchange="toUploadPic(this);"
+                       style="display:none;"/>
+                <input type="hidden" name="THUMB_URL" value=""/>
+            </div>
+            <div class="am-form-group">
+                <label class="am-u-sm-6 am-form-label"></label>
+                <div class="am-u-sm-6">
+                    <img id="img_view1" style="width:100px;height:100px;"
+                         src="http://spys.hubeta.com:80/spys-manager/resources/img/ZWTP.jpg"/>
+                </div>
+            </div>
+        </div>
+        <label class="am-u-sm-6 am-form-label"></label>
+    </div>
+    
+    <div class="am-margin">
+        <label class="am-u-sm-4"></label>
+        <button id="submitBtn" type="submit" class="am-btn am-btn-primary am-btn-xs">保存并下一步
+        </button>
+        <button type="button" class="am-btn am-btn-primary am-btn-xs"
+                onclick="goBack();">返回
+        </button>
+    </div>
+</form>
+<script src="assets/js/formToJson.js"></script>
+<script>
+    var selectProductId = "";
+    $(function () {
+        selectProductId = back.productId;
+
+        getProductInfo();
+
+        saveInfoGoNext();
+    });
+
+    //获取商品详情
+    function getProductInfo(){
+        $.ajax({
+            url: WS_SERVER_ROUTE + "pnt/getProductDetial",
+            type: "post",
+            async: false,
+            data: "pntId="+selectProductId,
+            dataType: "json",
+            success: function (result) {
+                if (result.result == 0) {
+                    if(result.data.product){
+                        var productObj = result.data.product;
+                        if(1 == productObj.STATUS){
+                            $("#STATUS option[value='1']").attr("selected",true);
+                        }
+                        if(1 == productObj.INTEGRAL_TAG){
+                            $("#INTEGRAL_TAG option[value='1']").attr("selected",true);
+                        }
+                        if (!$.AMUI.support.mutationobserver) {
+                          $selected.trigger('changed.selected.amui');
+                        }
+                        $('input[name=ID]').val(productObj.ID);
+                        $('input[name=PRODUCT_CODE]').val(productObj.PRODUCT_CODE);
+                        $('input[name=PRODUCT_NAME]').val(productObj.PRODUCT_NAME);
+                        $('input[name=ABB_NAME]').val(productObj.ABB_NAME);
+                        $('input[name=PY_CODE]').val(productObj.PY_CODE);
+                        $('input[name=TITLE]').val(productObj.TITLE);
+                        $('input[name=SAL_PRICE]').val(productObj.SAL_PRICE?productObj.SAL_PRICE:"0");
+                        // $('input[name=STOCK]').val(productObj.STOCK?"0":productObj.STOCK);
+                        $('input[name=BRIEF_DESCRIPTION]').val(productObj.BRIEF_DESCRIPTION);
+                        $('input[name=DISPLAY_SEQ]').val(productObj.DISPLAY_SEQ);
+                        if(productObj.IMAGE_URL){
+                            $("input[name=IMAGE_URL]").val(productObj.IMAGE_URL);
+                            $("#img_view").attr("src", productObj.IMAGE_URL);
+                        }
+                        if(productObj.THUMB_URL){
+                            $("input[name=THUMB_URL]").val(productObj.THUMB_URL);
+                            $("#img_view1").attr("src", productObj.THUMB_URL);
+                        }
+                    }
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    //保存或修改商品信息
+    function saveInfoGoNext() {
+        AMUI.plugin('mySelected', AMUI.selected);
+        $('select').mySelected({btnWidth: '100%', btnSize: 'xs', maxHeight: 300});
+        var $form = $('#pro_info_form');
+        var $tooltip = $('<div id="vld-tooltip" style="z-index: 99999;"></div>');
+        $tooltip.appendTo(document.body);
+        $form.validator({
+            onValid: function (validity) {
+                // 通过
+                $tooltip.hide();
+            }, onInValid: function (validity) {
+                // 不通过
+                var $this = $(validity.field);
+                var offset = $this.offset();
+                $tooltip.text($this.data('foolishMsg')).show().css({
+                    left: offset.left + 10,
+                    top: offset.top + $this.outerHeight() + 10
+                });
+            },
+            validate: function (validity) {
+                var id = "";
+                var value = $(validity.field).val();
+                if ($(validity.field).is('#productCode')) {
+                    validity.valid = false;
+                    if (value.trim().length == 0) {
+                        return validity;
+                    }else{
+                        validity.valid = true;
+                        return validity;
+                    }
+                    // return $.ajax({
+                    //     url: 'http://spys.hubeta.com:80/spys-manager/product/isCodeExist',
+                    //     data: {
+                    //         "productCode": value,
+                    //         "id": id
+                    //     },
+                    //     cache: false,
+                    //     dataType: 'json'
+                    // }).then(function (data) {
+                    //     if (data.resultCode == 1) {
+                    //         validity.valid = true;
+                    //     }
+                    //     return validity;
+                    // }, function () {
+                    //     return validity;
+                    // });
+                }
+            }, submit: function () {
+                var formValidity = this.isFormValid();
+                $.when(formValidity).then(function () {
+                    AMUI.dialog.confirm({
+                        title: '系统提示',
+                        content: '确定保存并下一步吗?',
+                        onConfirm: function () {
+                            // 验证成功的逻辑
+                            var $subbtn = $("#submitBtn");
+                            $subbtn.button('loading');
+                            var wsUrl = WS_SERVER_ROUTE + "pnt/addProduct";
+                            if(selectProductId && selectProductId.length > 0){
+                                wsUrl = WS_SERVER_ROUTE + "pnt/updateProduct";
+                            }
+                            $.ajax({
+                                url: wsUrl,
+                                async: false,
+                                type: "post",
+                                dataType: "json",
+                                data: JSON.stringify($form.serializeObject()),
+                                success: function (result) {
+                                    if (result.result == 0) {
+                                        toPicForm(result.data);
+                                        $("#flag").val(result.data);
+                                    } else {
+                                        AMUI.dialog.alert({
+                                            title: '错误提示',
+                                            content: result.errorData
+                                        });
+                                    }
+                                    $tooltip.hide();
+                                    $("#submitBtn").button('reset');
+                                },
+                                error:function(){
+                                    AMUI.dialog.alert({
+                                        title: '错误提示',
+                                        content: "请求失败"
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }, function () {
+                    return false;
+                });
+                return false;
+            }
+        });
+    }
+
+    /**
+     * 调用图片上传接口
+     * @param dom
+     */
+    function toUploadPic(dom) {
+        if (dom.value.length != 0) {
+            var formData = new FormData();
+            formData.append("targetFile", dom.files[0]);
+            $.ajax({
+                url: WS_SERVER_ROUTE + "file/upload",
+                type: "POST",
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function (data) {
+                    if (data.result == 0) {
+                        if("picFile" == $(dom).attr("id")){
+                            $("input[name=IMAGE_URL]").val(data.data);
+                            $("#img_view").attr("src", data.data);
+                        }
+                        if("picFile1" == $(dom).attr("id")){
+                            $("input[name=THUMB_URL]").val(data.data);
+                            $("#img_view1").attr("src", data.data);
+                        }
+                    } else {
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: data.errorData
+                        });
+                    }
+                },
+                error: function () {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: "上传异常"
+                    });
+                }
+            });
+        }
+    }
+
+</script>

@@ -1,0 +1,411 @@
+<style>
+    #pics_table td {
+        vertical-align: middle;
+    }
+
+    .active {
+        background: #e6e6e6;
+    }
+
+    .am-popup.am-modal-active {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+        z-index: 9999;
+    }
+    tr:hover {
+        background-color: #e6e6e6;
+    }
+</style>
+<form class="am-form tpl-form-border-form tpl-form-border-br" data-am-validator id="pro_pics_form">
+    <input type="hidden" id="proId" value="">
+    <button type="button"
+            class="am-btn am-btn-success am-btn-xs" onclick="toAddPicForTR();"><span
+            class="am-icon-plus"></span> 新增
+    </button>
+    <button type="button"
+            class="am-btn am-btn-secondary am-btn-xs" onclick="toView();"><span
+            class="am-icon-copy"></span> 预览
+    </button>
+    <button type="button"
+            class="am-btn am-btn-danger am-btn-xs" onclick="toDelPicForTR();"><span
+            class="am-icon-trash-o"></span> 删除
+    </button>
+    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
+    <div class="am-scrollable-horizontal">
+        <table id="pics_table" width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black">
+            <thead>
+            <tr id="table_color">
+                <th hidden></th>
+                <th>序号</th>
+                <th>图片</th>
+                <th>客户端</th>
+                <th>图片类型</th>
+                <th>图片顺序</th>
+                <th>文件地址</th>
+                <!-- <th>是否显示按钮</th> -->
+                <th>图片链接地址</th>
+                <th>更新时间</th>
+            </tr>
+            </thead>
+            <tbody id="pics_table_body">
+            </tbody>
+        </table>
+    </div>
+    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
+    <div class="am-margin">
+        <label class="am-u-sm-1 am-u-md-3 am-u-lg-4"></label>
+        <button id="submitBtn" type="button" class="am-btn am-btn-primary am-btn-xs" onclick="savePicsGoNext();">保存并下一步
+        </button>
+        <button type="button" class="am-btn am-btn-primary am-btn-xs"
+                onclick="goBack();">返回
+        </button>
+    </div>
+</form>
+<script>
+
+    var displaySeq_flag = 0;// 新增一条图片数据的序列标记
+
+    $(function () {
+        var productId = back.productId;
+        $("#proId").val(productId);
+        $("#pics_table tbody").on("click", "tr", function () {
+            $(this).addClass('active');
+            $(this).siblings().removeClass('active');
+        });
+        getProductPics();
+    });
+
+    //加载商品图片
+    function getProductPics(){
+        $.ajax({
+            url: WS_SERVER_ROUTE + "pnt/getProductDetial",
+            type: "post",
+            async: false,
+            data: "pntId="+$("#proId").val(),
+            dataType: "json",
+            success: function (result) {
+                if (result.result == 0) {
+                    if(result.data.photos){
+                        var picObj = result.data.photos;
+                        showPicList(picObj);
+                    }
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+
+    //展示商品图片列表
+    function showPicList(picObj){
+        if(picObj){
+            var dataHtml = '';
+            for (var i = 0; i < (picObj||[]).length; i++) {
+                var picItemObj = picObj[i];
+                if(picItemObj){
+                    dataHtml+='<tr class="gradeX">';
+                    dataHtml+='    <td hidden><input class="picId" type="text" value="'+ picItemObj.ID +'"/></td>';
+                    dataHtml+='    <td>'+ (i+1) +'</td>';
+                    dataHtml+='    <td>';
+                    dataHtml+='        <img class="picImg" style="height:50px;width:50px;" src="'+ picItemObj.URL +'" onclick="toFileClick(this);"/>';
+                    dataHtml+='        <input type="file" class="url_file" style="display:none;" onchange="toUpLoadPic(this);"/>';
+                    dataHtml+='    </td>';
+                    dataHtml+='    <td>';
+                    dataHtml+='        <select class="sysId">';
+                    dataHtml+='            <option value="1" '+ (picItemObj.SYS_ID == 1?"selected":"") +'>微信端</option>';
+                    dataHtml+='            <option value="2" '+ (picItemObj.SYS_ID == 2?"selected":"") +'>安卓app</option>';
+                    dataHtml+='            <option value="3" '+ (picItemObj.SYS_ID == 3?"selected":"") +'>苹果app</option>';
+                    dataHtml+='        </select>';
+                    dataHtml+='    </td>';
+                    dataHtml+='    <td>';
+                    dataHtml+='        <select class="type">';
+                    dataHtml+='            <option value="3" '+ (picItemObj.TYPE == 3?"selected":"") +'>商品详情顶部图</option>';
+                    dataHtml+='            <option value="4" '+ (picItemObj.TYPE == 4?"selected":"") +'>商品详细图片</option>';
+                    dataHtml+='            <option value="6" '+ (picItemObj.TYPE == 6?"selected":"") +'>商品详情参数图</option>';
+                    // dataHtml+='            <option value="5" '+ (picItemObj.TYPE == 5?"selected":"") +'>商品视频</option>';
+                    dataHtml+='        </select>';
+                    dataHtml+='    </td>';
+                    dataHtml+='    <td><input type="number" style="width: 50px;" class="displaySeq" value="'+ picItemObj.DISPLAY_SEQ +'"/>';
+                    dataHtml+='    </td>';
+                    dataHtml+='    <td class="img-url">';
+                    dataHtml+='        <input type="text" class="url" value="'+ picItemObj.URL +'"/>';
+                    dataHtml+='    </td>';
+                    dataHtml+='    <td><input type="text" class="hrefUrl" value="'+ picItemObj.HREF_URL +'"/></td>';
+                    dataHtml+='    <td>'+ picItemObj.UPDATE_DT +'</td>';
+                    dataHtml+='</tr>';
+                }
+            }
+            $("#pics_table_body").html(dataHtml);
+        }
+    }
+
+    // 预览
+    function toView() {
+        var url = $("table tbody .active .url").val();
+        if (typeof url != 'undefined' && url.length > 0) {
+            window.open(url);
+        } else {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '请选择有效数据!',
+            });
+        }
+    }
+
+    // 新增一tr图片
+    function toAddPicForTR() {
+        displaySeq_flag++;
+        var html_tr = '<tr class="gradeX">' +
+            '<td hidden><input class="picId" type="text" value=""/></td>' +
+            '<td></td>' +
+            '<td><img class="picImg" style="height:50px;width:50px;" src="assets/img/no-img.jpg" onclick="toFileClick(this);" /><input type="file" class="url_file" style="display:none;" onchange="toUpLoadPic(this);" /></td>' +
+            '<td><select class="sysId"><option value="1">微信端</option><option value="2">安卓app</option><option value="3">苹果app</option></select></td>' +
+            '<td><select class="type"><option value="3">商品详情顶部图</option><option value="4">商品详细图片</option><option value="6">商品详情参数图</option></select></td>' +
+            '<td><input type="number" style="width: 50px;" class="displaySeq" value="' + displaySeq_flag + '"/></td>' +
+            '<td class="img-url"><input type="text" class="url" /></td>' +
+            // '<td><select class="needButton"><option value="1">显示</option><option value="0">不显示</option></td>' +
+            '<td><input type="text" class="hrefUrl" /></td>' +
+            '<td></td>' +
+            '</tr>';
+        $("#pics_table_body").append(html_tr);
+    }
+
+    // 删除图片, 有id 的则须走后台删除, 无id则前端直接删除
+    function toDelPicForTR() {
+        AMUI.dialog.confirm({
+            title: '系统提示',
+            content: '删除之后无法还原,确定删除?',
+            onConfirm: function () {
+                var picId = $(".active .picId").val();
+                if (picId.length != 0) {
+                    $.ajax({
+                        url: WS_SERVER_ROUTE + "photos/deletePotos",
+                        type: "post",
+                        async: false,
+                        data: "id="+picId,
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.result == 0) {
+                                getProductPics();
+                            } else {
+                                AMUI.dialog.alert({
+                                    title: '系统提示',
+                                    content: result.errorData
+                                });
+                            }
+                        },
+                        error:function(){
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: "请求失败"
+                            });
+                        }
+                    });
+                } else {
+                    $(".active").remove();
+                }
+            }
+        });
+    }
+
+    // 模拟点击上传
+    function toFileClick(dom) {
+        if ($($($($($(dom).parent()).parent()).children()[3]).children()).val() != '5') {
+            $(dom).next().click();
+        }
+    }
+
+    // 上传图片处理
+    function toUpLoadPic(dom) {
+        if (dom.value.length != 0) {
+            var f = dom.files[0];
+            if (f.size > 1024 * 1024) fileSize = (Math.round(f.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+            else fileSize = (Math.round(f.size * 100 / 1024) / 100).toString() + 'KB';
+            if(f.size > 1024 * (1024 / 2)){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "上传的图片"+ fileSize +"超过了500KB,请重新选择"
+                });
+                return;
+            }
+            var formData = new FormData();
+            formData.append("targetFile", dom.files[0]);
+            $.ajax({
+                url: WS_SERVER_ROUTE + "file/upload",
+                type: "POST",
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function (data) {
+                    if (data.result == 0) {
+                        $(dom).prev(".picImg").attr("src", data.data);
+                        $(dom).parent().siblings('.img-url').find(".url").val(data.data);
+                    } else {
+                        AMUI.dialog.alert({
+                            title: '错误提示',
+                            content: data.errorData
+                        });
+                    }
+                },
+                error: function () {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: "上传异常"
+                    });
+                }
+            });
+        }
+    }
+
+    // 提交处理
+    function savePicsGoNext() {
+        var trs = $(".gradeX");
+        if (typeof(trs) == 'undefined') {
+            AMUI.dialog.alert({
+                title: '系统提示',
+                content: '页面异常,请重新加载该页面!'
+            });
+            return;
+        }
+        if (trs && trs.length > 0) {
+            AMUI.dialog.confirm({
+                title: '系统提示',
+                content: '确定保存并下一步吗?',
+                onConfirm: function () {
+                    // 封装图片数组
+                    var addPhotosArray = [],addFlag=false,updatePhotosArray = [],updateFlag = false;
+                    var picId = $("table tbody .picId");
+                    var picDomAry = [];
+                    for (var i = 0; i < picId.length; i++) {
+                        picDomAry.push($(picId[i]));
+                    }
+                    var sysId = $("table tbody .sysId");
+                    var type = $("table tbody .type");
+                    var displaySeq = $("table tbody .displaySeq");
+                    var url = $("table tbody .url");
+                    var needButton = $("table tbody .needButton");
+                    var hrefUrl = $("table tbody .hrefUrl");
+                    if (typeof(url) == 'undefined') {
+                        AMUI.dialog.alert({
+                            title: '系统提示',
+                            content: '图片文件异常,请重新加载该页面!'
+                        });
+                        return;
+                    }
+                    for (var i = 0; i < trs.length; i++) {
+                        var picUrl = $(url[i]).val();
+                        if (typeof(picUrl) == 'undefined') {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: '第' + (i + 1) + "行,<span style='color: red'>文件地址</span>异常, 请重新上传!"
+                            });
+                            return;
+                        }
+                        if (picUrl.trim().length == 0) {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: '第' + (i + 1) + "行,<span style='color: red'>文件地址</span>不能为空!"
+                            });
+                            return;
+                        }
+                        var picId = picDomAry[i].val();
+                        var photo = {
+                            "ID": picId,
+                            "RELATION_ID": $("#proId").val(),
+                            "SYS_ID": $(sysId[i]).val(),
+                            "TYPE": $(type[i]).val(),
+                            "DISPLAY_SEQ": $(displaySeq[i]).val(),
+                            "URL": $(url[i]).val(),
+                            "HREF_URL": $(hrefUrl[i]).val()
+                        }
+                        if(picId && picId.length > 0){
+                            updatePhotosArray.push(photo);
+                        }else{
+                            addPhotosArray.push(photo);
+                        }
+                    }
+                    if(updatePhotosArray.length > 0){
+                        $.ajax({
+                            url: WS_SERVER_ROUTE + "photos/updatePotos",
+                            async: false,
+                            type: "post",
+                            dataType: "json",
+                            data: JSON.stringify(updatePhotosArray),
+                            success: function (obj) {
+                                if (obj.result == 0) {
+                                    // toSkuForm($("#proId").val());
+                                    updateFlag = true;
+                                } else {
+                                    AMUI.dialog.alert({
+                                        title: '更新错误提示',
+                                        content: obj.errorData
+                                    });
+                                    return;
+                                }
+                            },
+                            error:function(){
+                                AMUI.dialog.alert({
+                                    title: '错误提示',
+                                    content: "请求失败"
+                                });
+                            }
+                        });
+                    }
+                    if(addPhotosArray.length > 0){
+                        $.ajax({
+                            url: WS_SERVER_ROUTE + "photos/addPotos",
+                            async: false,
+                            type: "post",
+                            dataType: "json",
+                            data: JSON.stringify(addPhotosArray),
+                            success: function (obj) {
+                                if (obj.result == 0) {
+                                    // toSkuForm($("#proId").val());
+                                    addFlag = true;
+                                } else {
+                                    AMUI.dialog.alert({
+                                        title: '保存错误提示',
+                                        content: obj.errorData
+                                    });
+                                    return;
+                                }
+                            },
+                            error:function(){
+                                AMUI.dialog.alert({
+                                    title: '错误提示',
+                                    content: "请求失败"
+                                });
+                            }
+                        });
+                    }
+                    toSkuForm($("#proId").val());
+                }
+            });
+        } else {
+            // 也阔以不新增, 跳入下一个tab
+            toSkuForm($("#proId").val());
+        }
+    }
+
+    /**
+     * 模拟点击 - 批量上传图片
+     * @param id
+     */
+    function toClickUpload(id) {
+        var dom = $("#" + id);
+        dom.click();
+    }
+</script>

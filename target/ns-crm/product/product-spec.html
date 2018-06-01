@@ -1,0 +1,229 @@
+<style>
+    .active {
+        background: #e6e6e6;
+    }
+    tr:hover {
+        background-color: #e6e6e6;
+    }
+</style>
+<form class="am-form tpl-form-border-form tpl-form-border-br" data-am-validator id="pro_spec_form">
+    <input type="hidden" id="proId" value="7E6C768F2F5A479F88CA59B02EA0C496">
+    <button type="button"
+            class="am-btn am-btn-success am-btn-xs" onclick="toAddSpecForTR();"><span
+            class="am-icon-plus"></span> 新增
+    </button>
+    
+    <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
+    <div class="am-scrollable-horizontal">
+        <table id="spec_table" width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black">
+            <thead>
+            <tr id="table_color">
+                <th hidden></th>
+                <th>序号</th>
+                <th>规格名称</th>
+                <th>规格名称(英文)</th>
+                <th>默认值</th>
+                <th>默认值(英文)</th>
+                <th>规格描述</th>
+                <th>顺序</th>
+                <th>是否生效</th>
+                <th>创建时间</th>
+            </tr>
+            </thead>
+            <tbody id="spec_table_body">
+            
+                <tr class="gradeX">
+                    <td hidden><input class="specId" type="text" value="28D0EA88EDB24193A26AF74B9D549BC2"/></td>
+                    <td>1</td>
+                    <td><input type="text" class="pntSpecName" value="颜色"/></td>
+                    <td><input type="text" class="pntSpecNameEn" value=""/></td>
+                    <td><input type="text" class="defPntSpecValue" value=""/></td>
+                    <td><input type="text" class="defPntSpecValueEn" value=""/></td>
+                    <td><input type="text" class="pntSpecDesc" value=""/></td>
+                    <td><input type="number" style="width: 50px;" class="displaySeq" value="1"/></td>
+                    <td>
+                        <select class="enabled">
+                            <option value="1" selected>有效</option>
+                            <option value="0" >无效</option>
+                        </select>
+                    </td>
+                    <td>2018-01-26 12:13:58</td>
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+    <div class="am-margin">
+        <label class="am-u-sm-1 am-u-md-3 am-u-lg-4"></label>
+        <button id="submitBtn" type="button" class="am-btn am-btn-primary am-btn-xs" onclick="saveSpecGoNext();">保存并下一步
+        </button>
+        <button type="button" class="am-btn am-btn-primary am-btn-xs"
+                onclick="goBack();">返回
+        </button>
+    </div>
+</form>
+<script>
+
+    var displaySeq_flag = 0;//新增一条规格数据的序列标记
+
+    $(function () {
+
+        $("#spec_table tbody").on("click", "tr", function () {
+            $(this).addClass('active');
+            $(this).siblings().removeClass('active');
+        });
+
+    });
+
+    function toAddSpecForTR() {
+        displaySeq_flag++;
+        var html_tr = '<tr class="gradeX">' +
+            '<td hidden><input class="specId" type="text" value=""/></td>' +
+            '<td></td>' +
+            '<td><input type="text" class="pntSpecName" value=""/></td>' +
+            '<td><input type="text" class="pntSpecNameEn" value="" /></td>' +
+            '<td><input type="text" class="defPntSpecValue" /></td>' +
+            '<td><input type="text" class="defPntSpecValueEn" /></td>' +
+            '<td><input type="text" class="pntSpecDesc"/></td>' +
+            '<td><input type="text" style="width: 50px;" class="displaySeq" value="' + displaySeq_flag + '" /></td>' +
+            '<td>' +
+            '<select class="enabled"><option value="1">有效</option><option value="0">无效</option></select>' +
+            '</td>' +
+            '</tr>';
+        $("#spec_table_body").append(html_tr);
+    }
+
+    function toDelSpecForTR() {
+        AMUI.dialog.confirm({
+            title: '系统提示',
+            content: '删除之后无法还原,确定删除?',
+            onConfirm: function () {
+                var specId = $(".active .specId").val();
+                if (specId.length != 0) {
+                    $.ajax({
+                        url: "http://spys.hubeta.com:80/spys-manager/productSpec/delSpec",
+                        type: "post",
+                        async: false,
+                        data: {
+                            "specId": specId
+                        },
+                        dataType: "json",
+                        success: function (result) {
+                            if (result.resultCode == 1) {
+                                $(".active").remove();
+                            } else {
+                                AMUI.dialog.alert({
+                                    title: '系统提示',
+                                    content: result.errorData
+                                });
+                            }
+                        },
+                        error:function(){
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: "请求失败"
+                            });
+                        }
+                    });
+                } else {
+                    $(".active").remove();
+                }
+            }
+        });
+    }
+
+    // 保存并且下一步
+    function saveSpecGoNext() {
+        // 验证 规格名称不能有重复的
+        var valid_flag = true;
+        var pntSpecName = $("#spec_table_body .pntSpecName");
+        if (pntSpecName.length > 0) {
+            // 把name转成数组
+            var pntSpecNameArr = [];
+            for (var i = 0; i < pntSpecName.length; i++) {
+                pntSpecNameArr.push($(pntSpecName[i]).val());
+            }
+            var s = pntSpecNameArr.join(",") + ",";
+            for (var i = 0; i < pntSpecNameArr.length; i++) {
+                if (s.replace(pntSpecNameArr[i] + ",", "").indexOf(pntSpecNameArr[i] + ",") > -1) {
+                    valid_flag = false;
+                    AMUI.dialog.alert({
+                        title: '系统提示',
+                        content: "规格名称:" + pntSpecNameArr[i] + ",已重复,请重新输入!"
+                    });
+                    break;
+                }
+            }
+        }
+        if (!valid_flag) {
+            return;
+        }
+        AMUI.dialog.confirm({
+            title: '系统提示',
+            content: '确定保存并下一步吗?',
+            onConfirm: function () {
+                var trs = $("#spec_table_body tr");
+                if (trs.length > 0) {
+                    // 封装规格数组
+                    var specArray = [];
+                    var specId = $("#spec_table_body .specId");
+//                    var pntSpecName = $("#spec_table_body .pntSpecName");
+                    var pntSpecNameEn = $("#spec_table_body .pntSpecNameEn");
+                    var defPntSpecValue = $("#spec_table_body .defPntSpecValue");
+                    var defPntSpecValueEn = $("#spec_table_body .defPntSpecValueEn");
+                    var pntSpecDesc = $("#spec_table_body .pntSpecDesc");
+                    var displaySeq = $("#spec_table_body .displaySeq");
+                    var enabled = $("#spec_table_body .enabled");
+                    for (var i = 0; i < trs.length; i++) {
+                        if ($(pntSpecName[i]).val().trim().length == 0) {
+                            AMUI.dialog.alert({
+                                title: '系统提示',
+                                content: '第' + (i + 1) + "行,<span style='color: red'>规格名称</span>不能为空!"
+                            });
+                            return;
+                        }
+                        var spec = {
+                            "id": $(specId[i]).val(),
+                            "pntId": "7E6C768F2F5A479F88CA59B02EA0C496",
+                            "pntSpecName": $(pntSpecName[i]).val(),
+                            "pntSpecNameEn": $(pntSpecNameEn[i]).val(),
+                            "defPntSpecValue": $(defPntSpecValue[i]).val(),
+                            "defPntSpecValueEn": $(defPntSpecValueEn[i]).val(),
+                            "pntSpecDesc": $(pntSpecDesc[i]).val(),
+                            "displaySeq": $(displaySeq[i]).val(),
+                            "enabled": $(enabled[i]).val(),
+                        }
+                        specArray.push(spec);
+                    }
+                    $.ajax({
+                        url: "http://spys.hubeta.com:80/spys-manager/product/addOrUpdateProSpec",
+                        async: false,
+                        type: "post",
+                        dataType: "json",
+                        contentType: "application/json",
+                        data: JSON.stringify(specArray),
+                        success: function (obj) {
+                            if (obj.resultCode == 1) {
+                                toSkuForm("7E6C768F2F5A479F88CA59B02EA0C496");
+                            } else {
+                                AMUI.dialog.alert({
+                                    title: '错误提示',
+                                    content: obj.errorData
+                                });
+                            }
+                        },
+                        error:function(){
+                            AMUI.dialog.alert({
+                                title: '错误提示',
+                                content: "请求失败"
+                            });
+                        }
+                    });
+                } else {
+                    toSkuForm("7E6C768F2F5A479F88CA59B02EA0C496");
+                }
+            }
+        });
+    }
+
+</script>

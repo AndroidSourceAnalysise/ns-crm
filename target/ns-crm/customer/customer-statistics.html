@@ -1,0 +1,177 @@
+<style type="text/css">
+    label{
+        display: inline-block;
+        margin-bottom: 5px;
+        font-weight: 700;
+        font-size: 120%;
+    }
+    .am-u-sm-12,.am-u-sm-6{
+        text-align: left;
+    }
+    .am-center{
+        text-align: center;
+    }
+    .am-u-sm-4,.am-u-md-4{
+        text-align: center;
+    }
+</style>
+<div class="am-u-sm-6">
+    <div class="widget am-cf">
+        <div class="widget-head am-cf">
+            <div class="widget-title am-fl">营业消费统计</div>
+        </div>
+        <div class="widget-body am-fr">
+            <div class="am-scrollable-horizontal">
+                <div class="am-u-sm-12 am-u-md-4 am-u-lg-4">
+                    <label class="order-value" id="REVENUES">0</label>
+                    <br>
+                    <span class="order-field">营业总额</span>
+                </div>
+                <div class="am-u-sm-12 am-u-md-4 am-u-lg-4">
+                    <label class="order-value" id="CONSUMPTIONS">0</label>
+                    <br/>
+                    <span class="order-field">消费总额</span>
+                </div>
+                <div class="am-u-sm-12 am-u-md-4 am-u-lg-4">
+                    <label class="order-value" id="RE_CONSUMPTIONS">0</label>
+                    <br/>
+                    <span  class="order-field">重复消费总额</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="am-u-sm-6">
+    <div class="widget am-cf">
+        <div class="widget-head am-cf">
+            <div class="widget-title am-fl">积分统计</div>
+        </div>
+        <div class="widget-body am-fr">
+            <div class="am-scrollable-horizontal">
+                <div class="am-u-sm-12 am-u-md-4 am-u-lg-4">
+                    <label class="order-value" id="POINTS_TOTAL">0</label>
+                    <br>
+                    <span class="order-field">累积总积分</span>
+                </div>
+                <div class="am-u-sm-12 am-u-md-4 am-u-lg-4">
+                    <label class="order-value" id="POINTS_CFMD">0</label>
+                    <br/>
+                    <span class="order-field">已确认积分</span>
+                </div>
+                <div class="am-u-sm-12 am-u-md-4 am-u-lg-4">
+                    <label class="order-value" id="POINTS_UNCFMD">0</label>
+                    <br/>
+                    <span  class="order-field">未确认积分</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="am-u-sm-6">
+    <div class="widget am-cf">
+        <div class="widget-head am-cf">
+            <div class="widget-title am-fl">会员统计</div>
+        </div>
+        <div class="widget-body am-fr">
+            <div class="am-scrollable-horizontal">
+                <div class="am-u-sm-4">
+                    <label class="order-value" id="PURED_CUST_QTY">0</label>
+                    <br>
+                    <span class="order-field">已购买会员</span>
+                </div>
+                <div class="am-u-sm-4">
+                    <label class="order-value" id="UNPURED_CUST_QTY">0</label>
+                    <br/>
+                    <span class="order-field">未购买会员</span>
+                </div>
+                <label class="am-u-sm-4"></label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="am-u-sm-6">
+    <div class="widget am-cf">
+        <div class="widget-head am-cf">
+            <div class="widget-title am-fl">订单统计</div>
+        </div>
+        <div class="widget-body am-fr">
+            <div class="am-scrollable-horizontal">
+                <div class="am-u-sm-4">
+                    <label class="order-value" id="ORDERS_TOTAL">0</label>
+                    <br>
+                    <span class="order-field">订单总数</span>
+                </div>
+                <div class="am-u-sm-4">
+                    <label class="order-value" id="ORDERS_PROM">0</label>
+                    <br/>
+                    <span class="order-field">推广订单总数</span>
+                </div>
+                <label class="am-u-sm-4"></label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="am-margin">
+    <label class="am-u-sm-1 am-u-md-3 am-u-lg-4"></label>
+    <div class="am-u-sm-4  am-center">
+        <label class="am-u-sm-4"></label>
+        <button type="button" class="am-u-sm-4 am-btn am-btn-primary am-btn-xs"
+                onclick="goBack();">返回
+        </button>
+        <label class="am-u-sm-4"></label>
+    </div>
+    <label class="am-u-sm-4"></label>
+</div>
+<script type="text/javascript">
+    $(function(){
+        getConStatisticsInfo();
+    });
+    /**
+     * 获取会员基本信息
+     * @method   getBaseInfo
+     * @Author   chenguangchao
+     * @DateTime 2018-02-22
+     * @return   JSONObject
+     */
+    function getConStatisticsInfo(){
+        var conId = back.conID;
+        $.ajax({
+            url: WS_SERVER_ROUTE + "customer/getInfo",
+            async: false,
+            type: "post",
+            dataType: "json",
+            data: "conId="+conId,
+            success: function (result) {
+                if (result.result == '0') {
+                    if(result.data.customerExt){
+                        var customerExtObj = result.data.customerExt;
+                        $("#REVENUES").text(customerExtObj.REVENUES);
+                        $("#CONSUMPTIONS").text(customerExtObj.CONSUMPTIONS);
+                        $("#RE_CONSUMPTIONS").text(customerExtObj.RE_CONSUMPTIONS);
+                       
+                        $("#POINTS_TOTAL").text(customerExtObj.POINTS_TOTAL);
+                        $("#POINTS_CFMD").text(customerExtObj.POINTS_CFMD);
+                        $("#POINTS_UNCFMD").text(customerExtObj.POINTS_UNCFMD);
+
+                        $("#PURED_CUST_QTY").text(customerExtObj.PURED_CUST_QTY);
+                        $("#UNPURED_CUST_QTY").text(customerExtObj.UNPURED_CUST_QTY);
+
+                        $("#ORDERS_TOTAL").text(customerExtObj.ORDERS_TOTAL);
+                        $("#ORDERS_PROM").text(customerExtObj.ORDERS_PROM);
+                    }
+                } else {
+                    AMUI.dialog.alert({
+                        title: '错误提示',
+                        content: result.errorData,
+                    });
+                }
+            },
+            error:function(){
+                AMUI.dialog.alert({
+                    title: '错误提示',
+                    content: "请求失败"
+                });
+            }
+        });
+    }
+</script>
