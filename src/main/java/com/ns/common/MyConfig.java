@@ -1,6 +1,5 @@
 package com.ns.common;
 
-import com.ns.common.fastdfs.newpool.FastDfsUtil;
 import com.ns.common.interceptor.GlobalInterceptor;
 import com.ns.common.model._MappingKit;
 import com.ns.customer.controller.BasCustAddressController;
@@ -144,7 +143,7 @@ public class MyConfig extends JFinalConfig {
         // ehcahce插件配置
         me.add(new EhCachePlugin());
 
-        RedisPlugin bbsRedis = new RedisPlugin("ns", "39.107.92.124", 7000, "Kou#8901");
+        RedisPlugin bbsRedis = new RedisPlugin("ns", "45.40.251.65", 7173, "h$n#s231");
 
         me.add(bbsRedis);
 
@@ -183,8 +182,8 @@ public class MyConfig extends JFinalConfig {
     public void afterJFinalStart() {
         ApiConfigKit.putApiConfig(getApiConfig());
         //初始化fastdfs
-        FastDfsUtil util = FastDfsUtil.getInstance();
-        util.init();
+        //FastDfsUtil util = FastDfsUtil.getInstance();
+        //util.init();
     }
 
     /**

@@ -13,6 +13,8 @@ import com.ns.tld.service.TldSiteMsgService;
 import com.jfinal.weixin.sdk.api.TemplateData;
 import com.jfinal.weixin.sdk.api.TemplateMsgApi;
 
+import java.util.UUID;
+
 /**
  * description: //TODO <br>
  * date: 2018-02-12 13:32
@@ -181,5 +183,10 @@ public class NoticeService {
             msgTxt = String.format("新客户【%s】，于%s成为【弘德苑】的第%s位会员，会员号为【%s】", customer.getConName(), customer.getUpdateDt(), customer.getConNo(), customer.getConNo());
             tldSiteMsgService.addMsg("0", refCustomer.getID(), msgTxt, 3);
         }
+    }
+
+    public static void main(String[] args) {
+        // ec4e14922a3049b281c9ab5241ea19d4
+        System.out.println(UUID.randomUUID().toString().replace("-","").length());
     }
 }

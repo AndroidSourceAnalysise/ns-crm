@@ -4,16 +4,12 @@ user =nskj
 password =qingcheng2018@
 devMode = true
 
-baseUploadPath = /usr/www/static
-#baseUploadPath = G:/static
+appId = wx9610e6177a7c1b4b
+appSecret = 61d20d8ce9a2cf6a6aa75f067ec7a895
+token = ec4e14922a3049b281c9ab5241ea19d4
 
+encryptMessage = true
+encodingAesKey = rs9sQmmfbXXbkRczU2dBKzUllcYP2fo2bgv3P9bwvTh
 
-appId = wx0b2cf6d4bc37d78e
-appSecret = f9ceec5b01d420b7a0d9aa39b6efab83
-token = 7a6LywbA98cuSxxCmXiRtNPbDylV5ZGH
-#appId = wxcfc586e9c9a695a1
-#appSecret = 7e6c0b510ea9fb162ad4fab709426049
-#token = 7a6LywbA98cuSxxCmXiRtNPbDylV5ZGH
-
-encryptMessage = false
-encodingAesKey = 9cDF24iO0oV5b7VhXM4AYaRieepySCOjc4o7agOwOBM
+ossAccessKeyId=AKID1vjR9gACBFCxUtKB6tWyDH9uUL2dxMVU
+ossAccessKeySecret=whJm38e8rQWTH0ZyBC1skRwGPRIxRioz

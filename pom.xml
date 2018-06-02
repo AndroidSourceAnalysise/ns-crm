@@ -126,13 +126,6 @@
             <version>1.2.44</version>
         </dependency>
         <dependency>
-            <groupId>fastdfs</groupId>
-            <artifactId>fastdfs-client</artifactId>
-            <version>1.25</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/fastdfs-client-java-1.25.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
             <version>2.4.2</version>
@@ -159,6 +152,12 @@
             <artifactId>fst</artifactId>
             <version>2.50</version>
         </dependency>
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+            <version>5.2.4</version>
+        </dependency>
+
     </dependencies>
 
     <build>

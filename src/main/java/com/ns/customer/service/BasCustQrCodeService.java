@@ -9,7 +9,6 @@
 package com.ns.customer.service;
 
 import com.ns.common.exception.CustException;
-import com.ns.common.fastdfs.FastDfsService;
 import com.ns.common.model.BasCustQrcode;
 import com.ns.common.model.BasCustomer;
 import com.ns.common.model.TldQrbgmParams;
@@ -18,6 +17,8 @@ import com.ns.common.qrcode.QrCodeUtil;
 import com.ns.common.utils.DateUtil;
 import com.ns.common.utils.GUIDUtil;
 import com.ns.common.utils.Util;
+import com.ns.file.cos.COSClientManager;
+import com.ns.file.cos.Dir;
 import com.ns.tld.service.TLdQrBgmParamsService;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
@@ -83,8 +84,8 @@ public class BasCustQrCodeService {
      */
     private BasCustQrcode createQrdode(BasCustomer customer, BasCustQrcode basCustQrcode, TldQrbgmParams tldQrbgmParams) throws Exception {
         String qrCodeFilePath = genLocalQrCode(customer.getConNo());
-        String relativePath ;//图片合成
-        String codeUrl ;
+        String relativePath;//图片合成
+        String codeUrl;
         //如果这个会员没有产生过二维码.则新增
         if (basCustQrcode == null) {
             relativePath = mergeImg(tldQrbgmParams, qrCodeFilePath, customer);
@@ -215,7 +216,8 @@ public class BasCustQrCodeService {
         String serverUrl = "";
         try {
 //            serverUrl = FastDfsService.upFile(filePath, "qrcode", "jpg");//老式
-            serverUrl = FastDfsService.upFileWithGroupName(filePath, "group2", "jpg");//新款
+//            serverUrl = FastDfsService.upFileWithGroupName(filePath, "group2", "jpg");//新款
+            serverUrl = COSClientManager.getInstance().uploadFile2COS(filePath, Dir.DIMEN);
         } catch (Exception e) {
             e.printStackTrace();
         }

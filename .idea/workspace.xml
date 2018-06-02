@@ -7,80 +7,83 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="244f648e-bad6-473b-8a12-ce62783b4230" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/ns_crm_war.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/ns_crm_war_exploded.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_nodep_3_2_5.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_0_29.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_44.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_cedarsoftware_java_util_1_9_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_cedarsoftware_json_io_2_5_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_8_8.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_zxing_core_3_3_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jfinal_cos_2017_5.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jfinal_jetty_server_8_1_8.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jfinal_jfinal_3_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jfinal_jfinal_weixin_1_9.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_5.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_ruedigermoeller_fst_2_50.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_3_8_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_16.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_44.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ehcache_ehcache_2_10_4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_4_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_3_8.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_continuation_8_1_8_v20121106.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_http_8_1_8_v20121106.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_io_8_1_8_v20121106.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_security_8_1_8_v20121106.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_server_8_1_8_v20121106.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_servlet_8_1_8_v20121106.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_util_8_1_8_v20121106.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_xml_8_1_8_v20121106.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_orbit_javax_servlet_3_0_0_v201112011016.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_21_0_GA.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_5_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_7.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__redis_clients_jedis_2_9_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/ns-crm.iml" />
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_8_0.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_8_5.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_qcloud_cos_api_5_2_4.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_9_6.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_21.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ns/file/cos/BinaryUtil.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ns/file/cos/COSClientManager.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ns/file/cos/Dir.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ns/file/cos/Mimetypes.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ns_crm_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/ns_crm_war_exploded.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/ns-crm.iml" afterPath="$PROJECT_DIR$/ns-crm.iml" />
       <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/blog/BlogController.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/blog/BlogInterceptor.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/blog/BlogService.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/blog/BlogValidator.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/common/DemoConfig.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/common/model/Blog.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/common/model/_JFinalDemoGenerator.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/common/model/_MappingKit.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/common/model/base/BaseBlog.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/demo/index/IndexController.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/MyConfig.java" afterPath="$PROJECT_DIR$/src/main/java/com/ns/common/MyConfig.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/FastDfsConfig.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/FastDfsFile.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/FastDfsService.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/FileManager.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/FileManagerConfig.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/newpool/ConnectionPool.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/newpool/FastDfsUtil.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/newpool/HeartBeat.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/pool/FastdfsClient.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/pool/FastdfsException.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/pool/FastdfsPool.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/pool/FastdfsPoolConfig.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/pool/FastdfsPooledObjectFactory.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/pool/Pool.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/customer/service/BasCustQrCodeService.java" afterPath="$PROJECT_DIR$/src/main/java/com/ns/customer/service/BasCustQrCodeService.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/file/controller/FileController.java" afterPath="$PROJECT_DIR$/src/main/java/com/ns/file/controller/FileController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/file/service/UploadService.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ns/weixin/service/NoticeService.java" afterPath="$PROJECT_DIR$/src/main/java/com/ns/weixin/service/NoticeService.java" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/a_little_config.txt" afterPath="$PROJECT_DIR$/src/main/resources/a_little_config.txt" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/main/webapp/META-INF/MANIFEST.MF" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/blog/_form.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/blog/add.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/blog/blog.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/blog/edit.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/common/_layout.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/common/_paginate.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/manage.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/favicon.ico" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/bg.gif" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/left2.gif" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/right2.gif" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/jquery-1.4.4.min.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/启动说明/blog.sql" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/启动说明/启动说明.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/a_little_config.txt" afterPath="$PROJECT_DIR$/target/classes/a_little_config.txt" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/MyConfig.class" afterPath="$PROJECT_DIR$/target/classes/com/ns/common/MyConfig.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/FastDfsConfig.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/FastDfsFile.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/FastDfsService.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/FileManager.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/FileManagerConfig.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/newpool/ConnectionPool.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/newpool/FastDfsUtil.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/newpool/HeartBeat$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/newpool/HeartBeat.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/pool/FastdfsClient.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/pool/FastdfsException.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/pool/FastdfsPool.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/pool/FastdfsPoolConfig.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/pool/FastdfsPooledObjectFactory.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/common/fastdfs/pool/Pool.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/customer/service/BasCustQrCodeService.class" afterPath="$PROJECT_DIR$/target/classes/com/ns/customer/service/BasCustQrCodeService.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/file/controller/FileController.class" afterPath="$PROJECT_DIR$/target/classes/com/ns/file/controller/FileController.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/file/service/UploadService.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ns/weixin/service/NoticeService.class" afterPath="$PROJECT_DIR$/target/classes/com/ns/weixin/service/NoticeService.class" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm.war" afterPath="$PROJECT_DIR$/target/ns-crm.war" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/target/ns-crm/META-INF/MANIFEST.MF" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/a_little_config.txt" afterPath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/a_little_config.txt" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/MyConfig.class" afterPath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/MyConfig.class" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/FastDfsConfig.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/FastDfsFile.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/FastDfsService.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/FileManager.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/FileManagerConfig.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/newpool/ConnectionPool.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/newpool/FastDfsUtil.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/newpool/HeartBeat$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/newpool/HeartBeat.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/pool/FastdfsClient.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/pool/FastdfsException.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/pool/FastdfsPool.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/pool/FastdfsPoolConfig.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/pool/FastdfsPooledObjectFactory.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/common/fastdfs/pool/Pool.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/customer/service/BasCustQrCodeService.class" afterPath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/customer/service/BasCustQrCodeService.class" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/file/controller/FileController.class" afterPath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/file/controller/FileController.class" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/file/service/UploadService.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/weixin/service/NoticeService.class" afterPath="$PROJECT_DIR$/target/ns-crm/WEB-INF/classes/com/ns/weixin/service/NoticeService.class" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -92,11 +95,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BasCustomerExtController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/customer/controller/BasCustomerExtController.java">
+      <file leaf-file-name="COSClientManager.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/cos/COSClientManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+            <state relative-caret-position="339">
+              <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyConfig.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/MyConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="222">
+              <caret line="188" column="7" lean-forward="false" selection-start-line="188" selection-start-column="7" selection-end-line="188" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/controller/FileController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="29" column="35" lean-forward="false" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BasCustQrCodeService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/customer/service/BasCustQrCodeService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="251">
+              <caret line="149" column="42" lean-forward="false" selection-start-line="149" selection-start-column="34" selection-end-line="149" selection-end-column="42" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -105,97 +144,77 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ytapi.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/Ytapi.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/controller/FileController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="51" column="22" lean-forward="false" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="手动重启oracle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/手动重启oracle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MyConfig.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/MyConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="71" column="6" lean-forward="true" selection-start-line="71" selection-start-column="6" selection-end-line="71" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="a_little_config.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/a_little_config.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="210">
+              <caret line="14" column="18" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ehcache.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/ehcache.xml">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+            <state relative-caret-position="156">
+              <caret line="124" column="33" lean-forward="false" selection-start-line="124" selection-start-column="33" selection-end-line="124" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="log4j.properties" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+      <file leaf-file-name="Mimetypes.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/cos/Mimetypes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-              <folding />
+            <state relative-caret-position="300">
+              <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2176#2177#0" expanded="true" />
+                <element signature="e#2231#2232#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fdfs.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fdfs.properties">
+      <file leaf-file-name="BinaryUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/cos/BinaryUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="300">
+              <caret line="24" column="31" lean-forward="false" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UploadService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/service/UploadService.java">
+      <file leaf-file-name="Dir.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/cos/Dir.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1950">
-              <caret line="142" column="9" lean-forward="true" selection-start-line="142" selection-start-column="9" selection-end-line="142" selection-end-column="9" />
+            <state relative-caret-position="120">
+              <caret line="8" column="31" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>isLocalDev</find>
+      <find>endpoint</find>
+      <find>fs</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -208,9 +227,19 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/a_little_config.txt" />
         <option value="$PROJECT_DIR$/src/main/resources/fdfs.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ns/weixin/service/NoticeService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ns/file/cos/Dir.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ns/file/cos/MimeTypes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ns/file/cos/Mimetypes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ns/file/cos/BinaryUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ns/file/cos/OSSClientManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ns/file/cos/COSClientManager.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/a_little_config.txt" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ns/file/controller/FileController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ns/customer/service/BasCustQrCodeService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ns/common/MyConfig.java" />
       </list>
     </option>
   </component>
@@ -220,6 +249,13 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -227,7 +263,24 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="ns-crm" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="ns-crm" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-1" />
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="844" />
@@ -264,6 +317,123 @@
               <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ns" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ns" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ns" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="task" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ns" type="462c0819:PsiDirectoryNode" />
+              <item name="file" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ns" type="462c0819:PsiDirectoryNode" />
+              <item name="file" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ns" type="462c0819:PsiDirectoryNode" />
+              <item name="file" type="462c0819:PsiDirectoryNode" />
+              <item name="cos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ns" type="462c0819:PsiDirectoryNode" />
+              <item name="weixin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ns" type="462c0819:PsiDirectoryNode" />
+              <item name="weixin" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ns-crm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: com.qcloud:cos_api:5.2.4" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: com.qcloud:cos_api:5.2.4" type="70bed36:NamedLibraryElementNode" />
+              <item name="cos_api-5.2.4.jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ns-crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: com.qcloud:cos_api:5.2.4" type="70bed36:NamedLibraryElementNode" />
+              <item name="cos_api-5.2.4.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="cos" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -274,7 +444,15 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="SearchEverywhereHistoryKey" value="Glob&#9;FILE&#9;file:///Users/longway/Documents/hdy/hdy-crm/src/main/java/com/hdy/common/interceptor/GlobalInterceptor.java&#10;MyC&#9;FILE&#9;file:///Users/longway/Documents/hdy/hdy-crm/src/main/java/com/hdy/common/MyConfig.java" />
+    <property name="SearchEverywhereHistoryKey" value="UinGrantee&#9;PSI&#9;JAVA://com.qcloud.cos.model.UinGrantee&#10;CacheKit&#9;PSI&#9;JAVA://com.jfinal.plugin.ehcache.CacheKit&#10;Glob&#9;FILE&#9;file:///Users/longway/Documents/hdy/hdy-crm/src/main/java/com/hdy/common/interceptor/GlobalInterceptor.java&#10;MyC&#9;FILE&#9;file:///Users/longway/Documents/hdy/hdy-crm/src/main/java/com/hdy/common/MyConfig.java" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/ns/file/cos" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -288,13 +466,32 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Tomcat Server.crm">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <module />
+    </configuration>
+    <configuration name="NoticeService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.ns.weixin.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="com.ns.weixin.service.NoticeService" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="ns-crm" />
+      <envs />
     </configuration>
     <configuration name="_JFinalDemoGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
@@ -383,15 +580,94 @@
       <properties />
       <listeners />
     </configuration>
+    <configuration name="crm" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.0.M20" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8082/ns-crm/" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="ns-crm:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/ns-crm" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_ns-crm_2" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="63105" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="ns-crm:war" />
+        </option>
+      </method>
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.crm" />
+      <item index="1" class="java.lang.String" itemvalue="Application._JFinalDemoGenerator" />
+      <item index="2" class="java.lang.String" itemvalue="Application.NoticeService" />
+    </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Application._JFinalDemoGenerator" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Application.NoticeService" />
+        <item index="1" class="java.lang.String" itemvalue="Application._JFinalDemoGenerator" />
       </list>
     </recent_temporary>
   </component>
@@ -427,77 +703,79 @@
       <workItem from="1527754376092" duration="2446000" />
       <workItem from="1527840575146" duration="27000" />
       <workItem from="1527840632760" duration="131000" />
-      <workItem from="1527840777593" duration="874000" />
+      <workItem from="1527840777593" duration="10524000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19858000" />
+    <option name="totallyTimeSpent" value="29508000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="844" extended-state="0" />
+    <frame x="-2" y="23" width="1440" height="844" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3271028" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977304" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977304" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31688127" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977304" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20026702" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3271028" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977304" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2167382" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977304" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977304" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20026702" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3271028" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32977304" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32977304" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31688127" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977304" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2167382" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977304" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,315 +785,107 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="3" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/assets/js/htmlLoadUtils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="11" lean-forward="true" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/menu/menu-add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/assets/js/appBase.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="42" lean-forward="true" selection-start-line="0" selection-start-column="42" selection-end-line="0" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-951">
-          <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/wechat/main-banner-add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/wechat/main-banner.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3">
-          <caret line="172" column="26" lean-forward="true" selection-start-line="172" selection-start-column="26" selection-end-line="172" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/3.8/poi-3.8.jar!/org/apache/poi/hssf/usermodel/HSSFWorkbook.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/export/controller/ExportController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/export/service/ExportService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1425">
-          <caret line="111" column="5" lean-forward="true" selection-start-line="111" selection-start-column="5" selection-end-line="111" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/blog/BlogInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/blog/BlogValidator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/index/IndexController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/node/service/NodeCategoryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/node/service/NodeContentService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/weixin/service/WeixinPayService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/pnt/controller/PntMenuController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/weixin/service/NoticeService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        <state relative-caret-position="335">
+          <caret line="189" column="31" lean-forward="true" selection-start-line="189" selection-start-column="31" selection-end-line="189" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/pnt/controller/PntProductCmtController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/kit/MsgEncryptKit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+        <state relative-caret-position="241">
+          <caret line="46" column="25" lean-forward="false" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/pnt/service/PntSkuService.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.3/jfinal-3.3-sources.jar!/com/jfinal/log/Log.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        <state relative-caret-position="234">
+          <caret line="53" column="22" lean-forward="false" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
+          <folding>
+            <element signature="e#1588#1589#0" expanded="false" />
+            <element signature="e#1633#1634#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/pnt/service/PntProductCmtService.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/jfinal/ApiController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="43" column="12" lean-forward="true" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
+        <state relative-caret-position="60">
+          <caret line="5" column="3" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/pnt/service/PntMenuService.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/api/ApiConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="46" column="47" lean-forward="true" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+        <state relative-caret-position="271">
+          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/sys/controller/SysDictController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="38" column="12" lean-forward="true" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/sys/controller/SysUserController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-server/8.1.8.v20121106/jetty-server-8.1.8.v20121106.jar!/org/eclipse/jetty/server/nio/SelectChannelConnector.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="18" column="17" lean-forward="false" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+          <caret line="13" column="11" lean-forward="false" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.3/jfinal-3.3-sources.jar!/com/jfinal/server/JettyServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="52" column="25" lean-forward="false" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.3/jfinal-3.3-sources.jar!/com/jfinal/core/JFinal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="160" column="37" lean-forward="false" selection-start-line="160" selection-start-column="37" selection-end-line="160" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.3/jfinal-3.3-sources.jar!/com/jfinal/server/ServerFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="43" column="26" lean-forward="false" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/kit/SignatureCheckKit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="56" column="5" lean-forward="false" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/tld/controller/CreateOrderModeB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-820">
-          <caret line="52" column="21" lean-forward="false" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/tld/controller/TldCouponController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/tld/controller/TLdPhotosController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="56" column="29" lean-forward="true" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/tld/controller/TldSiteMsgController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/tld/service/TldSiteMsgService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="50" column="26" lean-forward="true" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/newpool/FastDfsUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/customer/task/CreateCustomerTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="36" column="27" lean-forward="true" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/customer/service/BasCustAddressService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/customer/service/BasCustomerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="213" column="38" lean-forward="true" selection-start-line="213" selection-start-column="38" selection-end-line="213" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hdy-crm.iml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/constant/RedisKeyDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="22" column="10" lean-forward="false" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/blog/BlogService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/customer/service/BasCustomerExtService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="44" column="20" lean-forward="false" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/blog/BlogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="14" column="11" lean-forward="false" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="190" column="40" lean-forward="false" selection-start-line="190" selection-start-column="40" selection-end-line="190" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/tld/controller/TldOrdersController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="126" column="9" lean-forward="false" selection-start-line="126" selection-start-column="9" selection-end-line="126" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/customer/controller/BasCustAddressController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/customer/controller/BasCustomerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="57" column="10" lean-forward="false" selection-start-line="57" selection-start-column="10" selection-end-line="57" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/customer/controller/BasCustomerRequestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="37" column="17" lean-forward="false" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/customer/controller/BasCustomerExtController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/model/_JFinalDemoGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="50" column="29" lean-forward="true" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
+        <state relative-caret-position="90">
+          <caret line="57" column="16" lean-forward="false" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -828,50 +898,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/service/UploadService.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.3/jfinal-3.3-sources.jar!/com/jfinal/plugin/redis/RedisPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1950">
-          <caret line="142" column="9" lean-forward="true" selection-start-line="142" selection-start-column="9" selection-end-line="142" selection-end-column="9" />
+        <state relative-caret-position="-3">
+          <caret line="119" column="47" lean-forward="false" selection-start-line="119" selection-start-column="47" selection-end-line="119" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/controller/FileController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.3/jfinal-3.3-sources.jar!/com/jfinal/config/Plugins.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="51" column="22" lean-forward="false" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/手动重启oracle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/MyConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="71" column="6" lean-forward="true" selection-start-line="71" selection-start-column="6" selection-end-line="71" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/a_little_config.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/ehcache.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        <state relative-caret-position="240">
+          <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -879,12 +917,95 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/fdfs.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="17" />
+          <caret line="9" column="27" lean-forward="false" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/interceptor/GlobalInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/index/IndexController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.3/jfinal-3.3-sources.jar!/com/jfinal/plugin/ehcache/CacheKit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="67" column="33" lean-forward="true" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/ehcache.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="85" column="12" lean-forward="true" selection-start-line="85" selection-start-column="12" selection-end-line="85" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/jfinal/MsgInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="44" column="32" lean-forward="true" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/jfinal/MsgController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="64" column="7" lean-forward="true" selection-start-line="64" selection-start-column="7" selection-end-line="64" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/jfinal/MsgControllerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="47" column="53" lean-forward="true" selection-start-line="47" selection-start-column="53" selection-end-line="47" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/weixin/controller/WeixinMsgController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/weixin/controller/WeixinApiController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="55" column="45" lean-forward="true" selection-start-line="55" selection-start-column="45" selection-end-line="55" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/api/AccessToken.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="29" column="11" lean-forward="false" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+          <folding>
+            <element signature="e#2191#2192#0" expanded="false" />
+            <element signature="e#2226#2227#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/cache/IAccessTokenCache.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
@@ -892,12 +1013,462 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/api/ApiConfigKit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="96" column="36" lean-forward="false" selection-start-line="96" selection-start-column="36" selection-end-line="96" selection-end-column="36" />
+          <folding>
+            <element signature="e#3090#3091#0" expanded="false" />
+            <element signature="e#3142#3143#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/kit/ParaMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="23" column="31" lean-forward="false" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+          <folding>
+            <element signature="e#538#539#0" expanded="false" />
+            <element signature="e#565#566#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/utils/HttpUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="34" column="25" lean-forward="false" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+          <folding>
+            <element signature="e#877#878#0" expanded="false" />
+            <element signature="e#929#930#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/api/AccessTokenApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+          <folding>
+            <element signature="e#2038#2039#0" expanded="false" />
+            <element signature="e#2094#2095#0" expanded="false" />
+            <element signature="e#3119#3360#0" expanded="false" />
+            <element signature="e#3359#3360#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal-weixin/1.9/jfinal-weixin-1.9-sources.jar!/com/jfinal/weixin/sdk/api/MenuApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="50" column="5" lean-forward="false" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/qcloud/cos_api/5.2.4/cos_api-5.2.4.jar!/com/qcloud/cos/auth/BasicCOSCredentials.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/qcloud/cos_api/5.2.4/cos_api-5.2.4.jar!/com/qcloud/cos/COS.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="111" column="58" lean-forward="false" selection-start-line="111" selection-start-column="58" selection-end-line="111" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/qcloud/cos_api/5.2.4/cos_api-5.2.4.jar!/com/qcloud/cos/model/UinGrantee.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/qcloud/cos_api/5.2.4/cos_api-5.2.4.jar!/com/qcloud/cos/model/ObjectMetadata.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="49" column="16" lean-forward="false" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/qcloud/cos_api/5.2.4/cos_api-5.2.4.jar!/com/qcloud/cos/model/GeneratePresignedUrlRequest.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <marker date="1527930428000" expanded="false" signature="3:117" ph="/.../" />
+            <marker date="1527930428000" expanded="true" signature="780:803" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="938:961" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1021:1044" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1115:1138" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1254:1277" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1323:1346" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1407:1430" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1536:1559" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1598:1621" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1668:1691" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1783:1806" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1851:1874" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1933:1956" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2060:2083" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2127:2150" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2209:2232" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2336:2359" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2443:2466" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2551:2574" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2653:2676" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2775:2798" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2942:2965" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3012:3035" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3098:3121" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3229:3252" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3298:3321" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3382:3405" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3511:3534" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3577:3600" ph="{}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/qcloud/cos_api/5.2.4/cos_api-5.2.4.jar!/com/qcloud/cos/COSClient.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding>
+            <marker date="1527930428000" expanded="false" signature="3:117" ph="/.../" />
+            <marker date="1527930428000" expanded="true" signature="693:716" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="745:768" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="827:850" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="944:967" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1206:1229" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1403:1426" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1571:1594" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1808:1831" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2039:2062" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2125:2148" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2221:2244" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2321:2344" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2492:2515" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2775:2798" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3096:3119" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3447:3470" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3596:3619" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3760:3783" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="3917:3940" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="4099:4122" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="4205:4228" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="4421:4444" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="4607:4630" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="4843:4866" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="5093:5116" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="5397:5420" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="5622:5645" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="5852:5875" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="6117:6140" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="6332:6355" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="6570:6593" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="6829:6852" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="7031:7054" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="7244:7267" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="7549:7572" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="7752:7775" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="7988:8011" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="8168:8191" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="8381:8404" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="8567:8590" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="8807:8830" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="8998:9021" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="9247:9270" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="9444:9467" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="9684:9707" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="9976:9999" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="10216:10239" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="10603:10626" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="10835:10858" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="11072:11095" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="11364:11387" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="11640:11663" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="11849:11872" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="12083:12106" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="12323:12346" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="12572:12595" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="12845:12868" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="13163:13186" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="13403:13426" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="13635:13658" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="13914:13937" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="14184:14207" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="14428:14451" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="14646:14669" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="14848:14871" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="15127:15150" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="15400:15423" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="15646:15669" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="15965:15988" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="16211:16234" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="16463:16486" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="16676:16699" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="16912:16935" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="17159:17182" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="17383:17406" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="17613:17636" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="17826:17849" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="18040:18063" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="18287:18310" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="18508:18531" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="18739:18762" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="19079:19102" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="19327:19350" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="19650:19673" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="19935:19958" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="20211:20234" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="20415:20438" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="20700:20723" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="20968:20991" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="21244:21267" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="21492:21515" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="21815:21838" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="22019:22042" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="22304:22327" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="22503:22526" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="22745:22768" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="22920:22943" ph="{}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/qcloud/cos_api/5.2.4/cos_api-5.2.4.jar!/com/qcloud/cos/exception/CosServiceException.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <marker date="1527930428000" expanded="false" signature="3:117" ph="/.../" />
+            <marker date="1527930428000" expanded="true" signature="806:829" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="920:943" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1037:1060" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1119:1142" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1187:1210" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1269:1292" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1337:1360" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1457:1480" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1563:1586" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1634:1657" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1715:1738" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1786:1809" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1842:1865" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1908:1931" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="1987:2010" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2095:2118" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2225:2248" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2300:2323" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2366:2389" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2443:2466" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2543:2566" ph="{}" />
+            <marker date="1527930428000" expanded="true" signature="2601:2695" ph="{...}" />
+            <marker date="1527930428000" expanded="true" signature="2666:2689" ph="{}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/cos/BinaryUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="24" column="31" lean-forward="false" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/cos/Mimetypes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2176#2177#0" expanded="true" />
+            <element signature="e#2231#2232#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/a_little_config.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="18" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="124" column="33" lean-forward="false" selection-start-line="124" selection-start-column="33" selection-end-line="124" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/service/UploadService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8">
+          <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/FastDfsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/fastdfs/FileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/customer/service/BasCustQrCodeService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="149" column="42" lean-forward="false" selection-start-line="149" selection-start-column="34" selection-end-line="149" selection-end-column="42" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/cos/Dir.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="31" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/common/MyConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="188" column="7" lean-forward="false" selection-start-line="188" selection-start-column="7" selection-end-line="188" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/controller/FileController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="35" lean-forward="false" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ns/file/cos/COSClientManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>ns-crm:war</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Web</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>ns-crm</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
       <state key="ProjectJDKs.UI">
         <settings>
           <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: cglib:cglib-nodep:3.2.5</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
