@@ -187,6 +187,6 @@ public class NoticeService {
 
     public static void main(String[] args) {
         // ec4e14922a3049b281c9ab5241ea19d4
-        System.out.println(UUID.randomUUID().toString().replace("-","").length());
+        System.out.println(UUID.randomUUID().toString().replace("-",""));
     }
 }

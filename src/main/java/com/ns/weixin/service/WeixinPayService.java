@@ -9,13 +9,17 @@
 package com.ns.weixin.service;
 
 import com.ns.common.exception.CustException;
+import com.ns.common.utils.GUIDUtil;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.weixin.sdk.api.PaymentApi;
+import com.jfinal.weixin.sdk.kit.IpKit;
 import com.jfinal.weixin.sdk.kit.PaymentKit;
+import com.jfinal.weixin.sdk.utils.JsonUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,31 +36,33 @@ public class WeixinPayService {
 
     //商户相关资料
     private static String appid = PropKit.get("appId");
-    private static String partner = "1497125292";
-    private static String paternerKey = "F5CE0C20867EAFE9A12C0FF37998962F";
-    private static String notify_url = "http://xhd777.com.cn/ns-api/api/weixin/pay/pay_notify";
+    private static String partner = PropKit.get("partner");
+    private static String paternerKey = PropKit.get("paternerKey");
+    private static String notify_url = PropKit.get("notify_url");
+    private static String cert_path = PropKit.get("certPath");
 
     /**
      * 公众号支付js-sdk
      */
     public static Map<String, String> prePay(String orderId) {
         // openId，采用 网页授权获取 access_token API：SnsAccessTokenApi获取
-        Record record = Db.findFirst("select ID,CON_ID,ORDER_TOTAL,STATUS from tld_orders where id = ?", orderId);
+        Record record = Db.findFirst("select ID,CON_ID,ORDER_NO,ORDER_TOTAL,STATUS from tld_orders where id = ?", orderId);
         if (record == null || record.getInt("STATUS") != 1) {
             throw new CustException("订单数据异常或订单不是未付款状态!");
         }
 
         String openId = Db.queryStr("select OPENID from bas_customer where id = ?", record.getStr("CON_ID"));
 
-        String totalFee = record.getBigDecimal("ORDER_TOTAL").multiply(new BigDecimal(100)) + "";
+        BigDecimal totalFee = record.getBigDecimal("ORDER_TOTAL").multiply(new BigDecimal(100));
+
         // 统一下单文档地址：https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("appid", appid);
         params.put("mch_id", partner);
-        params.put("body", "body");
+        params.put("body", "订单编号:" + record.getStr("ORDER_NO"));
         params.put("out_trade_no", record.getStr("ID"));
-        params.put("total_fee", "1");
+        params.put("total_fee", totalFee.intValue() + "");
 
         String ip = "";//IpKit.getRealIp(request);
         if (StrKit.isBlank(ip)) {
@@ -110,13 +116,13 @@ public class WeixinPayService {
         params.put("out_refund_no", orderId);
         params.put("total_fee", totalFee);
         params.put("refund_fee", refundFee);
-        Map<String, String> result = PaymentApi.refund(params, paternerKey, "/usr/cert/apiclient_cert.p12");
+        Map<String, String> result = PaymentApi.refund(params, paternerKey, cert_path);
         if ("SUCCESS".equals(result.get("return_code"))) {
             if (!"SUCCESS".equals(result.get("result_code"))) {
-                throw new CustException("微信退款失败:"+result.get("err_code_des"));
+                throw new CustException(result.get("err_code_des"));
             }
         } else {
-            throw new CustException("微信退款失败:"+result.get("return_msg"));
+            throw new CustException(result.get("return_msg"));
         }
     }
 }
