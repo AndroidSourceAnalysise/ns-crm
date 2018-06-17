@@ -1,4 +1,5 @@
 var SERVER_ROUTE = "http://m.nashengbuy.com";
+//var SERVER_ROUTE = "http://172.20.10.2:8082";
 var SERVER_BASE_URL = SERVER_ROUTE + "/ns-crm/";
 var WS_SERVER_ROUTE = SERVER_ROUTE + "/ns-crm/crm/";
 var ORDER_STATUS_CHN = [{"code":"1","value":"新增订单"},{"code":"2","value":"已付款"},{"code":"3","value":"申请取消"},{"code":"4","value":"已取消"},{"code":"5","value":"已打印"},{"code":"6","value":"配送中"},{"code":"7","value":"已收货"},{"code":"8","value":"申请退货"},{"code":"9","value":"已退货"},{"code":"10","value":"已退款"},{"code":"11","value":"已关闭"},{"code":"12","value":"已删除"},{"code":"13","value":"已评价"}];
